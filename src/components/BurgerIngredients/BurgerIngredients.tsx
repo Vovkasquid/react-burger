@@ -25,7 +25,7 @@ export default function BurgerIngredients() {
         <div key={bread._id} className={`${styles.ingredientsCard} ml-4`}>
           <img src={bread.image} className={`${styles.ingredientsImg} ml-4 mr-4 `} alt='изображение ингридиета' />
           <p className={`${styles.ingredientsPrice} text text_type_digits-default`}>{bread.price}<CurrencyIcon type="primary" /></p>
-          <p className={`text text_type_main-default`}>{bread.name}</p>
+          <p className={`${styles.ingredientsName} text text_type_main-default`}>{bread.name}</p>
           {index === 0 && <Counter size="default" count={index+1}/>}
         </div>
      ))}
