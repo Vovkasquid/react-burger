@@ -17,7 +17,7 @@ export default function AppHeader() {
               <p className="text text_type_main-default">Конструктор</p>
             </NavLink>
           </li>
-           <li>
+          <li>
             <NavLink
             to="/"
             className={`${styles.link} pt-4 pb-4 pr-5 pl-5`}
