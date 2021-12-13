@@ -11,7 +11,7 @@ export default function BurgerConstructor() {
           {data.map((item, index) => {
             return (
               <li key={index}>
-                <BurgerConstructorItem item={item} />
+                <BurgerConstructorItem item={item} index={index} />
               </li>
             )
           })}
