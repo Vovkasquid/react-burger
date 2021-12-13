@@ -24,7 +24,7 @@ export default function BurgerIngredients() {
     <ul className={`${styles.ingredientsContainer}`}>
       {breads.map((bread, index) => (
         <li key={index}>
-          <IngredientCard bread={bread} index={index} />
+          <IngredientCard ingredient={bread} index={index} />
         </li>
      ))}
     </ul>
@@ -32,7 +32,7 @@ export default function BurgerIngredients() {
     <ul className={`${styles.ingredientsContainer}`}>
       {sauces.map((sauce, index) => (
         <li key={index}>
-          <IngredientCard bread={sauce} index={index} />
+          <IngredientCard ingredient={sauce} index={index} />
         </li>
      ))}
     </ul>
