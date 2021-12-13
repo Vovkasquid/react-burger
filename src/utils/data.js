@@ -30,6 +30,67 @@ const breads = [
 
 ]
 
+const sauces = [
+   {
+      "_id":"60666c42cc7b410027a1a9b7",
+      "name":"Соус Spicy-X",
+      "type":"sauce",
+      "proteins":30,
+      "fat":20,
+      "carbohydrates":40,
+      "calories":30,
+      "price":90,
+      "image":"https://code.s3.yandex.net/react/code/sauce-02.png",
+      "image_mobile":"https://code.s3.yandex.net/react/code/sauce-02-mobile.png",
+      "image_large":"https://code.s3.yandex.net/react/code/sauce-02-large.png",
+      "__v":0
+   },
+   {
+      "_id":"60666c42cc7b410027a1a9b9",
+      "name":"Соус традиционный галактический",
+      "type":"sauce",
+      "proteins":42,
+      "fat":24,
+      "carbohydrates":42,
+      "calories":99,
+      "price":15,
+      "image":"https://code.s3.yandex.net/react/code/sauce-03.png",
+      "image_mobile":"https://code.s3.yandex.net/react/code/sauce-03-mobile.png",
+      "image_large":"https://code.s3.yandex.net/react/code/sauce-03-large.png",
+      "__v":0
+   },
+   {
+      "_id":"60666c42cc7b410027a1a9b8",
+      "name":"Соус фирменный Space Sauce",
+      "type":"sauce",
+      "proteins":50,
+      "fat":22,
+      "carbohydrates":11,
+      "calories":14,
+      "price":80,
+      "image":"https://code.s3.yandex.net/react/code/sauce-04.png",
+      "image_mobile":"https://code.s3.yandex.net/react/code/sauce-04-mobile.png",
+      "image_large":"https://code.s3.yandex.net/react/code/sauce-04-large.png",
+      "__v":0
+   },
+   {
+      "_id":"60666c42cc7b410027a1a9ba",
+      "name":"Соус с шипами Антарианского плоскоходца",
+      "type":"sauce",
+      "proteins":101,
+      "fat":99,
+      "carbohydrates":100,
+      "calories":100,
+      "price":88,
+      "image":"https://code.s3.yandex.net/react/code/sauce-01.png",
+      "image_mobile":"https://code.s3.yandex.net/react/code/sauce-01-mobile.png",
+      "image_large":"https://code.s3.yandex.net/react/code/sauce-01-large.png",
+      "__v":0
+   },
+
+
+]
+
 const data = [
   
   {
@@ -60,20 +121,7 @@ const data = [
      "image_large":"https://code.s3.yandex.net/react/code/meat-01-large.png",
      "__v":0
   },
-  {
-     "_id":"60666c42cc7b410027a1a9b7",
-     "name":"Соус Spicy-X",
-     "type":"sauce",
-     "proteins":30,
-     "fat":20,
-     "carbohydrates":40,
-     "calories":30,
-     "price":90,
-     "image":"https://code.s3.yandex.net/react/code/sauce-02.png",
-     "image_mobile":"https://code.s3.yandex.net/react/code/sauce-02-mobile.png",
-     "image_large":"https://code.s3.yandex.net/react/code/sauce-02-large.png",
-     "__v":0
-  },
+  
   {
      "_id":"60666c42cc7b410027a1a9b4",
      "name":"Мясо бессмертных моллюсков Protostomia",
@@ -86,34 +134,6 @@ const data = [
      "image":"https://code.s3.yandex.net/react/code/meat-02.png",
      "image_mobile":"https://code.s3.yandex.net/react/code/meat-02-mobile.png",
      "image_large":"https://code.s3.yandex.net/react/code/meat-02-large.png",
-     "__v":0
-  },
-  {
-     "_id":"60666c42cc7b410027a1a9b9",
-     "name":"Соус традиционный галактический",
-     "type":"sauce",
-     "proteins":42,
-     "fat":24,
-     "carbohydrates":42,
-     "calories":99,
-     "price":15,
-     "image":"https://code.s3.yandex.net/react/code/sauce-03.png",
-     "image_mobile":"https://code.s3.yandex.net/react/code/sauce-03-mobile.png",
-     "image_large":"https://code.s3.yandex.net/react/code/sauce-03-large.png",
-     "__v":0
-  },
-  {
-     "_id":"60666c42cc7b410027a1a9b8",
-     "name":"Соус фирменный Space Sauce",
-     "type":"sauce",
-     "proteins":50,
-     "fat":22,
-     "carbohydrates":11,
-     "calories":14,
-     "price":80,
-     "image":"https://code.s3.yandex.net/react/code/sauce-04.png",
-     "image_mobile":"https://code.s3.yandex.net/react/code/sauce-04-mobile.png",
-     "image_large":"https://code.s3.yandex.net/react/code/sauce-04-large.png",
      "__v":0
   },
   {
@@ -144,20 +164,7 @@ const data = [
      "image_large":"https://code.s3.yandex.net/react/code/mineral_rings-large.png",
      "__v":0
   },
-  {
-     "_id":"60666c42cc7b410027a1a9ba",
-     "name":"Соус с шипами Антарианского плоскоходца",
-     "type":"sauce",
-     "proteins":101,
-     "fat":99,
-     "carbohydrates":100,
-     "calories":100,
-     "price":88,
-     "image":"https://code.s3.yandex.net/react/code/sauce-01.png",
-     "image_mobile":"https://code.s3.yandex.net/react/code/sauce-01-mobile.png",
-     "image_large":"https://code.s3.yandex.net/react/code/sauce-01-large.png",
-     "__v":0
-  },
+  
   {
      "_id":"60666c42cc7b410027a1a9bd",
      "name":"Кристаллы марсианских альфа-сахаридов",
@@ -217,4 +224,4 @@ const data = [
 ]
 
 export default data
-export { breads }
+export { breads, sauces }

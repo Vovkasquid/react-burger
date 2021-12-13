@@ -4,6 +4,7 @@
   align-items: center;
   gap: 4px;
   position: relative;
+  max-width: 272px;
 }
 
 .ingredientsPrice {
@@ -15,4 +16,8 @@
 
 .ingredientsName {
   min-height: 48px;
+}
+
+.ingredientsName {
+  text-align: center;
 }

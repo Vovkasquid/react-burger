@@ -4,7 +4,8 @@
   align-items: center;
   justify-content: center;
   width: 600px;
-  max-height: 756px;
+  max-height: 912px;
+  box-sizing: border-box;
 }
 
 .ingredientsHeader {
@@ -17,7 +18,7 @@
   text-align: left;
 }
 
-.breadsContainer {
+.ingredientsContainer {
   display: flex;
   align-items: center;
   gap: 24px;
@@ -27,23 +28,5 @@
   list-style: none;
   width: 100%;
   justify-content: space-between;
-}
-
-.ingredientsCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  position: relative;
-}
-
-.ingredientsPrice {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.ingredientsName {
-  min-height: 48px;
+  overflow: scroll;
 }
