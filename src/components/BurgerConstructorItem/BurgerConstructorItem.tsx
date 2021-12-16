@@ -3,7 +3,6 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import styles from './BurgerConstructorItem.module.css'
 
 export default function BurgerConstructorItem({ item, index, length }:any) {
-  console.log(item.name)
   return (
     <div className={`${styles.BurgerConstructorItem}`}>
       {index === 0 ? null : <DragIcon type="primary" />}

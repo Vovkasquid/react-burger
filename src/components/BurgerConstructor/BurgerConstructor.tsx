@@ -1,17 +1,16 @@
 import React from 'react'
 import styles from './BurgerConstructor.module.css'
 import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorItem'
-import data from '../../utils/data'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
-export default function BurgerConstructor() {
+export default function BurgerConstructor({ mainIngrediets } : any) {
   return (
     <section className={`${styles.burgerConstructorContainer} pt-25 pl-4 pr-4`}>
       <ul className={`${styles.burgerConstructorList} mb-10`}>
-          {data.map((item, index) => {
+          {mainIngrediets.map((item : any, index : any) => {
             return (
               <li key={index}>
-                <BurgerConstructorItem item={item} index={index} length={data.length} />
+                <BurgerConstructorItem item={item} index={index} length={mainIngrediets.length} />
               </li>
             )
           })}

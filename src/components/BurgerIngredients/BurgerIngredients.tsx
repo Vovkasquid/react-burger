@@ -1,10 +1,9 @@
 import React from 'react'
 import styles from './BurgerIngredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import { breads, sauces } from '../../utils/data.js'
 import IngredientCard from '../IngredientCard/IngredientCard'
 
-export default function BurgerIngredients() {
+export default function BurgerIngredients({ bun, sauses } : any) {
   const [current, setCurrent] = React.useState('Булки')
   return(
     <section className={`${styles.burgerIngredients} pt-10`}>
@@ -22,7 +21,7 @@ export default function BurgerIngredients() {
     </div>
     <p className={`${styles.chapter} text text_type_main-medium mt-10 mb-6`}>Булки</p>
     <ul className={`${styles.ingredientsContainer}`}>
-      {breads.map((bread, index) => (
+      {bun.map((bread : any, index : any) => (
         <li key={index}>
           <IngredientCard ingredient={bread} index={index} />
         </li>
@@ -30,7 +29,7 @@ export default function BurgerIngredients() {
     </ul>
     <p className={`${styles.chapter} text text_type_main-medium mt-10 mb-6`}>Соусы</p>
     <ul className={`${styles.ingredientsContainer}`}>
-      {sauces.map((sauce, index) => (
+      {sauses.map((sauce : any, index: any) => (
         <li key={index}>
           <IngredientCard ingredient={sauce} index={index} />
         </li>
