@@ -4,7 +4,7 @@ import AppHeader from '../AppHeader/AppHeader'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
 import { BURGER_API_URL } from '../../utils/constants'
-import { sauces } from '../../utils/data'
+import Modal from '../Modal/Modal'
 
  // Метод для проверки ответа
  function checkResponse(res : any) {
@@ -43,7 +43,8 @@ function App() {
     .catch(err => console.log(err))
   }, [])
   return (
-    <div className={styles.app}>
+    <div className={styles.app} id="app">
+      <Modal />
       <AppHeader />
       <main className={styles.main}>
         <BurgerIngredients bun={bun} sauses={sauses}/>
