@@ -9,8 +9,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* visibility: hidden; */
-  transition: all .8s linear;
+  /* visibility: hidden; 
+  transition: all .8s linear; */
 }
 /*
 .modalActive {

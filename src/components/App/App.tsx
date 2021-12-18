@@ -33,15 +33,18 @@ function App() {
   const [sauses, setSauces] = React.useState([])
   const [mainIngrediets, setMainIngredients] = React.useState([])
   const [isModalVisible, setIsModalVisible] = React.useState(false)
+  const [ingredient, setIngredient] = React.useState({})
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (currentIngredient : any) => {
     console.log('open')
     setIsModalVisible(true)
+    setIngredient(currentIngredient)
   }
 
   const handleCloseModal = () => {
     console.log('close')
     setIsModalVisible(false)
+    setIngredient({})
   }
 
   React.useEffect(() => {
@@ -55,7 +58,7 @@ function App() {
   }, [])
   return (
     <div className={styles.app} id="app">
-      <Modal isModalVisible={isModalVisible} />
+      <Modal isModalVisible={isModalVisible} closePopup={handleCloseModal} />
       <AppHeader />
       <main className={styles.main}>
         <BurgerIngredients

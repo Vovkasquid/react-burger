@@ -3,13 +3,13 @@ import styles from './Modal.module.css'
 import ModalOverley from '../ModalOverley/ModalOverley.jsx'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
-const Modal = ( { isModalVisible, image } : any ) => {
+const Modal = ( { isModalVisible, closePopup } : any ) => {
   return (
     <ModalOverley isModalVisible={isModalVisible} >
       <div className={`${styles.modal} pt-10 pr-10 pb-15 pl-10`}>
         <div className={styles.modalHeaderContainer}>
           <h3 className={`${styles.modalHeader} text text_type_main-large`}>Детали ингредиента</h3>
-          <button className={styles.closeButton}><CloseIcon type="primary" /></button>
+          <button className={styles.closeButton}><CloseIcon type="primary" onClick={closePopup} /></button>
         </div>
       </div>
     </ModalOverley>
