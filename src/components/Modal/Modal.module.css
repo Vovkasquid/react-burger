@@ -9,4 +9,36 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  visibility: hidden;
+  transition: all .8s linear;
+}
+
+.modal-active {
+  visibility: visible;
+}
+
+.modalHeaderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.modalHeader {
+  color: hsla(240, 5%, 95%, 1);
+}
+
+.closeButton {
+  width: 24px;
+  height: 24px; 
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  transition: opacity .3s ease; 
+}
+
+.closeButton:hover {
+  opacity: .8;
 }
