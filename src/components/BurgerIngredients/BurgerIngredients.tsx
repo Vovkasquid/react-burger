@@ -3,10 +3,10 @@ import styles from './BurgerIngredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientCard from '../IngredientCard/IngredientCard'
 
-export default function BurgerIngredients({ bun, sauses } : any) {
+export default function BurgerIngredients({ bun, sauses, openModal } : any) {
   const [current, setCurrent] = React.useState('Булки')
   return(
-    <section className={`${styles.burgerIngredients} pt-10`}>
+    <section className={`${styles.burgerIngredients} pt-10`} >
       <h2 className={`${styles.ingredientsContainer} text text_type_main-large mb-10`}>Соберите бургер</h2>
       <div style={{ display: 'flex' }}>
         <Tab value='Булки' active={current === 'Булки'} onClick={setCurrent}>
@@ -23,7 +23,7 @@ export default function BurgerIngredients({ bun, sauses } : any) {
     <ul className={`${styles.ingredientsContainer}`}>
       {bun.map((bread : any, index : any) => (
         <li key={index}>
-          <IngredientCard ingredient={bread} index={index} />
+          <IngredientCard ingredient={bread} index={index} openModal={openModal} />
         </li>
      ))}
     </ul>

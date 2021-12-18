@@ -32,6 +32,17 @@ function App() {
   const [bun, setBun] = React.useState([])
   const [sauses, setSauces] = React.useState([])
   const [mainIngrediets, setMainIngredients] = React.useState([])
+  const [isModalVisible, setIsModalVisible] = React.useState(false)
+
+  const handleOpenModal = () => {
+    console.log('open')
+    setIsModalVisible(true)
+  }
+
+  const handleCloseModal = () => {
+    console.log('close')
+    setIsModalVisible(false)
+  }
 
   React.useEffect(() => {
     fetch(BURGER_API_URL).then((response) => checkResponse(response))
@@ -44,10 +55,14 @@ function App() {
   }, [])
   return (
     <div className={styles.app} id="app">
-      <Modal />
+      <Modal isModalVisible={isModalVisible} />
       <AppHeader />
       <main className={styles.main}>
-        <BurgerIngredients bun={bun} sauses={sauses}/>
+        <BurgerIngredients
+          bun={bun}
+          sauses={sauses}
+          openModal={handleOpenModal}
+        />
         <BurgerConstructor mainIngrediets={mainIngrediets} />
       </main>
     </div>
