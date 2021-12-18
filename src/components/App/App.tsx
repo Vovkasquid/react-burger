@@ -39,6 +39,7 @@ function App() {
     console.log('open')
     setIsModalVisible(true)
     setIngredient(currentIngredient)
+    console.log(currentIngredient)
   }
 
   const handleCloseModal = () => {
@@ -58,7 +59,7 @@ function App() {
   }, [])
   return (
     <div className={styles.app} id="app">
-      <Modal isModalVisible={isModalVisible} closePopup={handleCloseModal} />
+      <Modal isModalVisible={isModalVisible} closePopup={handleCloseModal} ingredient={ingredient} />
       <AppHeader />
       <main className={styles.main}>
         <BurgerIngredients

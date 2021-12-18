@@ -6,7 +6,10 @@
   position: relative;
   max-width: 272px;
 }
-
+.ingredientsImg {
+  margin: 0;
+  padding: 0;
+}
 .ingredientsPrice {
   display: flex;
   align-items: center;
