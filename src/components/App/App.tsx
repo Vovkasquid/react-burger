@@ -51,6 +51,18 @@ function App() {
     setIngredient({})
   }
 
+  const listenEscHandler = (event : any) => {
+    // document.addEventListener('keydown', listenEscHandler);
+    if (event.key === 'Escape') {
+      handleCloseModal()
+    }
+  }
+
+  React.useEffect(() => {
+    document.addEventListener('keydown', listenEscHandler)
+    return document.removeEventListener('keydown', listenEscHandler)
+  }, [])
+
   React.useEffect(() => {
     fetch(BURGER_API_URL).then((response) => checkResponse(response))
     .then((data) => {
