@@ -17,7 +17,6 @@ const Modal = ( { isModalVisible, closePopup, ingredient, isOrder } : any ) => {
         <img src={succesIcon} className={`${styles.successImage} mb-15`} alt="изображение картинки успешного заказа" />
         <p className="text text_type_main-default mb-2">Ваш заказ начали готовить</p>
         <p className="text text_type_main-default text_color_inactive">Дождитесь готовности на орбитальной станции</p>
-
       </div>
       :
       <div className={`${styles.modal} pt-10 pr-10 pb-15 pl-10`}>
@@ -53,4 +52,3 @@ const Modal = ( { isModalVisible, closePopup, ingredient, isOrder } : any ) => {
 }
 
 export default Modal
-// <div className={`${isModalVisible ? `${styles.modal} ${styles.modalActive}` : styles.modal} pt-10 pr-10 pb-15 pl-10`}>

@@ -52,7 +52,6 @@ function App() {
   }
 
   const listenEscHandler = (event : any) => {
-    // document.addEventListener('keydown', listenEscHandler);
     if (event.key === 'Escape') {
       handleCloseModal()
     }
@@ -60,7 +59,7 @@ function App() {
 
   React.useEffect(() => {
     document.addEventListener('keydown', listenEscHandler)
-    return document.removeEventListener('keydown', listenEscHandler)
+    return  () => document.removeEventListener('keydown', listenEscHandler)
   }, [])
 
   React.useEffect(() => {

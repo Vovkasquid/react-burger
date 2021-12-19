@@ -1,5 +1,6 @@
 import React from 'react'
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
 import styles from './ModalOverley.module.css'
 
 const modalRoot = document.getElementById('root');
@@ -16,4 +17,8 @@ export default class ModalOverley extends React.Component {
       modalRoot
     );
   }
+}
+
+ModalOverley.propTypes = {
+  isModalVisible: PropTypes.bool,
 }
