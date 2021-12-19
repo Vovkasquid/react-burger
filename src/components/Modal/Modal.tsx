@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Modal.module.css'
 import ModalOverley from '../ModalOverley/ModalOverley.jsx'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import succesIcon from '../../image/successIcon.svg'
+import succesIcon from '../../images/successIcon.svg'
 
 const Modal = ( { isModalVisible, closePopup, ingredient, isOrder } : any ) => {
   console.log('isOrder in Modal: ', isOrder)
