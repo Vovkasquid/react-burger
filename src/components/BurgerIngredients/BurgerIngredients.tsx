@@ -31,7 +31,7 @@ export default function BurgerIngredients({ bun, sauses, openModal } : any) {
     <ul className={`${styles.ingredientsContainer}`}>
       {sauses.map((sauce : any, index: any) => (
         <li key={index}>
-          <IngredientCard ingredient={sauce} index={index} />
+          <IngredientCard ingredient={sauce} index={index} openModal={openModal}/>
         </li>
      ))}
     </ul>

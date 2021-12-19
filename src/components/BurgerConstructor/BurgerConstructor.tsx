@@ -3,14 +3,14 @@ import styles from './BurgerConstructor.module.css'
 import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorItem'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
-export default function BurgerConstructor({ mainIngrediets } : any) {
+export default function BurgerConstructor({ mainIngrediets, openModal } : any) {
   return (
     <section className={`${styles.burgerConstructorContainer} pt-25 pl-4 pr-4`}>
       <ul className={`${styles.burgerConstructorList} mb-10`}>
           {mainIngrediets.map((item : any, index : any) => {
             return (
               <li key={index}>
-                <BurgerConstructorItem item={item} index={index} length={mainIngrediets.length} />
+                <BurgerConstructorItem item={item} index={index} length={mainIngrediets.length} openModal={openModal} />
               </li>
             )
           })}

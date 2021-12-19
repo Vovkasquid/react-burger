@@ -59,7 +59,11 @@ function App() {
   }, [])
   return (
     <div className={styles.app} id="app">
-      <Modal isModalVisible={isModalVisible} closePopup={handleCloseModal} ingredient={ingredient} />
+      <Modal
+        isModalVisible={isModalVisible}
+        closePopup={handleCloseModal}
+        ingredient={ingredient}
+      />
       <AppHeader />
       <main className={styles.main}>
         <BurgerIngredients
@@ -67,7 +71,10 @@ function App() {
           sauses={sauses}
           openModal={handleOpenModal}
         />
-        <BurgerConstructor mainIngrediets={mainIngrediets} />
+        <BurgerConstructor
+          mainIngrediets={mainIngrediets}
+          openModal={handleOpenModal}
+        />
       </main>
     </div>
   )
