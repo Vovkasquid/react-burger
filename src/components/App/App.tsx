@@ -34,12 +34,15 @@ function App() {
   const [mainIngrediets, setMainIngredients] = React.useState([])
   const [isModalVisible, setIsModalVisible] = React.useState(false)
   const [ingredient, setIngredient] = React.useState({})
+  const [isOrder, setIsOrder] = React.useState(false)
 
-  const handleOpenModal = (currentIngredient : any) => {
+  const handleOpenModal = (currentIngredient : any, isCurrentOrder : any) => {
     console.log('open')
     setIsModalVisible(true)
     setIngredient(currentIngredient)
+    setIsOrder(isCurrentOrder)
     console.log(currentIngredient)
+    console.log('Order? : ', isCurrentOrder)
   }
 
   const handleCloseModal = () => {
@@ -63,6 +66,7 @@ function App() {
         isModalVisible={isModalVisible}
         closePopup={handleCloseModal}
         ingredient={ingredient}
+        isOrder={isOrder}
       />
       <AppHeader />
       <main className={styles.main}>

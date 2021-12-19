@@ -17,7 +17,7 @@ export default function BurgerConstructor({ mainIngrediets, openModal } : any) {
       </ul>
       <div className={`${styles.burgerConstructorPriceContainer} mt-10`}>
         <p className={`${styles.burgerConstructorPrice} text text_type_main-large`}>625<CurrencyIcon type="primary" /></p>
-        <Button type="primary" size="medium">
+        <Button type="primary" size="medium" onClick={() => openModal(null, true)} >
           Оформить заказ
         </Button>
       </div>
