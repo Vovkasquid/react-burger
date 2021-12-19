@@ -5,6 +5,17 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import succesIcon from '../../images/successIcon.svg'
 
 const Modal = ( { isModalVisible, closePopup, ingredient, isOrder } : any ) => {
+  const listenEscHandler = (event : any) => {
+    if (event.key === 'Escape') {
+      closePopup()
+    }
+  }
+
+  React.useEffect(() => {
+    document.addEventListener('keydown', listenEscHandler)
+    return  () => document.removeEventListener('keydown', listenEscHandler)
+  }, [])
+  
   return (
     <ModalOverley isModalVisible={isModalVisible} >
       {isOrder
