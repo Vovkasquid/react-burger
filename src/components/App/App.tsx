@@ -8,7 +8,6 @@ import Modal from '../Modal/Modal'
 
  // Метод для проверки ответа
  function checkResponse(res : any) {
-  console.log(res)
   if (res.ok) {
     return res.json();
   }
@@ -37,16 +36,12 @@ function App() {
   const [isOrder, setIsOrder] = React.useState(false)
 
   const handleOpenModal = (currentIngredient : any, isCurrentOrder : any) => {
-    console.log('open')
     setIsModalVisible(true)
     setIngredient(currentIngredient)
     setIsOrder(isCurrentOrder)
-    console.log(currentIngredient)
-    console.log('Order? : ', isCurrentOrder)
   }
 
   const handleCloseModal = () => {
-    console.log('close')
     setIsModalVisible(false)
     setIngredient({})
   }
