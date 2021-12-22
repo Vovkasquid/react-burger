@@ -4,6 +4,7 @@ import ModalOverley from '../ModalOverley/ModalOverley.jsx'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import succesIcon from '../../images/successIcon.svg'
 import ReactDOM from 'react-dom'
+import ModalOrderItem from '../ModalOrderItem/ModalOrderItem'
 
 const modalRoot = document.getElementById('modal')
 
@@ -23,14 +24,7 @@ const Modal = ( { isModalVisible, closePopup, ingredient, isOrder } ) => {
     <ModalOverley isModalVisible={isModalVisible} closePopup={closePopup} >
       {isOrder
       ?
-      <div className={`${styles.modal} pb-30 pt-30`}>
-        <button className={`${styles.closeButton} ${styles.closeButtonFixed}`}><CloseIcon type="primary" onClick={closePopup} /></button>
-        <p className="text text_type_digits-large mb-8">034536</p>
-        <p className={`text text_type_main-medium mb-15`}>идентификатор заказа</p>
-        <img src={succesIcon} className={`${styles.successImage} mb-15`} alt="изображение картинки успешного заказа" />
-        <p className="text text_type_main-default mb-2">Ваш заказ начали готовить</p>
-        <p className="text text_type_main-default text_color_inactive">Дождитесь готовности на орбитальной станции</p>
-      </div>
+      <ModalOrderItem closePopup={closePopup} />
       :
       <div className={`${styles.modal} pt-10 pr-10 pb-15 pl-10`}>
         <div className={styles.modalHeaderContainer}>
