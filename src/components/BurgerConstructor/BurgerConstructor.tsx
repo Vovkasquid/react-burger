@@ -3,17 +3,19 @@ import styles from './BurgerConstructor.module.css'
 import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorItem'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
-export default function BurgerConstructor({ mainIngrediets, openModal } : any) {
+export default function BurgerConstructor({ mainIngrediets, openModal, choosenBun } : any) {
   return (
     <section className={`${styles.burgerConstructorContainer} pt-25 pl-4 pr-4`}>
       <ul className={`${styles.burgerConstructorList} mb-10`}>
+          <li><BurgerConstructorItem item={choosenBun} isLocked openModal={openModal} isTop/></li>
           {mainIngrediets.map((item : any, index : any) => {
             return (
               <li key={index}>
-                <BurgerConstructorItem item={item} index={index} length={mainIngrediets.length} openModal={openModal} />
+                <BurgerConstructorItem item={item} openModal={openModal} />
               </li>
             )
           })}
+          <li><BurgerConstructorItem item={choosenBun} isLocked openModal={openModal} isBottom /></li>
       </ul>
       <div className={`${styles.burgerConstructorPriceContainer} mt-10`}>
         <p className={`${styles.burgerConstructorPrice} text text_type_main-large`}>625<CurrencyIcon type="primary" /></p>

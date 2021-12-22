@@ -70,9 +70,11 @@ function App() {
           sauses={sauses}
           openModal={handleOpenModal}
         />
+        { /*Временное решение с choosenBun, пока не сделали выбор булки*/ }
         <BurgerConstructor
           mainIngrediets={mainIngrediets}
           openModal={handleOpenModal}
+          choosenBun={bun[0]}
         />
       </main>
     </div>
