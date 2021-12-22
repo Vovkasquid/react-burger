@@ -19,6 +19,9 @@
 
 .ingredientsName {
   min-height: 48px;
+  min-width: 272px;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .ingredientsName {
