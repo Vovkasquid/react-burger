@@ -4,13 +4,11 @@ import styles from './Modal.module.css'
 import ModalOverley from '../ModalOverley/ModalOverley.jsx'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ReactDOM from 'react-dom'
-import ModalOrderItem from '../ModalOrderItem/ModalOrderItem'
-import ModalIngredientItem from '../ModalIngredientItem/ModalIngredientItem'
 import { ingredientSchema } from '../../utils/schemas'
 
 const modalRoot = document.getElementById('modal')
 
-const Modal = ( { isModalVisible, closePopup, ingredient, isOrder } ) => {
+const Modal = ( { isModalVisible, closePopup, ingredient, isOrder, children } ) => {
   const listenEscHandler = (event) => {
     if (event.key === 'Escape') {
       closePopup()
@@ -37,11 +35,7 @@ const Modal = ( { isModalVisible, closePopup, ingredient, isOrder } ) => {
           <button className={styles.closeButton}><CloseIcon type="primary" onClick={closePopup} /></button>
         </div>
         }
-        {isOrder ?
-          <ModalOrderItem closePopup={closePopup} />
-        :
-          <ModalIngredientItem closePopup={closePopup} ingredient={ingredient} />
-        }
+        {children}
       </div>
     </ModalOverley>
     
@@ -55,4 +49,5 @@ Modal.propTypes = {
   isModalVisible: PropTypes.bool.isRequired,
   ingredient: ingredientSchema.isRequired,
   isOrder: PropTypes.bool.isRequired,
+  children: PropTypes.element.isRequired,
 }

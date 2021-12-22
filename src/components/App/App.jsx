@@ -5,6 +5,8 @@ import BurgerConstructor from '../BurgerConstructor/BurgerConstructor.jsx'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients.jsx'
 import { BURGER_API_URL } from '../../utils/constants.js'
 import Modal from '../Modal/Modal.jsx'
+import ModalOrderItem from '../ModalOrderItem/ModalOrderItem'
+import ModalIngredientItem from '../ModalIngredientItem/ModalIngredientItem'
 
  // Метод для проверки ответа
  function checkResponse(res) {
@@ -62,7 +64,13 @@ function App() {
         closePopup={handleCloseModal}
         ingredient={ingredient}
         isOrder={isOrder}
-      />
+      >
+        {isOrder ?
+          <ModalOrderItem closePopup={handleCloseModal} />
+        :
+          <ModalIngredientItem closePopup={handleCloseModal} ingredient={ingredient} />
+        }
+      </Modal>
       <AppHeader />
       <main className={styles.main}>
         <BurgerIngredients
