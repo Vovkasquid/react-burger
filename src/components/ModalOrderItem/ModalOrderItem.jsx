@@ -1,9 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styles from './ModalOrderItem.module.css'
 import succesIcon from '../../images/successIcon.svg'
 
-const ModalOrderItem = ({ closePopup }) => {
+const ModalOrderItem = () => {
   return (
     <>
       <p className="text text_type_digits-large mb-8">034536</p>
@@ -16,7 +15,3 @@ const ModalOrderItem = ({ closePopup }) => {
 }
 
 export default ModalOrderItem
-
-ModalOrderItem.propTypes = {
-  closePopup: PropTypes.func.isRequired,
-}

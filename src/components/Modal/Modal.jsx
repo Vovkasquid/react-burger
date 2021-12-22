@@ -8,7 +8,7 @@ import { ingredientSchema } from '../../utils/schemas'
 
 const modalRoot = document.getElementById('modal')
 
-const Modal = ( { isModalVisible, closePopup, ingredient, isOrder, children } ) => {
+const Modal = ( { isModalVisible, closePopup, isOrder, children } ) => {
   const listenEscHandler = (event) => {
     if (event.key === 'Escape') {
       closePopup()
@@ -46,8 +46,7 @@ export default Modal
 
 Modal.propTypes = {
   closePopup: PropTypes.func.isRequired,
-  isModalVisible: PropTypes.bool.isRequired,
-  ingredient: ingredientSchema.isRequired,
-  isOrder: PropTypes.bool.isRequired,
+  isModalVisible: PropTypes.bool,
+  isOrder: PropTypes.bool,
   children: PropTypes.element.isRequired,
 }

@@ -23,6 +23,6 @@ export default function ModalOverley ({ children, isModalVisible, closePopup}) {
 
 ModalOverley.propTypes = {
   closePopup: PropTypes.func.isRequired,
-  isModalVisible: PropTypes.bool.isRequired,
+  isModalVisible: PropTypes.bool,
   children: PropTypes.element.isRequired,
 }
