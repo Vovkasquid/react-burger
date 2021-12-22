@@ -36,6 +36,11 @@ const Modal = ( { isModalVisible, closePopup, ingredient, isOrder } ) => {
           <button className={styles.closeButton}><CloseIcon type="primary" onClick={closePopup} /></button>
         </div>
         }
+        {isOrder ?
+          <ModalOrderItem closePopup={closePopup} />
+        :
+          <ModalIngredientItem closePopup={closePopup} ingredient={ingredient} />
+        }
       </div>
     </ModalOverley>
     
@@ -43,13 +48,3 @@ const Modal = ( { isModalVisible, closePopup, ingredient, isOrder } ) => {
 }
 
 export default Modal
-/*
-<ModalOverley isModalVisible={isModalVisible} closePopup={closePopup} >
-      {isOrder
-      ?
-      <ModalOrderItem closePopup={closePopup} />
-      :
-      <ModalIngredientItem closePopup={closePopup} ingredient={ingredient} />
-      }
-    </ModalOverley>
-    */
