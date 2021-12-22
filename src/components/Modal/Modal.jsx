@@ -23,6 +23,28 @@ const Modal = ( { isModalVisible, closePopup, ingredient, isOrder } ) => {
   
   return ReactDOM.createPortal(
     <ModalOverley isModalVisible={isModalVisible} closePopup={closePopup} >
+    <div className={isOrder ? `${styles.modal} pb-30 pt-30` : `${styles.modal} pt-10 pr-10 pb-15 pl-10`}>
+        {isOrder ? 
+          <button 
+            className={`${styles.closeButton} ${styles.closeButtonFixed}`}
+          >
+            <CloseIcon type="primary" onClick={closePopup} />
+          </button>
+          :
+          <div className={styles.modalHeaderContainer}>
+          <h3 className={`${styles.modalHeader} text text_type_main-large`}>Детали ингредиента</h3>
+          <button className={styles.closeButton}><CloseIcon type="primary" onClick={closePopup} /></button>
+        </div>
+        }
+      </div>
+    </ModalOverley>
+    
+  , modalRoot)
+}
+
+export default Modal
+/*
+<ModalOverley isModalVisible={isModalVisible} closePopup={closePopup} >
       {isOrder
       ?
       <ModalOrderItem closePopup={closePopup} />
@@ -30,7 +52,4 @@ const Modal = ( { isModalVisible, closePopup, ingredient, isOrder } ) => {
       <ModalIngredientItem closePopup={closePopup} ingredient={ingredient} />
       }
     </ModalOverley>
-  , modalRoot)
-}
-
-export default Modal
+    */
