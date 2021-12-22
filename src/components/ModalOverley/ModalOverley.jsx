@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './ModalOverley.module.css'
 
-
 export default function ModalOverley ({ children, isModalVisible, closePopup}) {
   return (
     <>
@@ -20,4 +19,10 @@ export default function ModalOverley ({ children, isModalVisible, closePopup}) {
       </section>
     </>
   )
+}
+
+ModalOverley.propTypes = {
+  closePopup: PropTypes.func.isRequired,
+  isModalVisible: PropTypes.bool.isRequired,
+  children: PropTypes.element.isRequired,
 }

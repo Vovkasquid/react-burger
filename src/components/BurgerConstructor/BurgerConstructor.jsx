@@ -1,7 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styles from './BurgerConstructor.module.css'
 import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorItem.jsx'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import { ingredientSchema, arrayOfIngredientSchema } from '../../utils/schemas'
 
 export default function BurgerConstructor({ mainIngrediets, openModal, choosenBun }) {
   return (
@@ -27,4 +29,10 @@ export default function BurgerConstructor({ mainIngrediets, openModal, choosenBu
       </div>
     </section>
   )
+}
+
+BurgerConstructor.propTypes = {
+  mainIngrediets: arrayOfIngredientSchema.isRequired,
+  openModal: PropTypes.func.isRequired,
+  choosenBun: ingredientSchema.isRequired,
 }

@@ -1,7 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styles from './BurgerIngredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientCard from '../IngredientCard/IngredientCard.jsx'
+import { arrayOfIngredientSchema } from '../../utils/schemas'
 
 export default function BurgerIngredients({ bun, sauses, openModal }) {
   const [current, setCurrent] = React.useState('Булки')
@@ -39,4 +41,10 @@ export default function BurgerIngredients({ bun, sauses, openModal }) {
     </div>
     </section>
   )
+}
+
+IngredientCard.propTypes = {
+  bun: arrayOfIngredientSchema,
+  sauses: arrayOfIngredientSchema,
+  openModal: PropTypes.func.isRequired,
 }

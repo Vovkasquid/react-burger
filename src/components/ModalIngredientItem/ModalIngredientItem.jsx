@@ -1,7 +1,8 @@
 import React from 'react'
 import styles from './ModalIngredientItem.module.css'
+import { ingredientSchema } from '../../utils/schemas'
 
-const ModalIngredientItem = ({closePopup, ingredient }) => {
+const ModalIngredientItem = ({ ingredient }) => {
   return (
     <>
       <img alt="картинка ингредиента" src={ingredient?.image} className={styles.ingredientImage} /><div className={styles.ingredientDescriptionContainer}>
@@ -30,3 +31,7 @@ const ModalIngredientItem = ({closePopup, ingredient }) => {
 }
 
 export default ModalIngredientItem
+
+ModalIngredientItem.propTypes = {
+  ingredient: ingredientSchema.isRequired,
+}

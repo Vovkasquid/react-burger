@@ -1,10 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styles from './Modal.module.css'
 import ModalOverley from '../ModalOverley/ModalOverley.jsx'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ReactDOM from 'react-dom'
 import ModalOrderItem from '../ModalOrderItem/ModalOrderItem'
 import ModalIngredientItem from '../ModalIngredientItem/ModalIngredientItem'
+import { ingredientSchema } from '../../utils/schemas'
 
 const modalRoot = document.getElementById('modal')
 
@@ -47,3 +49,10 @@ const Modal = ( { isModalVisible, closePopup, ingredient, isOrder } ) => {
 }
 
 export default Modal
+
+Modal.propTypes = {
+  closePopup: PropTypes.func.isRequired,
+  isModalVisible: PropTypes.bool.isRequired,
+  ingredient: ingredientSchema.isRequired,
+  isOrder: PropTypes.bool.isRequired,
+}

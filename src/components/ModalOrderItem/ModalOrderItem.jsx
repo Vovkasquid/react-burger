@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styles from './ModalOrderItem.module.css'
 import succesIcon from '../../images/successIcon.svg'
 
@@ -15,3 +16,7 @@ const ModalOrderItem = ({ closePopup }) => {
 }
 
 export default ModalOrderItem
+
+ModalOrderItem.propTypes = {
+  closePopup: PropTypes.func.isRequired,
+}
