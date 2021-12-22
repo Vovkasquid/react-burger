@@ -3,9 +3,12 @@ import styles from './Modal.module.css'
 import ModalOverley from '../ModalOverley/ModalOverley.jsx'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import succesIcon from '../../images/successIcon.svg'
+import ReactDOM from 'react-dom'
 
-const Modal = ( { isModalVisible, closePopup, ingredient, isOrder } : any ) => {
-  const listenEscHandler = (event : any) => {
+const modalRoot = document.getElementById('modal')
+
+const Modal = ( { isModalVisible, closePopup, ingredient, isOrder } ) => {
+  const listenEscHandler = (event) => {
     if (event.key === 'Escape') {
       closePopup()
     }
@@ -16,7 +19,7 @@ const Modal = ( { isModalVisible, closePopup, ingredient, isOrder } : any ) => {
     return  () => document.removeEventListener('keydown', listenEscHandler)
   }, [])
   
-  return (
+  return ReactDOM.createPortal(
     <ModalOverley isModalVisible={isModalVisible} closePopup={closePopup} >
       {isOrder
       ?
@@ -58,7 +61,7 @@ const Modal = ( { isModalVisible, closePopup, ingredient, isOrder } : any ) => {
         </div>
       </div>}
     </ModalOverley>
-  )
+  , modalRoot)
 }
 
 export default Modal

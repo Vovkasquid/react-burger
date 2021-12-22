@@ -4,7 +4,7 @@ import AppHeader from '../AppHeader/AppHeader'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
 import { BURGER_API_URL } from '../../utils/constants'
-import Modal from '../Modal/Modal'
+import Modal from '../Modal/Modal.jsx'
 
  // Метод для проверки ответа
  function checkResponse(res : any) {
