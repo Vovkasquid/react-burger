@@ -17,7 +17,7 @@ const Modal = ( { isModalVisible, closePopup, ingredient, isOrder } : any ) => {
   }, [])
   
   return (
-    <ModalOverley isModalVisible={isModalVisible} >
+    <ModalOverley isModalVisible={isModalVisible} closePopup={closePopup} >
       {isOrder
       ?
       <div className={`${styles.modal} pb-30 pt-30`}>

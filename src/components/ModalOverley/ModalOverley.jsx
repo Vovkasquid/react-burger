@@ -7,12 +7,23 @@ const modalRoot = document.getElementById('root');
 
 export default class ModalOverley extends React.Component {
   render() {
-    const { children, isModalVisible } = this.props;
+    const { children, isModalVisible, closePopup} = this.props;
     // Возвращаем ReactDOM.createPortal,
     // который поместит дочерние элементы в modalRoot
     return ReactDOM.createPortal(
       <>
-        <section className={isModalVisible ? `${styles.modal} ${styles.modalActive}` : styles.modal }>{children}</section>
+        <section
+          className={isModalVisible ?
+          `${styles.modal} ${styles.modalActive}` :
+          styles.modal }
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              closePopup()
+            }           
+          }}
+          >
+            {children}
+        </section>
       </>,
       modalRoot
     );
