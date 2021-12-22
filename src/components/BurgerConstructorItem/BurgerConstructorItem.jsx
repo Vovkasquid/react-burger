@@ -2,7 +2,7 @@ import React from 'react'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './BurgerConstructorItem.module.css'
 
-export default function BurgerConstructorItem({ item, openModal, isLocked, isTop, isBottom }:any) {
+export default function BurgerConstructorItem({ item, openModal, isLocked, isTop, isBottom }) {
   let itemName = ''
   if (isTop) {
     itemName = item?.name + ' (верх)'

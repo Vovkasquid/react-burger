@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './IngredientCard.module.css'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 
-export default function IngredientCard({ ingredient, index, openModal }:any) {
+export default function IngredientCard({ ingredient, index, openModal }) {
   return (
   <div className={`${styles.ingredientsCard} ml-4`} onClick={() => openModal(ingredient)}>
     <img src={ingredient.image} className={`${styles.ingredientsImg} ml-4 mr-4 `} alt='изображение ингридиета' />

@@ -1,13 +1,13 @@
 import React from 'react'
 import styles from './App.module.css'
-import AppHeader from '../AppHeader/AppHeader'
-import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
-import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
-import { BURGER_API_URL } from '../../utils/constants'
+import AppHeader from '../AppHeader/AppHeader.jsx'
+import BurgerConstructor from '../BurgerConstructor/BurgerConstructor.jsx'
+import BurgerIngredients from '../BurgerIngredients/BurgerIngredients.jsx'
+import { BURGER_API_URL } from '../../utils/constants.js'
 import Modal from '../Modal/Modal.jsx'
 
  // Метод для проверки ответа
- function checkResponse(res : any) {
+ function checkResponse(res) {
   if (res.ok) {
     return res.json();
   }
@@ -15,16 +15,16 @@ import Modal from '../Modal/Modal.jsx'
   return Promise.reject(res);
 }
 
-const filterBun = (data : any) => {
-  return data.filter((item : any) => item.type === 'bun')
+const filterBun = (data) => {
+  return data.filter((item) => item.type === 'bun')
 }
 
-const filterSauces = (data : any) => {
-  return data.filter((item : any) => item.type === 'sauce')
+const filterSauces = (data) => {
+  return data.filter((item) => item.type === 'sauce')
 }
 
-const filterMainIngredients = (data : any) => {
-  return data.filter((item : any) => item.type === 'main')
+const filterMainIngredients = (data) => {
+  return data.filter((item) => item.type === 'main')
 }
 
 function App() {
@@ -35,7 +35,7 @@ function App() {
   const [ingredient, setIngredient] = React.useState({})
   const [isOrder, setIsOrder] = React.useState(false)
 
-  const handleOpenModal = (currentIngredient : any, isCurrentOrder : any) => {
+  const handleOpenModal = (currentIngredient, isCurrentOrder) => {
     setIsModalVisible(true)
     setIngredient(currentIngredient)
     setIsOrder(isCurrentOrder)
@@ -81,4 +81,4 @@ function App() {
   )
 }
 
-export default App;
+export default App
