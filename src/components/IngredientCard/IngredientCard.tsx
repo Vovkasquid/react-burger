@@ -4,7 +4,7 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 
 export default function IngredientCard({ ingredient, index, openModal }:any) {
   return (
-  <div key={ingredient._id} className={`${styles.ingredientsCard} ml-4`} onClick={() => openModal(ingredient)}>
+  <div className={`${styles.ingredientsCard} ml-4`} onClick={() => openModal(ingredient)}>
     <img src={ingredient.image} className={`${styles.ingredientsImg} ml-4 mr-4 `} alt='изображение ингридиета' />
     <p className={`${styles.ingredientsPrice} text text_type_digits-default`}>{ingredient.price}<CurrencyIcon type="primary" /></p>
     <p className={`${styles.ingredientsName} text text_type_main-default`}>{ingredient.name}</p>
