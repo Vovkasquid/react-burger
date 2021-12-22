@@ -28,5 +28,24 @@
   list-style: none;
   width: 100%;
   justify-content: space-between;
-  overflow: scroll;
+}
+
+.scrollZone {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-color: #8585ad #2f2f37;
+  scrollbar-width: thin;
+}
+
+.scrollZone::-webkit-scrollbar {
+  width: 12px;
+}
+.scrollZone::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+.scrollZone::-webkit-scrollbar-thumb {
+  background: #8585ad;
+  border: 3px solid #2f2f37;
+  border-radius: 6px;
 }

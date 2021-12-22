@@ -20,21 +20,23 @@ export default function BurgerIngredients({ bun, sauses, openModal } : any) {
         </Tab>
     </div>
     <p className={`${styles.chapter} text text_type_main-medium mt-10 mb-6`}>Булки</p>
-    <ul className={`${styles.ingredientsContainer}`}>
-      {bun.map((bread : any, index : any) => (
-        <li key={index}>
-          <IngredientCard ingredient={bread} index={index} openModal={openModal} />
-        </li>
-     ))}
-    </ul>
-    <p className={`${styles.chapter} text text_type_main-medium mt-10 mb-6`}>Соусы</p>
-    <ul className={`${styles.ingredientsContainer}`}>
-      {sauses.map((sauce : any, index: any) => (
-        <li key={index}>
-          <IngredientCard ingredient={sauce} index={index} openModal={openModal}/>
-        </li>
-     ))}
-    </ul>
+    <div className={styles.scrollZone}>
+      <ul className={`${styles.ingredientsContainer}`}>
+        {bun.map((bread : any, index : any) => (
+          <li key={index}>
+            <IngredientCard ingredient={bread} index={index} openModal={openModal} />
+          </li>
+      ))}
+      </ul>
+      <p className={`${styles.chapter} text text_type_main-medium mt-10 mb-6`}>Соусы</p>
+      <ul className={`${styles.ingredientsContainer}`}>
+        {sauses.map((sauce : any, index: any) => (
+          <li key={index}>
+            <IngredientCard ingredient={sauce} index={index} openModal={openModal}/>
+          </li>
+      ))}
+      </ul>
+    </div>
     </section>
   )
 }
