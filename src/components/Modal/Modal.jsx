@@ -4,7 +4,6 @@ import styles from './Modal.module.css'
 import ModalOverley from '../ModalOverley/ModalOverley.jsx'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ReactDOM from 'react-dom'
-import { ingredientSchema } from '../../utils/schemas'
 
 const modalRoot = document.getElementById('modal')
 

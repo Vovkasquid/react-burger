@@ -34,5 +34,5 @@ export default function BurgerConstructor({ mainIngrediets, openModal, choosenBu
 BurgerConstructor.propTypes = {
   mainIngrediets: arrayOfIngredientSchema.isRequired,
   openModal: PropTypes.func.isRequired,
-  choosenBun: ingredientSchema.isRequired,
+  choosenBun: ingredientSchema,
 }

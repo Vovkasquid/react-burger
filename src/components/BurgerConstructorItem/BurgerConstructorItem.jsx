@@ -28,7 +28,7 @@ export default function BurgerConstructorItem({ item, openModal, isLocked, isTop
 }
 
 BurgerConstructorItem.propTypes = {
-  item: ingredientSchema.isRequired,
+  item: ingredientSchema,
   openModal: PropTypes.func.isRequired,
   isLocked: PropTypes.bool,
   isTop: PropTypes.bool,
