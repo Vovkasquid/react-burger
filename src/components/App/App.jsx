@@ -3,7 +3,7 @@ import styles from './App.module.css'
 import AppHeader from '../AppHeader/AppHeader.jsx'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor.jsx'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients.jsx'
-import { BURGER_API_URL } from '../../utils/constants.js'
+import { BURGER_API_URL, MODAL_INGREDIENT_TITLE } from '../../utils/constants.js'
 import Modal from '../Modal/Modal.jsx'
 import ModalOrderItem from '../ModalOrderItem/ModalOrderItem'
 import ModalIngredientItem from '../ModalIngredientItem/ModalIngredientItem'
@@ -64,6 +64,7 @@ function App() {
         closePopup={handleCloseModal}
         ingredient={ingredient}
         isOrder={isOrder}
+        title={MODAL_INGREDIENT_TITLE}
       >
         {isOrder ?
           <ModalOrderItem closePopup={handleCloseModal} />

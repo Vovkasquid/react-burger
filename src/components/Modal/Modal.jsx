@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom'
 
 const modalRoot = document.getElementById('modal')
 
-const Modal = ( { isModalVisible, closePopup, isOrder, children } ) => {
+const Modal = ( { isModalVisible, closePopup, isOrder, children, title } ) => {
   const listenEscHandler = (event) => {
     if (event.key === 'Escape') {
       closePopup()
@@ -30,7 +30,7 @@ const Modal = ( { isModalVisible, closePopup, isOrder, children } ) => {
           </button>
           :
           <div className={styles.modalHeaderContainer}>
-          <h3 className={`${styles.modalHeader} text text_type_main-large`}>Детали ингредиента</h3>
+          <h3 className={`${styles.modalHeader} text text_type_main-large`}>{title}</h3>
           <button className={styles.closeButton}><CloseIcon type="primary" onClick={closePopup} /></button>
         </div>
         }
@@ -48,4 +48,5 @@ Modal.propTypes = {
   isModalVisible: PropTypes.bool,
   isOrder: PropTypes.bool,
   children: PropTypes.element.isRequired,
+  title: PropTypes.string,
 }
