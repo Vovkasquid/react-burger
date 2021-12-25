@@ -5,25 +5,25 @@ import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorIte
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ingredientSchema, arrayOfIngredientSchema } from '../../utils/schemas'
 
-export default function BurgerConstructor({ mainIngrediets, openModal, choosenBun }) {
+export default function BurgerConstructor({ mainIngrediets, openIngredientModal, openOrderModal, choosenBun }) {
   return (
     <section className={`${styles.burgerConstructorContainer} pt-25 pl-4 pr-4`}>
       <div className={`${styles.burgerConstructorList} mb-10`}>
-          <BurgerConstructorItem item={choosenBun} isLocked openModal={openModal} isTop/>
+          <BurgerConstructorItem item={choosenBun} isLocked openModal={openIngredientModal} isTop/>
           <ul className={`${styles.burgerConstructorScrollList} ${styles.scrollZone}`}>
             {mainIngrediets.map((item, index) => {
               return (
                 <li key={index}>
-                  <BurgerConstructorItem item={item} openModal={openModal} />
+                  <BurgerConstructorItem item={item} openModal={openIngredientModal} />
                 </li>
               )
             })}
           </ul>
-          <BurgerConstructorItem item={choosenBun} isLocked openModal={openModal} isBottom />
+          <BurgerConstructorItem item={choosenBun} isLocked openModal={openIngredientModal} isBottom />
       </div>
       <div className={`${styles.burgerConstructorPriceContainer} mt-10`}>
         <p className={`${styles.burgerConstructorPrice} text text_type_main-large`}>625<CurrencyIcon type="primary" /></p>
-        <Button type="primary" size="medium" onClick={() => openModal(null, true)} >
+        <Button type="primary" size="medium" onClick={() => openOrderModal()} >
           Оформить заказ
         </Button>
       </div>
@@ -33,6 +33,7 @@ export default function BurgerConstructor({ mainIngrediets, openModal, choosenBu
 
 BurgerConstructor.propTypes = {
   mainIngrediets: arrayOfIngredientSchema.isRequired,
-  openModal: PropTypes.func.isRequired,
+  openIngredientModal: PropTypes.func.isRequired,
+  openOrderModal: PropTypes.func.isRequired,
   choosenBun: ingredientSchema,
 }

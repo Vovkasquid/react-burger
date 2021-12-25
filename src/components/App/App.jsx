@@ -33,19 +33,28 @@ function App() {
   const [bun, setBun] = React.useState([])
   const [sauses, setSauces] = React.useState([])
   const [mainIngrediets, setMainIngredients] = React.useState([])
-  const [isModalVisible, setIsModalVisible] = React.useState(false)
+  const [isIngredientModalVisible, setIsIngredientModalVisible] = React.useState(false)
+  const [isOrderModalVisible, setIsOrderModalVisible] = React.useState(false)
   const [ingredient, setIngredient] = React.useState({})
   const [isOrder, setIsOrder] = React.useState(false)
 
-  const handleOpenModal = (currentIngredient, isCurrentOrder) => {
-    setIsModalVisible(true)
+  const handleOpenIngredientModal = (currentIngredient, isCurrentOrder) => {
+    setIsIngredientModalVisible(true)
     setIngredient(currentIngredient)
     setIsOrder(isCurrentOrder)
   }
+  
+  const handleOpenOrderModal = () => {
+    setIsOrderModalVisible(true)
+  }
 
-  const handleCloseModal = () => {
-    setIsModalVisible(false)
+  const handleCloseIngredientModal = () => {
+    setIsIngredientModalVisible(false)
     setIngredient({})
+  }
+
+  const handleCloseOrderModal = () => {
+    setIsOrderModalVisible(false)
   }
 
   React.useEffect(() => {
@@ -60,29 +69,32 @@ function App() {
   return (
     <div className={styles.app} id="app">
       <Modal
-        isModalVisible={isModalVisible}
-        closePopup={handleCloseModal}
+        isModalVisible={isIngredientModalVisible}
+        closePopup={handleCloseIngredientModal}
         ingredient={ingredient}
         isOrder={isOrder}
         title={MODAL_INGREDIENT_TITLE}
       >
-        {isOrder ?
-          <ModalOrderItem closePopup={handleCloseModal} />
-        :
-          <ModalIngredientItem closePopup={handleCloseModal} ingredient={ingredient} />
-        }
+        <ModalIngredientItem closePopup={handleCloseIngredientModal} ingredient={ingredient} />
+      </Modal>
+      <Modal
+        isModalVisible={isOrderModalVisible}
+        closePopup={handleCloseOrderModal}
+      >
+        <ModalOrderItem closePopup={handleCloseOrderModal} />
       </Modal>
       <AppHeader />
       <main className={styles.main}>
         <BurgerIngredients
           bun={bun}
           sauses={sauses}
-          openModal={handleOpenModal}
+          openModal={handleOpenIngredientModal}
         />
         { /*Временное решение с choosenBun, пока не сделали выбор булки*/ }
         <BurgerConstructor
           mainIngrediets={mainIngrediets}
-          openModal={handleOpenModal}
+          openIngredientModal={handleOpenIngredientModal}
+          openOrderModal={handleOpenOrderModal}
           choosenBun={bun[0]}
         />
       </main>
