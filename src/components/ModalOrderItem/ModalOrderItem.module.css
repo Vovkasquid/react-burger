@@ -1,0 +1,7 @@
+.successImage {
+  background-color: transparent;
+  border: none;
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}

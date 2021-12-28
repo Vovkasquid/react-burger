@@ -1,0 +1,51 @@
+.burgerIngredients {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 600px;
+  max-height: 912px;
+  box-sizing: border-box;
+}
+
+.ingredientsHeader {
+  width: 100%;
+  text-align: left;
+}
+
+.chapter {
+  width: 100%;
+  text-align: left;
+}
+
+.ingredientsContainer {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.scrollZone {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-color: #8585ad #2f2f37;
+  scrollbar-width: thin;
+}
+
+.scrollZone::-webkit-scrollbar {
+  width: 12px;
+}
+.scrollZone::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+.scrollZone::-webkit-scrollbar-thumb {
+  background: #8585ad;
+  border: 3px solid #2f2f37;
+  border-radius: 6px;
+}
