@@ -97,7 +97,6 @@ function App() {
           />
           { /*Временное решение с choosenBun, пока не сделали выбор булки*/ }
           <BurgerConstructor
-            mainIngrediets={mainIngrediets}
             openIngredientModal={handleOpenIngredientModal}
             openOrderModal={handleOpenOrderModal}
             choosenBun={bun[0]}

@@ -3,13 +3,10 @@ import PropTypes from 'prop-types'
 import styles from './BurgerIngredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientCard from '../IngredientCard/IngredientCard.jsx'
-import { arrayOfIngredientSchema } from '../../utils/schemas'
 import { IngredientContext } from '../../services/IngredientsContext'
 
 export default function BurgerIngredients({ openModal }) {
   const { bun, sauces } = React.useContext(IngredientContext)
-  console.log(bun)
-  console.log(sauces)
   const [current, setCurrent] = React.useState('Булки')
   return(
     <section className={`${styles.burgerIngredients} pt-10`} >

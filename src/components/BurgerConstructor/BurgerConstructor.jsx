@@ -3,15 +3,17 @@ import PropTypes from 'prop-types'
 import styles from './BurgerConstructor.module.css'
 import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorItem.jsx'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { ingredientSchema, arrayOfIngredientSchema } from '../../utils/schemas'
+import { ingredientSchema } from '../../utils/schemas'
+import { IngredientContext } from '../../services/IngredientsContext'
 
-export default function BurgerConstructor({ mainIngrediets, openIngredientModal, openOrderModal, choosenBun }) {
+export default function BurgerConstructor({ openIngredientModal, openOrderModal, choosenBun }) {
+  const { mainIngrediets } = React.useContext(IngredientContext)
   return (
     <section className={`${styles.burgerConstructorContainer} pt-25 pl-4 pr-4`}>
       <div className={`${styles.burgerConstructorList} mb-10`}>
           <BurgerConstructorItem item={choosenBun} isLocked openModal={openIngredientModal} isTop/>
           <ul className={`${styles.burgerConstructorScrollList} ${styles.scrollZone}`}>
-            {mainIngrediets.map((item, index) => {
+            {mainIngrediets?.map((item, index) => {
               return (
                 <li key={index}>
                   <BurgerConstructorItem item={item} openModal={openIngredientModal} />
@@ -32,7 +34,6 @@ export default function BurgerConstructor({ mainIngrediets, openIngredientModal,
 }
 
 BurgerConstructor.propTypes = {
-  mainIngrediets: arrayOfIngredientSchema.isRequired,
   openIngredientModal: PropTypes.func.isRequired,
   openOrderModal: PropTypes.func.isRequired,
   choosenBun: ingredientSchema,
