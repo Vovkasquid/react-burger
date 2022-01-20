@@ -31,14 +31,13 @@ const filterMainIngredients = (data) => {
 }
 
 function App() {
-  const [bun, setBun] = React.useState([])
-  const [sauses, setSauces] = React.useState([])
-  const [mainIngrediets, setMainIngredients] = React.useState([])
   const [isIngredientModalVisible, setIsIngredientModalVisible] = React.useState(false)
   const [isOrderModalVisible, setIsOrderModalVisible] = React.useState(false)
   const [ingredient, setIngredient] = React.useState({})
   const [isOrder, setIsOrder] = React.useState(false)
   const [ingredientContext, setIngeredientContext] = React.useState({})
+  const [choosenBun, setChoosenBun] = React.useState({})
+  console.log(ingredientContext.bun)
 
   const handleOpenIngredientModal = (currentIngredient, isCurrentOrder) => {
     setIsIngredientModalVisible(true)
@@ -62,11 +61,11 @@ function App() {
   React.useEffect(() => {
     fetch(BURGER_API_URL).then((response) => checkResponse(response))
     .then((data) => {
-      setSauces(filterSauces(data.data))
-      setBun(filterBun(data.data))
-      setMainIngredients(filterMainIngredients(data.data))
       // Записывает ингредиенты в контекст
       setIngeredientContext({sauces: filterSauces(data.data), bun: filterBun(data.data), mainIngrediets: filterMainIngredients(data.data)})
+      // Костылим временно выбранную булку
+      const bunArray = filterBun(data.data)
+      setChoosenBun(bunArray[0])
     })
     .catch(err => console.log(err))
   }, [])
@@ -91,15 +90,13 @@ function App() {
         <AppHeader />
         <main className={styles.main}>
           <BurgerIngredients
-            bun={bun}
-            sauses={sauses}
             openModal={handleOpenIngredientModal}
           />
           { /*Временное решение с choosenBun, пока не сделали выбор булки*/ }
           <BurgerConstructor
             openIngredientModal={handleOpenIngredientModal}
             openOrderModal={handleOpenOrderModal}
-            choosenBun={bun[0]}
+            choosenBun={choosenBun}
           />
         </main>
       </div>
