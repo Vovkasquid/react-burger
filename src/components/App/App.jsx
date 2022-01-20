@@ -7,6 +7,7 @@ import { BURGER_API_URL, MODAL_INGREDIENT_TITLE } from '../../utils/constants.js
 import Modal from '../Modal/Modal.jsx'
 import ModalOrderItem from '../ModalOrderItem/ModalOrderItem'
 import ModalIngredientItem from '../ModalIngredientItem/ModalIngredientItem'
+import { IngredientContext } from '../../services/IngredientsContext'
 
  // Метод для проверки ответа
  function checkResponse(res) {
@@ -37,6 +38,7 @@ function App() {
   const [isOrderModalVisible, setIsOrderModalVisible] = React.useState(false)
   const [ingredient, setIngredient] = React.useState({})
   const [isOrder, setIsOrder] = React.useState(false)
+  const [ingredientContext, setIngeredientContext] = React.useState({})
 
   const handleOpenIngredientModal = (currentIngredient, isCurrentOrder) => {
     setIsIngredientModalVisible(true)
@@ -63,42 +65,47 @@ function App() {
       setSauces(filterSauces(data.data))
       setBun(filterBun(data.data))
       setMainIngredients(filterMainIngredients(data.data))
+      // Записывает ингредиенты в контекст
+      setIngeredientContext({sauces: filterSauces(data.data), bun: filterBun(data.data), mainIngrediets: filterMainIngredients(data.data)})
     })
     .catch(err => console.log(err))
   }, [])
   return (
-    <div className={styles.app} id="app">
-      <Modal
-        isModalVisible={isIngredientModalVisible}
-        closePopup={handleCloseIngredientModal}
-        ingredient={ingredient}
-        isOrder={isOrder}
-        title={MODAL_INGREDIENT_TITLE}
-      >
-        <ModalIngredientItem closePopup={handleCloseIngredientModal} ingredient={ingredient} />
-      </Modal>
-      <Modal
-        isModalVisible={isOrderModalVisible}
-        closePopup={handleCloseOrderModal}
-      >
-        <ModalOrderItem closePopup={handleCloseOrderModal} />
-      </Modal>
-      <AppHeader />
-      <main className={styles.main}>
-        <BurgerIngredients
-          bun={bun}
-          sauses={sauses}
-          openModal={handleOpenIngredientModal}
-        />
-        { /*Временное решение с choosenBun, пока не сделали выбор булки*/ }
-        <BurgerConstructor
-          mainIngrediets={mainIngrediets}
-          openIngredientModal={handleOpenIngredientModal}
-          openOrderModal={handleOpenOrderModal}
-          choosenBun={bun[0]}
-        />
-      </main>
-    </div>
+    <IngredientContext.Provider value={ingredientContext}>
+      <div className={styles.app} id="app">
+        <Modal
+          isModalVisible={isIngredientModalVisible}
+          closePopup={handleCloseIngredientModal}
+          ingredient={ingredient}
+          isOrder={isOrder}
+          title={MODAL_INGREDIENT_TITLE}
+        >
+          <ModalIngredientItem closePopup={handleCloseIngredientModal} ingredient={ingredient} />
+        </Modal>
+        <Modal
+          isModalVisible={isOrderModalVisible}
+          closePopup={handleCloseOrderModal}
+        >
+          <ModalOrderItem closePopup={handleCloseOrderModal} />
+        </Modal>
+        <AppHeader />
+        <main className={styles.main}>
+          <BurgerIngredients
+            bun={bun}
+            sauses={sauses}
+            openModal={handleOpenIngredientModal}
+          />
+          { /*Временное решение с choosenBun, пока не сделали выбор булки*/ }
+          <BurgerConstructor
+            mainIngrediets={mainIngrediets}
+            openIngredientModal={handleOpenIngredientModal}
+            openOrderModal={handleOpenOrderModal}
+            choosenBun={bun[0]}
+          />
+        </main>
+      </div>
+    </IngredientContext.Provider>
+
   )
 }
 
