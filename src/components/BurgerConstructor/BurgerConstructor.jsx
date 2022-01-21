@@ -17,7 +17,6 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal,
 
   const onSubmitBurger = () => {
     const ingredientArray = mainIngrediets?.map(item => item._id)
-    console.log(ingredientArray)
     openOrderModal(ingredientArray)
   }
   

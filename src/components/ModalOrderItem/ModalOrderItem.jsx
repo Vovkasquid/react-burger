@@ -1,11 +1,12 @@
 import React from 'react'
 import styles from './ModalOrderItem.module.css'
 import succesIcon from '../../images/successIcon.svg'
+import PropTypes from 'prop-types'
 
-const ModalOrderItem = () => {
+const ModalOrderItem = ({ orderNumber }) => {
   return (
     <>
-      <p className="text text_type_digits-large mb-8">034536</p>
+      <p className="text text_type_digits-large mb-8">{orderNumber}</p>
       <p className={`text text_type_main-medium mb-15`}>идентификатор заказа</p>
       <img src={succesIcon} className={`${styles.successImage} mb-15`} alt="изображение картинки успешного заказа" />
       <p className="text text_type_main-default mb-2">Ваш заказ начали готовить</p>
@@ -15,3 +16,7 @@ const ModalOrderItem = () => {
 }
 
 export default ModalOrderItem
+
+ModalOrderItem.propTypes = {
+  orderNumber: PropTypes.number.isRequired
+}

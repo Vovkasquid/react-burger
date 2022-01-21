@@ -51,21 +51,24 @@ function App() {
   const [isIngredientModalVisible, setIsIngredientModalVisible] = React.useState(false)
   const [isOrderModalVisible, setIsOrderModalVisible] = React.useState(false)
   const [ingredient, setIngredient] = React.useState({})
-  const [isOrder, setIsOrder] = React.useState(false)
   const [ingredientContext, setIngeredientContext] = React.useState({})
   const [choosenBun, setChoosenBun] = React.useState({})
+  const [orderNumber, setOrderNumber] = React.useState(0)
 
   const handleOpenIngredientModal = (currentIngredient, isCurrentOrder) => {
     setIsIngredientModalVisible(true)
     setIngredient(currentIngredient)
-    setIsOrder(isCurrentOrder)
   }
   
   const handleOpenOrderModal = (req) => {
-    fetch(BURGER_API_ORDERS_URL, { method: 'POST', body: JSON.stringify({ ingredients: req })})
+    fetch(BURGER_API_ORDERS_URL, { method: 'POST', headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ ingredients: req })})
       .then((response) => checkResponse(response))
       .then((data) => {
-        console.log(data)
+        // Записываем номер заказа в стейт
+        setOrderNumber(data.order.number)
       })
       .catch(err => console.log(err))
     setIsOrderModalVisible(true)
@@ -104,7 +107,6 @@ function App() {
             isModalVisible={isIngredientModalVisible}
             closePopup={handleCloseIngredientModal}
             ingredient={ingredient}
-            isOrder={isOrder}
             title={MODAL_INGREDIENT_TITLE}
           >
             <ModalIngredientItem closePopup={handleCloseIngredientModal} ingredient={ingredient} />
@@ -113,7 +115,7 @@ function App() {
             isModalVisible={isOrderModalVisible}
             closePopup={handleCloseOrderModal}
           >
-            <ModalOrderItem closePopup={handleCloseOrderModal} />
+            <ModalOrderItem orderNumber={orderNumber} />
           </Modal>
           <AppHeader />
           <main className={styles.main}>
