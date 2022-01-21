@@ -3,7 +3,7 @@ import styles from './App.module.css'
 import AppHeader from '../AppHeader/AppHeader.jsx'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor.jsx'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients.jsx'
-import { BURGER_API_URL, MODAL_INGREDIENT_TITLE } from '../../utils/constants.js'
+import { BURGER_API_INGREDIENTS_URL, BURGER_API_ORDERS_URL, MODAL_INGREDIENT_TITLE } from '../../utils/constants.js'
 import Modal from '../Modal/Modal.jsx'
 import ModalOrderItem from '../ModalOrderItem/ModalOrderItem'
 import ModalIngredientItem from '../ModalIngredientItem/ModalIngredientItem'
@@ -13,8 +13,6 @@ import { PriceContext } from '../../services/PriceContext'
 // функция-редьюсер
 // изменяет состояния в зависимости от типа переданного action
 function reducer(state, action) {
-  console.log(state)
-  console.log(action)
   switch (action.type) {
     case "increase":
       return { price: state.price + action.payload };
@@ -63,7 +61,13 @@ function App() {
     setIsOrder(isCurrentOrder)
   }
   
-  const handleOpenOrderModal = () => {
+  const handleOpenOrderModal = (req) => {
+    fetch(BURGER_API_ORDERS_URL, { method: 'POST', body: JSON.stringify({ ingredients: req })})
+      .then((response) => checkResponse(response))
+      .then((data) => {
+        console.log(data)
+      })
+      .catch(err => console.log(err))
     setIsOrderModalVisible(true)
   }
 
@@ -77,7 +81,7 @@ function App() {
   }
 
   React.useEffect(() => {
-    fetch(BURGER_API_URL).then((response) => checkResponse(response))
+    fetch(BURGER_API_INGREDIENTS_URL).then((response) => checkResponse(response))
     .then((data) => {
       // Записывает ингредиенты в контекст
       const mainIngredientsArray = filterMainIngredients(data.data)
