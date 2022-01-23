@@ -106,7 +106,6 @@ function App() {
         <div className={styles.application} id="app">
           {isIngredientModalVisible && <Modal
             closePopup={handleCloseIngredientModal}
-            ingredient={ingredient}
             title={MODAL_INGREDIENT_TITLE}
           >
             <ModalIngredientItem closePopup={handleCloseIngredientModal} ingredient={ingredient} />
