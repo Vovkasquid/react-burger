@@ -8,22 +8,6 @@ import Modal from '../Modal/Modal.jsx'
 import OrderDetail from '../OrderDetail/OrderDetail'
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
 import { IngredientContext } from '../../services/IngredientsContext'
-import { PriceContext } from '../../services/PriceContext'
-
-// функция-редьюсер
-// изменяет состояния в зависимости от типа переданного action
-function reducer(state, action) {
-  switch (action.type) {
-    case "increase":
-      return { price: state.price + action.payload };
-    case "subtract":
-      return { price: state.price - action.payload };
-    default:
-      throw new Error(`Wrong type of action: ${action.type}`);
-  }
-}
-
-const initialState = { price: 0 };
 
  // Метод для проверки ответа
  function checkResponse(res) {
@@ -47,7 +31,6 @@ const filterMainIngredients = (data) => {
 }
 
 function App() {
-  const [totalPrice, totalPriceDispatcher] = React.useReducer(reducer, initialState, undefined);
   const [isIngredientModalVisible, setIsIngredientModalVisible] = React.useState(false)
   const [isOrderModalVisible, setIsOrderModalVisible] = React.useState(false)
   const [ingredient, setIngredient] = React.useState({})
@@ -110,47 +93,42 @@ function App() {
       // Костылим временно выбранную булку
       const bunArray = filterBun(data.data)
       setChoosenBun(bunArray[0])
-      // Считаем деньги
-      totalPriceDispatcher({type: 'increase', payload: bunArray[0].price * 2})
-      mainIngredientsArray.forEach((item) => totalPriceDispatcher({type: 'increase', payload: item.price}))
     })
     
     .catch(err => setError(err))
   }, [])
   return (
     <IngredientContext.Provider value={ingredientContext}>
-      <PriceContext.Provider value={{totalPrice, totalPriceDispatcher}}>
-        <div className={styles.application} id="app">
-          {isIngredientModalVisible && <Modal
-            closePopup={handleCloseIngredientModal}
-            title={MODAL_INGREDIENT_TITLE}
-          >
-            <IngredientDetails ingredient={ingredient} />
-          </Modal>}
-         {isOrderModalVisible &&  <Modal
-            closePopup={handleCloseOrderModal}
-          >
-            <OrderDetail orderNumber={orderNumber} />
-          </Modal>}
-          <AppHeader />
-          {isError && 
-            <p className={`${styles.errorText} text text_type_main-default`}>
-              {`При выполнении запроса произошла ошибка: ${errorText.statusText}`}
-              </p>
-            }
-          <main className={styles.main}>
-            <BurgerIngredients
-              openModal={handleOpenIngredientModal}
-            />
-            { /*Временное решение с choosenBun, пока не сделали выбор булки*/ }
-            <BurgerConstructor
-              openIngredientModal={handleOpenIngredientModal}
-              openOrderModal={handleOpenOrderModal}
-              choosenBun={choosenBun}
-            />
-          </main>
-        </div>
-      </PriceContext.Provider>
+      <div className={styles.application} id="app">
+        {isIngredientModalVisible && <Modal
+          closePopup={handleCloseIngredientModal}
+          title={MODAL_INGREDIENT_TITLE}
+        >
+          <IngredientDetails ingredient={ingredient} />
+        </Modal>}
+        {isOrderModalVisible &&  <Modal
+          closePopup={handleCloseOrderModal}
+        >
+          <OrderDetail orderNumber={orderNumber} />
+        </Modal>}
+        <AppHeader />
+        {isError && 
+          <p className={`${styles.errorText} text text_type_main-default`}>
+            {`При выполнении запроса произошла ошибка: ${errorText.statusText}`}
+            </p>
+          }
+        <main className={styles.main}>
+          <BurgerIngredients
+            openModal={handleOpenIngredientModal}
+          />
+          { /*Временное решение с choosenBun, пока не сделали выбор булки*/ }
+          <BurgerConstructor
+            openIngredientModal={handleOpenIngredientModal}
+            openOrderModal={handleOpenOrderModal}
+            choosenBun={choosenBun}
+          />
+        </main>
+      </div>
     </IngredientContext.Provider>
 
   )
