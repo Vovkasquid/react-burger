@@ -5,8 +5,8 @@ import BurgerConstructor from '../BurgerConstructor/BurgerConstructor.jsx'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients.jsx'
 import { BURGER_API_INGREDIENTS_URL, BURGER_API_ORDERS_URL, MODAL_INGREDIENT_TITLE } from '../../utils/constants.js'
 import Modal from '../Modal/Modal.jsx'
-import ModalOrderItem from '../ModalOrderItem/ModalOrderItem'
-import ModalIngredientItem from '../ModalIngredientItem/ModalIngredientItem'
+import OrderDetail from '../OrderDetail/OrderDetail'
+import IngredientDetails from '../IngredientDetails/IngredientDetails'
 import { IngredientContext } from '../../services/IngredientsContext'
 import { PriceContext } from '../../services/PriceContext'
 
@@ -108,12 +108,12 @@ function App() {
             closePopup={handleCloseIngredientModal}
             title={MODAL_INGREDIENT_TITLE}
           >
-            <ModalIngredientItem closePopup={handleCloseIngredientModal} ingredient={ingredient} />
+            <IngredientDetails ingredient={ingredient} />
           </Modal>}
          {isOrderModalVisible &&  <Modal
             closePopup={handleCloseOrderModal}
           >
-            <ModalOrderItem orderNumber={orderNumber} />
+            <OrderDetail orderNumber={orderNumber} />
           </Modal>}
           <AppHeader />
           <main className={styles.main}>

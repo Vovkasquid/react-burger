@@ -1,9 +1,9 @@
 import React from 'react'
-import styles from './ModalOrderItem.module.css'
+import styles from './OrderDetail.module.css'
 import succesIcon from '../../images/successIcon.svg'
 import PropTypes from 'prop-types'
 
-const ModalOrderItem = ({ orderNumber }) => {
+const OrderDetail = ({ orderNumber }) => {
   return (
     <>
       <p className="text text_type_digits-large mb-8">{orderNumber}</p>
@@ -15,8 +15,8 @@ const ModalOrderItem = ({ orderNumber }) => {
   )
 }
 
-export default ModalOrderItem
+export default OrderDetail
 
-ModalOrderItem.propTypes = {
+OrderDetail.propTypes = {
   orderNumber: PropTypes.number.isRequired
 }
