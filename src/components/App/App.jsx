@@ -55,7 +55,7 @@ function App() {
   const [choosenBun, setChoosenBun] = React.useState({})
   const [orderNumber, setOrderNumber] = React.useState(0)
 
-  const handleOpenIngredientModal = (currentIngredient, isCurrentOrder) => {
+  const handleOpenIngredientModal = (currentIngredient) => {
     setIsIngredientModalVisible(true)
     setIngredient(currentIngredient)
   }
@@ -69,9 +69,10 @@ function App() {
       .then((data) => {
         // Записываем номер заказа в стейт
         setOrderNumber(data.order.number)
+        // Открываем попап только после того, как получили ответ от сервера
+        setIsOrderModalVisible(true)
       })
       .catch(err => console.log(err))
-    setIsOrderModalVisible(true)
   }
 
   const handleCloseIngredientModal = () => {
@@ -103,20 +104,18 @@ function App() {
     <IngredientContext.Provider value={ingredientContext}>
       <PriceContext.Provider value={{totalPrice, totalPriceDispatcher}}>
         <div className={styles.application} id="app">
-          <Modal
-            isModalVisible={isIngredientModalVisible}
+          {isIngredientModalVisible && <Modal
             closePopup={handleCloseIngredientModal}
             ingredient={ingredient}
             title={MODAL_INGREDIENT_TITLE}
           >
             <ModalIngredientItem closePopup={handleCloseIngredientModal} ingredient={ingredient} />
-          </Modal>
-          <Modal
-            isModalVisible={isOrderModalVisible}
+          </Modal>}
+         {isOrderModalVisible &&  <Modal
             closePopup={handleCloseOrderModal}
           >
             <ModalOrderItem orderNumber={orderNumber} />
-          </Modal>
+          </Modal>}
           <AppHeader />
           <main className={styles.main}>
             <BurgerIngredients
