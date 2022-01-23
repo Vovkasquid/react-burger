@@ -17,7 +17,7 @@ const Modal = ( { closePopup, children, title } ) => {
   React.useEffect(() => {
     document.addEventListener('keydown', listenEscHandler)
     return  () => document.removeEventListener('keydown', listenEscHandler)
-  }, [])
+  }, [closePopup])
   
   return ReactDOM.createPortal(
     <ModalOverley closePopup={closePopup} >
