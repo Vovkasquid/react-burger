@@ -5,11 +5,12 @@ import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorIte
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ingredientSchema } from '../../utils/schemas'
 import { IngredientContext } from '../../services/IngredientsContext'
-import { PriceContext } from '../../services/PriceContext'
 
 export default function BurgerConstructor({ openIngredientModal, openOrderModal, choosenBun }) {
   const { mainIngrediets } = React.useContext(IngredientContext)
-  const { totalPrice } = React.useContext(PriceContext)
+
+  const orderPrice = React.useMemo(() => mainIngrediets?.reduce((prevPrice, item) => prevPrice + item.price, 0) + 2 * choosenBun.price
+  , [mainIngrediets, choosenBun.price] )
 
   const onSubmitBurger = () => {
     const ingredientArray = mainIngrediets?.map(item => item._id)
@@ -32,7 +33,7 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal,
           <BurgerConstructorItem item={choosenBun} isLocked openModal={openIngredientModal} isBottom />
       </div>
       <div className={`${styles.burgerConstructorPriceContainer} mt-10`}>
-        <p className={`${styles.burgerConstructorPrice} text text_type_main-large`}>{totalPrice.price}<CurrencyIcon type="primary" /></p>
+        <p className={`${styles.burgerConstructorPrice} text text_type_main-large`}>{orderPrice}<CurrencyIcon type="primary" /></p>
         <Button type="primary" size="medium" onClick={onSubmitBurger} >
           Оформить заказ
         </Button>
