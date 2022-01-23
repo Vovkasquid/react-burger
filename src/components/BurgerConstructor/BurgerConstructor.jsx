@@ -10,10 +10,6 @@ import { PriceContext } from '../../services/PriceContext'
 export default function BurgerConstructor({ openIngredientModal, openOrderModal, choosenBun }) {
   const { mainIngrediets } = React.useContext(IngredientContext)
   const { totalPrice } = React.useContext(PriceContext)
-  React.useState(() => {
-    // Записываем в стейт все айди игредиентов
-    mainIngrediets?.forEach(item => console.log(item))
-  }, [mainIngrediets])
 
   const onSubmitBurger = () => {
     const ingredientArray = mainIngrediets?.map(item => item._id)
@@ -37,7 +33,7 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal,
       </div>
       <div className={`${styles.burgerConstructorPriceContainer} mt-10`}>
         <p className={`${styles.burgerConstructorPrice} text text_type_main-large`}>{totalPrice.price}<CurrencyIcon type="primary" /></p>
-        <Button type="primary" size="medium" onClick={() => onSubmitBurger()} >
+        <Button type="primary" size="medium" onClick={onSubmitBurger} >
           Оформить заказ
         </Button>
       </div>
