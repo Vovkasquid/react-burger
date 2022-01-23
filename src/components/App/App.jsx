@@ -3,7 +3,7 @@ import styles from './App.module.css'
 import AppHeader from '../AppHeader/AppHeader.jsx'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor.jsx'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients.jsx'
-import { BURGER_API_INGREDIENTS_URL, BURGER_API_ORDERS_URL, MODAL_INGREDIENT_TITLE } from '../../utils/constants.js'
+import { BURGER_API, MODAL_INGREDIENT_TITLE } from '../../utils/constants.js'
 import Modal from '../Modal/Modal.jsx'
 import OrderDetail from '../OrderDetail/OrderDetail'
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
@@ -61,7 +61,7 @@ function App() {
   }
   
   const handleOpenOrderModal = (req) => {
-    fetch(BURGER_API_ORDERS_URL, { method: 'POST', headers: {
+    fetch(`${BURGER_API}/orders`, { method: 'POST', headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ ingredients: req })})
@@ -85,7 +85,7 @@ function App() {
   }
 
   React.useEffect(() => {
-    fetch(BURGER_API_INGREDIENTS_URL).then((response) => checkResponse(response))
+    fetch(`${BURGER_API}/ingredients`).then((response) => checkResponse(response))
     .then((data) => {
       // Записывает ингредиенты в контекст
       const mainIngredientsArray = filterMainIngredients(data.data)
