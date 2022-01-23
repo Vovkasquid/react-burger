@@ -15,3 +15,7 @@
   width: 100%;
   gap: 40px;
 }
+
+.errorText {
+  color: hsla(5, 80%, 50%, 1);
+}

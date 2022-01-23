@@ -54,13 +54,29 @@ function App() {
   const [ingredientContext, setIngeredientContext] = React.useState({})
   const [choosenBun, setChoosenBun] = React.useState({})
   const [orderNumber, setOrderNumber] = React.useState(0)
+  const [isError, setIsError] = React.useState(false)
+  const [errorText, setIsErrorText] = React.useState('')
 
   const handleOpenIngredientModal = (currentIngredient) => {
     setIsIngredientModalVisible(true)
     setIngredient(currentIngredient)
   }
+
+  // Функция установки ошибки
+  const setError = (err) => {
+    setIsError(true)
+    setIsErrorText(err)
+  }
+
+  // Функция очистики ошибки
+  const resetError = () => {
+    setIsError(false)
+    setIsErrorText('')
+  }
   
   const handleOpenOrderModal = (req) => {
+    // Перед запросом стираем ошибки
+    resetError()
     fetch(`${BURGER_API}/orders`, { method: 'POST', headers: {
       'Content-Type': 'application/json'
     },
@@ -72,7 +88,7 @@ function App() {
         // Открываем попап только после того, как получили ответ от сервера
         setIsOrderModalVisible(true)
       })
-      .catch(err => console.log(err))
+      .catch(err => setError(err))
   }
 
   const handleCloseIngredientModal = () => {
@@ -85,6 +101,7 @@ function App() {
   }
 
   React.useEffect(() => {
+    resetError()
     fetch(`${BURGER_API}/ingredients`).then((response) => checkResponse(response))
     .then((data) => {
       // Записывает ингредиенты в контекст
@@ -98,7 +115,7 @@ function App() {
       mainIngredientsArray.forEach((item) => totalPriceDispatcher({type: 'increase', payload: item.price}))
     })
     
-    .catch(err => console.log(err))
+    .catch(err => setError(err))
   }, [])
   return (
     <IngredientContext.Provider value={ingredientContext}>
@@ -116,6 +133,11 @@ function App() {
             <OrderDetail orderNumber={orderNumber} />
           </Modal>}
           <AppHeader />
+          {isError && 
+            <p className={`${styles.errorText} text text_type_main-default`}>
+              {`При выполнении запроса произошла ошибка: ${errorText.statusText}`}
+              </p>
+            }
           <main className={styles.main}>
             <BurgerIngredients
               openModal={handleOpenIngredientModal}
