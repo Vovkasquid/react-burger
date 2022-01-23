@@ -102,7 +102,7 @@ function App() {
   return (
     <IngredientContext.Provider value={ingredientContext}>
       <PriceContext.Provider value={{totalPrice, totalPriceDispatcher}}>
-        <div className={styles.app} id="app">
+        <div className={styles.application} id="app">
           <Modal
             isModalVisible={isIngredientModalVisible}
             closePopup={handleCloseIngredientModal}
