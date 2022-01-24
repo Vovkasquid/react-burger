@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom'
 
 const modalRoot = document.getElementById('modal')
 
-const Modal = ( { isModalVisible, closePopup, children, title } ) => {
+const Modal = ( { closePopup, children, title } ) => {
   const listenEscHandler = (event) => {
     if (event.key === 'Escape') {
       closePopup()
@@ -17,10 +17,10 @@ const Modal = ( { isModalVisible, closePopup, children, title } ) => {
   React.useEffect(() => {
     document.addEventListener('keydown', listenEscHandler)
     return  () => document.removeEventListener('keydown', listenEscHandler)
-  }, [])
+  }, [closePopup])
   
   return ReactDOM.createPortal(
-    <ModalOverley isModalVisible={isModalVisible} closePopup={closePopup} >
+    <ModalOverley closePopup={closePopup} >
     <div className={!title ? `${styles.modal} pb-30 pt-30` : `${styles.modal} pt-10 pr-10 pb-15 pl-10`}>
         {!title ? 
           <button 
@@ -45,7 +45,6 @@ export default Modal
 
 Modal.propTypes = {
   closePopup: PropTypes.func.isRequired,
-  isModalVisible: PropTypes.bool,
   children: PropTypes.element.isRequired,
   title: PropTypes.string,
 }

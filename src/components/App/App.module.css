@@ -1,4 +1,4 @@
-.App {
+.application {
   width: 100%;
   color: hsla(240, 5%, 95%, 1);
   display: flex;
@@ -14,4 +14,8 @@
   justify-content: center;
   width: 100%;
   gap: 40px;
+}
+
+.errorText {
+  color: hsla(5, 80%, 50%, 1);
 }

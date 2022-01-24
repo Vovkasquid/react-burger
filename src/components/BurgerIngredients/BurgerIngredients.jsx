@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import styles from './BurgerIngredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientCard from '../IngredientCard/IngredientCard.jsx'
-import { arrayOfIngredientSchema } from '../../utils/schemas'
+import { IngredientContext } from '../../services/IngredientsContext'
 
-export default function BurgerIngredients({ bun, sauses, openModal }) {
+export default function BurgerIngredients({ openModal }) {
+  const { bun, sauces } = React.useContext(IngredientContext)
   const [current, setCurrent] = React.useState('Булки')
   return(
     <section className={`${styles.burgerIngredients} pt-10`} >
@@ -24,7 +25,7 @@ export default function BurgerIngredients({ bun, sauses, openModal }) {
     <p className={`${styles.chapter} text text_type_main-medium mt-10 mb-6`}>Булки</p>
     <div className={styles.scrollZone}>
       <ul className={`${styles.ingredientsContainer}`}>
-        {bun.map((bread, index) => (
+        {bun?.map((bread, index) => (
           <li key={index}>
             <IngredientCard ingredient={bread} index={index} openModal={openModal} />
           </li>
@@ -32,7 +33,7 @@ export default function BurgerIngredients({ bun, sauses, openModal }) {
       </ul>
       <p className={`${styles.chapter} text text_type_main-medium mt-10 mb-6`}>Соусы</p>
       <ul className={`${styles.ingredientsContainer}`}>
-        {sauses.map((sauce, index) => (
+        {sauces?.map((sauce, index) => (
           <li key={index}>
             <IngredientCard ingredient={sauce} index={index} openModal={openModal}/>
           </li>
@@ -44,7 +45,5 @@ export default function BurgerIngredients({ bun, sauses, openModal }) {
 }
 
 IngredientCard.propTypes = {
-  bun: arrayOfIngredientSchema,
-  sauses: arrayOfIngredientSchema,
   openModal: PropTypes.func.isRequired,
 }

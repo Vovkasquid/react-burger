@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './ModalIngredientItem.module.css'
+import styles from './IngredientDetails.module.css'
 import { ingredientSchema } from '../../utils/schemas'
 
 const ModalIngredientItem = ({ ingredient }) => {
