@@ -5,7 +5,7 @@ import BurgerConstructor from '../BurgerConstructor/BurgerConstructor.jsx'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients.jsx'
 import { BURGER_API, MODAL_INGREDIENT_TITLE } from '../../utils/constants.js'
 import Modal from '../Modal/Modal.jsx'
-import OrderDetail from '../OrderDetail/OrderDetail'
+import OrderDetails from '../OrderDetails/OrderDetails'
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
 import { IngredientContext } from '../../services/IngredientsContext'
 
@@ -109,7 +109,7 @@ function App() {
         {isOrderModalVisible &&  <Modal
           closePopup={handleCloseOrderModal}
         >
-          <OrderDetail orderNumber={orderNumber} />
+          <OrderDetails orderNumber={orderNumber} />
         </Modal>}
         <AppHeader />
         {isError && 

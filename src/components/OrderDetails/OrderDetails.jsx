@@ -1,9 +1,9 @@
 import React from 'react'
-import styles from './OrderDetail.module.css'
+import styles from './OrderDetails.module.css'
 import succesIcon from '../../images/successIcon.svg'
 import PropTypes from 'prop-types'
 
-const OrderDetail = ({ orderNumber }) => {
+const OrderDetails = ({ orderNumber }) => {
   return (
     <>
       <p className="text text_type_digits-large mb-8">{orderNumber}</p>
@@ -15,8 +15,8 @@ const OrderDetail = ({ orderNumber }) => {
   )
 }
 
-export default OrderDetail
+export default OrderDetails
 
-OrderDetail.propTypes = {
+OrderDetails.propTypes = {
   orderNumber: PropTypes.number.isRequired
 }
