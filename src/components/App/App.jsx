@@ -8,6 +8,8 @@ import Modal from '../Modal/Modal.jsx'
 import OrderDetails from '../OrderDetails/OrderDetails'
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
 import { IngredientContext } from '../../services/IngredientsContext'
+import { getComponents } from '../../services/actions/receivedComponents'
+import { useDispatch, useSelector } from 'react-redux'
 
  // Метод для проверки ответа
  function checkResponse(res) {
@@ -39,6 +41,11 @@ function App() {
   const [orderNumber, setOrderNumber] = React.useState(0)
   const [isError, setIsError] = React.useState(false)
   const [errorText, setIsErrorText] = React.useState('')
+
+  // Вытащим из хранилища данные о элементах с сервера и ошибках
+  const { receivedComponents, getComponentsError } = useSelector(store => store.receivedComponents)
+  // Получаем диспатч
+  const dispatch = useDispatch()
 
   const handleOpenIngredientModal = (currentIngredient) => {
     setIsIngredientModalVisible(true)
@@ -84,6 +91,7 @@ function App() {
   }
 
   React.useEffect(() => {
+    /*
     resetError()
     fetch(`${BURGER_API}/ingredients`).then((response) => checkResponse(response))
     .then((data) => {
@@ -96,6 +104,9 @@ function App() {
     })
     
     .catch(err => setError(err))
+    */
+    // Вызываем экшн для получения данных от сервера
+    dispatch(getComponents())
   }, [])
   return (
     <IngredientContext.Provider value={ingredientContext}>

@@ -1,7 +1,8 @@
+import { GET_COMPONENTS_SUCCESS, GET_COMPONENTS_FAILED } from "../actions/receivedComponents"
+
 const initialReceivedComponents = {
-  buns: [],
-  sauces: [],
-  mainIngrediets: [],
+  receivedComponents: [],
+  getComponentsError: '',
 }
 
 const initialCurrentIngredients = {
@@ -18,7 +19,26 @@ const initialOrder = {
 }
 
 export const receivedComponentsReducer = (state = initialReceivedComponents, action) => {
-  return 0
+  switch(action.type) {
+    case GET_COMPONENTS_SUCCESS: {
+      // Если запрос прошёл успешно, то заполним стейт и затрём ошибку
+      // Иначе выставим ошибку
+      return {
+        ...state,
+        receivedComponents: action.components,
+        getComponentsError: '',
+      }
+    }
+    case GET_COMPONENTS_FAILED: {
+      return {
+        ...state,
+        getComponentsError: action.error,
+      }
+    }
+    default: {
+      return state
+    }
+  }
 }
 
 export const currentIngredientsReducer = (state = initialCurrentIngredients, action) => {
