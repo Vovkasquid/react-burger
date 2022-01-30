@@ -12,7 +12,7 @@ import { getComponents } from '../../services/actions/receivedComponents'
 import { useDispatch, useSelector } from 'react-redux'
 
  // Метод для проверки ответа
- function checkResponse(res) {
+ export function checkResponse(res) {
   if (res.ok) {
     return res.json();
   }
@@ -107,7 +107,7 @@ function App() {
     */
     // Вызываем экшн для получения данных от сервера
     dispatch(getComponents())
-  }, [])
+  }, [dispatch])
   return (
     <IngredientContext.Provider value={ingredientContext}>
       <div className={styles.application} id="app">

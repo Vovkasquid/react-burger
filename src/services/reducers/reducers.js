@@ -23,6 +23,7 @@ export const receivedComponentsReducer = (state = initialReceivedComponents, act
     case GET_COMPONENTS_SUCCESS: {
       // Если запрос прошёл успешно, то заполним стейт и затрём ошибку
       // Иначе выставим ошибку
+      console.log(action.components)
       return {
         ...state,
         receivedComponents: action.components,
