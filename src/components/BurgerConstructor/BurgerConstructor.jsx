@@ -5,9 +5,12 @@ import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorIte
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ingredientSchema } from '../../utils/schemas'
 import { IngredientContext } from '../../services/IngredientsContext'
+import { filterMainIngredients } from '../App/App'
+import { useSelector } from 'react-redux'
 
 export default function BurgerConstructor({ openIngredientModal, openOrderModal, choosenBun }) {
-  const { mainIngrediets } = React.useContext(IngredientContext)
+  // Вытаскиваем из стора полученные компоненты и отфильтровываем нужные
+  const mainIngrediets  = filterMainIngredients(useSelector(state => state.receivedComponents.receivedComponents))
 
   const orderPrice = React.useMemo(() => mainIngrediets?.reduce((prevPrice, item) => prevPrice + item.price, 0) + 2 * choosenBun.price
   , [mainIngrediets, choosenBun.price] )

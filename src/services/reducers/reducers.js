@@ -1,8 +1,17 @@
-import { GET_COMPONENTS_SUCCESS, GET_COMPONENTS_FAILED } from "../actions/receivedComponents"
+import {
+  GET_COMPONENTS_SUCCESS,
+  GET_COMPONENTS_FAILED,
+  SET_FILTERED_BUN,
+  SET_FILTERED_SAUCES,
+  SET_FILTERED_MAIN_INGREDIENTS
+} from "../actions/receivedComponents"
 
 const initialReceivedComponents = {
   receivedComponents: [],
   getComponentsError: '',
+  filteredBun: '',
+  filteredSauces: '',
+  filteredMainIngredients: '',
 }
 
 const initialCurrentIngredients = {
@@ -34,6 +43,25 @@ export const receivedComponentsReducer = (state = initialReceivedComponents, act
       return {
         ...state,
         getComponentsError: action.error,
+      }
+    }
+    // Обработаем экшены записи отфильтрованных элементов
+    case SET_FILTERED_BUN: {
+      return {
+        ...state,
+        filteredBun: action.filtered,
+      }
+    }
+    case SET_FILTERED_SAUCES: {
+      return {
+        ...state,
+        filteredSauces: action.filtered,
+      }
+    }
+    case SET_FILTERED_MAIN_INGREDIENTS: {
+      return {
+        ...state,
+        filteredMainIngredients: action.filtered,
       }
     }
     default: {

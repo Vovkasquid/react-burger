@@ -20,16 +20,16 @@ import { useDispatch, useSelector } from 'react-redux'
   return Promise.reject(res);
 }
 
-const filterBun = (data) => {
-  return data.filter((item) => item.type === 'bun')
+export const filterBun = (data) => {
+  return data?.filter((item) => item.type === 'bun')
 }
 
-const filterSauces = (data) => {
-  return data.filter((item) => item.type === 'sauce')
+export const filterSauces = (data) => {
+  return data?.filter((item) => item.type === 'sauce')
 }
 
-const filterMainIngredients = (data) => {
-  return data.filter((item) => item.type === 'main')
+export const filterMainIngredients = (data) => {
+  return data?.filter((item) => item.type === 'main')
 }
 
 function App() {
@@ -108,6 +108,9 @@ function App() {
     // Вызываем экшн для получения данных от сервера
     dispatch(getComponents())
   }, [dispatch])
+  React.useEffect(() => {
+
+  }, [receivedComponents])
   return (
     <IngredientContext.Provider value={ingredientContext}>
       <div className={styles.application} id="app">
@@ -123,9 +126,9 @@ function App() {
           <OrderDetails orderNumber={orderNumber} />
         </Modal>}
         <AppHeader />
-        {isError && 
+        {getComponentsError && 
           <p className={`${styles.errorText} text text_type_main-default`}>
-            {`При выполнении запроса произошла ошибка: ${errorText.statusText}`}
+            {getComponentsError}
             </p>
           }
         <main className={styles.main}>

@@ -3,6 +3,9 @@ import { checkResponse } from '../../components/App/App'
 
 export const GET_COMPONENTS_SUCCESS = 'GET_COMPONENTS_SUCCESS'
 export const GET_COMPONENTS_FAILED = 'GET_COMPONENTS_FAILED'
+export const SET_FILTERED_BUN = 'SET_FILTERED_BUN'
+export const SET_FILTERED_SAUCES = 'SET_FILTERED_SAUCES'
+export const SET_FILTERED_MAIN_INGREDIENTS = 'SET_FILTERED_MAIN_INGREDIENTS'
 
 
 export function getComponents() {
@@ -18,7 +21,6 @@ return function(dispatch) {
         components: data.data
       })
     })
-    
     .catch((err) => {
       // Если что-то пошло не так, то вернём ошибку
       dispatch({
