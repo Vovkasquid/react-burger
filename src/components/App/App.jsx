@@ -37,8 +37,6 @@ function App() {
   const [ingredient, setIngredient] = React.useState({})
   const [choosenBun, setChoosenBun] = React.useState({})
   const [orderNumber, setOrderNumber] = React.useState(0)
-  const [isError, setIsError] = React.useState(false)
-  const [errorText, setIsErrorText] = React.useState('')
 
   // Вытащим из хранилища данные о элементах с сервера и ошибках
   const { receivedComponents, getComponentsError } = useSelector(store => store.receivedComponents)
@@ -49,22 +47,8 @@ function App() {
     setIsIngredientModalVisible(true)
     setIngredient(currentIngredient)
   }
-
-  // Функция установки ошибки
-  const setError = (err) => {
-    setIsError(true)
-    setIsErrorText(err)
-  }
-
-  // Функция очистики ошибки
-  const resetError = () => {
-    setIsError(false)
-    setIsErrorText('')
-  }
   
   const handleOpenOrderModal = (req) => {
-    // Перед запросом стираем ошибки
-    resetError()
     fetch(`${BURGER_API}/orders`, { method: 'POST', headers: {
       'Content-Type': 'application/json'
     },
@@ -76,7 +60,7 @@ function App() {
         // Открываем попап только после того, как получили ответ от сервера
         setIsOrderModalVisible(true)
       })
-      .catch(err => setError(err))
+      .catch(err => console.log(err))
   }
 
   const handleCloseIngredientModal = () => {
