@@ -3,10 +3,15 @@ import PropTypes from 'prop-types'
 import styles from './BurgerIngredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientCard from '../IngredientCard/IngredientCard.jsx'
-import { IngredientContext } from '../../services/IngredientsContext'
+import { filterBun, filterSauces } from '../App/App'
+import { useSelector } from 'react-redux'
 
 export default function BurgerIngredients({ openModal }) {
-  const { bun, sauces } = React.useContext(IngredientContext)
+  // Получаем из стора компоненты и фильтруем их
+  const ingredients = useSelector(state => state.receivedComponents.receivedComponents)
+  const bun = filterBun(ingredients)
+  const sauces = filterSauces(ingredients)
+
   const [current, setCurrent] = React.useState('Булки')
   return(
     <section className={`${styles.burgerIngredients} pt-10`} >

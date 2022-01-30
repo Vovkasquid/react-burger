@@ -7,7 +7,6 @@ import { BURGER_API, MODAL_INGREDIENT_TITLE } from '../../utils/constants.js'
 import Modal from '../Modal/Modal.jsx'
 import OrderDetails from '../OrderDetails/OrderDetails'
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
-import { IngredientContext } from '../../services/IngredientsContext'
 import { getComponents } from '../../services/actions/receivedComponents'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -36,7 +35,6 @@ function App() {
   const [isIngredientModalVisible, setIsIngredientModalVisible] = React.useState(false)
   const [isOrderModalVisible, setIsOrderModalVisible] = React.useState(false)
   const [ingredient, setIngredient] = React.useState({})
-  const [ingredientContext, setIngeredientContext] = React.useState({})
   const [choosenBun, setChoosenBun] = React.useState({})
   const [orderNumber, setOrderNumber] = React.useState(0)
   const [isError, setIsError] = React.useState(false)
@@ -108,42 +106,45 @@ function App() {
     // Вызываем экшн для получения данных от сервера
     dispatch(getComponents())
   }, [dispatch])
-  React.useEffect(() => {
 
+  React.useEffect(() => {
+     // Временное решение для выбранной булки
+     const buns = filterBun(receivedComponents)
+     const bunToChosen = buns[0]
+     console.log(buns)
+     setChoosenBun(bunToChosen)
   }, [receivedComponents])
   return (
-    <IngredientContext.Provider value={ingredientContext}>
-      <div className={styles.application} id="app">
-        {isIngredientModalVisible && <Modal
-          closePopup={handleCloseIngredientModal}
-          title={MODAL_INGREDIENT_TITLE}
-        >
-          <IngredientDetails ingredient={ingredient} />
-        </Modal>}
-        {isOrderModalVisible &&  <Modal
-          closePopup={handleCloseOrderModal}
-        >
-          <OrderDetails orderNumber={orderNumber} />
-        </Modal>}
-        <AppHeader />
-        {getComponentsError && 
-          <p className={`${styles.errorText} text text_type_main-default`}>
-            {getComponentsError}
-            </p>
-          }
-        <main className={styles.main}>
-          <BurgerIngredients
-            openModal={handleOpenIngredientModal}
-          />
-          { /*Временное решение с choosenBun, пока не сделали выбор булки*/ }
-          <BurgerConstructor
-            openIngredientModal={handleOpenIngredientModal}
-            openOrderModal={handleOpenOrderModal}
-            choosenBun={choosenBun}
-          />
-        </main>
-      </div>
-    </IngredientContext.Provider>
+    <div className={styles.application} id="app">
+      {isIngredientModalVisible && <Modal
+        closePopup={handleCloseIngredientModal}
+        title={MODAL_INGREDIENT_TITLE}
+      >
+        <IngredientDetails ingredient={ingredient} />
+      </Modal>}
+      {isOrderModalVisible &&  <Modal
+        closePopup={handleCloseOrderModal}
+      >
+        <OrderDetails orderNumber={orderNumber} />
+      </Modal>}
+      <AppHeader />
+      {getComponentsError && 
+        <p className={`${styles.errorText} text text_type_main-default`}>
+          {getComponentsError}
+          </p>
+        }
+      <main className={styles.main}>
+        <BurgerIngredients
+          openModal={handleOpenIngredientModal}
+        />
+        { /*Временное решение с choosenBun, пока не сделали выбор булки*/ }
+        <BurgerConstructor
+          openIngredientModal={handleOpenIngredientModal}
+          openOrderModal={handleOpenOrderModal}
+          choosenBun={choosenBun}
+        />
+      </main>
+    </div>
 
   )
 }
