@@ -22,8 +22,8 @@ import {
 const initialReceivedComponents = {
   receivedComponents: [],
   getComponentsError: '',
-  filteredBun: '',
-  filteredSauces: '',
+  bun: '',
+  sauces: '',
   mainIngredients: '',
 }
 
@@ -58,19 +58,19 @@ export const receivedComponentsReducer = (state = initialReceivedComponents, act
     case SET_FILTERED_BUN: {
       return {
         ...state,
-        filteredBun: action.filtered,
+        bun: action.filtered,
       }
     }
     case SET_FILTERED_SAUCES: {
       return {
         ...state,
-        filteredSauces: action.filtered,
+        sauces: action.filtered,
       }
     }
     case SET_FILTERED_MAIN_INGREDIENTS: {
       return {
         ...state,
-        mainIngredients: action.filteredMainIngredients,
+        mainIngredients: action.filtered,
       }
     }
     default: {

@@ -9,8 +9,7 @@ import { useSelector } from 'react-redux'
 export default function BurgerIngredients({ openModal }) {
   // Получаем из стора компоненты и фильтруем их
   const ingredients = useSelector(state => state.receivedComponents.receivedComponents)
-  const bun = filterBun(ingredients)
-  const sauces = filterSauces(ingredients)
+  const { mainIngredients, bun, sauces } = useSelector(state => state.receivedComponents)
 
   const [current, setCurrent] = React.useState('Булки')
   return(
@@ -30,7 +29,7 @@ export default function BurgerIngredients({ openModal }) {
     <p className={`${styles.chapter} text text_type_main-medium mt-10 mb-6`}>Булки</p>
     <div className={styles.scrollZone}>
       <ul className={`${styles.ingredientsContainer}`}>
-        {bun?.map((bread, index) => (
+        {bun && bun?.map((bread, index) => (
           <li key={index}>
             <IngredientCard ingredient={bread} index={index} openModal={openModal} />
           </li>
@@ -38,12 +37,21 @@ export default function BurgerIngredients({ openModal }) {
       </ul>
       <p className={`${styles.chapter} text text_type_main-medium mt-10 mb-6`}>Соусы</p>
       <ul className={`${styles.ingredientsContainer}`}>
-        {sauces?.map((sauce, index) => (
+        {sauces && sauces?.map((sauce, index) => (
           <li key={index}>
             <IngredientCard ingredient={sauce} index={index} openModal={openModal}/>
           </li>
       ))}
       </ul>
+      <p className={`${styles.chapter} text text_type_main-medium mt-10 mb-6`}>Начинки</p>
+      <ul className={`${styles.ingredientsContainer}`}>
+        {mainIngredients && mainIngredients?.map((sauce, index) => (
+          <li key={index}>
+            <IngredientCard ingredient={sauce} index={index} openModal={openModal}/>
+          </li>
+      ))}
+      </ul>
+      
     </div>
     </section>
   )
