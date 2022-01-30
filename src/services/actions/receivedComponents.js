@@ -1,5 +1,5 @@
 import { BURGER_API } from '../../utils/constants'
-import { checkResponse } from '../../components/App/App'
+import { checkResponse, filterMainIngredients } from '../../components/App/App'
 
 export const GET_COMPONENTS_SUCCESS = 'GET_COMPONENTS_SUCCESS'
 export const GET_COMPONENTS_FAILED = 'GET_COMPONENTS_FAILED'
@@ -19,6 +19,12 @@ export function getComponents() {
         dispatch({
           type: GET_COMPONENTS_SUCCESS,
           components: data.data
+        })
+        // Сразу отфильтровываем элементы из конструктора
+        const filteredMainIngredients = filterMainIngredients(data.data)
+        dispatch({
+          type: SET_FILTERED_MAIN_INGREDIENTS,
+          filteredMainIngredients: filteredMainIngredients,
         })
       })
       .catch((err) => {

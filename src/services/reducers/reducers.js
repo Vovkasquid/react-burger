@@ -24,12 +24,7 @@ const initialReceivedComponents = {
   getComponentsError: '',
   filteredBun: '',
   filteredSauces: '',
-  filteredMainIngredients: '',
-}
-
-const initialCurrentIngredients = {
-  currentBun: {},
-  currentIngredients: {},
+  mainIngredients: '',
 }
 
 const initialDetailIngredient = {
@@ -75,17 +70,13 @@ export const receivedComponentsReducer = (state = initialReceivedComponents, act
     case SET_FILTERED_MAIN_INGREDIENTS: {
       return {
         ...state,
-        filteredMainIngredients: action.filtered,
+        mainIngredients: action.filteredMainIngredients,
       }
     }
     default: {
       return state
     }
   }
-}
-
-export const currentIngredientsReducer = (state = initialCurrentIngredients, action) => {
-  return 0
 }
 
 export const detailIngredientReducer = (state = initialDetailIngredient, action) => {

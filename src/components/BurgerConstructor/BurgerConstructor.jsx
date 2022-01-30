@@ -4,24 +4,23 @@ import styles from './BurgerConstructor.module.css'
 import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorItem.jsx'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ingredientSchema } from '../../utils/schemas'
-import { filterMainIngredients } from '../App/App'
 import { useSelector } from 'react-redux'
 
 export default function BurgerConstructor({ openIngredientModal, openOrderModal, choosenBun }) {
   // Вытаскиваем из стора полученные компоненты и отфильтровываем нужные
-  const mainIngrediets  = filterMainIngredients(useSelector(state => state.receivedComponents.receivedComponents))
+  const  { mainIngredients } = useSelector(store => store.receivedComponents)
 
   const orderPrice = React.useMemo(() => {
-    if (choosenBun) {
-      return mainIngrediets?.reduce((prevPrice, item) => prevPrice + item.price, 0) + 2 * choosenBun.price
+    if (choosenBun && mainIngredients) {
+      return mainIngredients?.reduce((prevPrice, item) => prevPrice + item.price, 0) + 2 * choosenBun.price
     } else {
       return 0
     }
   }
-  , [mainIngrediets, choosenBun] )
+  , [mainIngredients, choosenBun] )
 
   const onSubmitBurger = () => {
-    const ingredientArray = mainIngrediets?.map(item => item._id)
+    const ingredientArray = mainIngredients?.map(item => item._id)
     openOrderModal(ingredientArray)
   }
   
@@ -30,7 +29,7 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal,
       <div className={`${styles.burgerConstructorList} mb-10`}>
           <BurgerConstructorItem item={choosenBun} isLocked openModal={openIngredientModal} isTop/>
           <ul className={`${styles.burgerConstructorScrollList} ${styles.scrollZone}`}>
-            {mainIngrediets?.map((item, index) => {
+            {mainIngredients && mainIngredients?.map((item, index) => {
               return (
                 <li key={index}>
                   <BurgerConstructorItem item={item} openModal={openIngredientModal} />
