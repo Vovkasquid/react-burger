@@ -9,6 +9,7 @@ import OrderDetails from '../OrderDetails/OrderDetails'
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
 import { getComponents } from '../../services/actions/receivedComponents'
 import { useDispatch, useSelector } from 'react-redux'
+import { SET_DETAIL_INGREDIENT, CLEAR_DETAIL_INGREDIENT } from '../../services/actions/detailIngredient'
 
  // Метод для проверки ответа
  export function checkResponse(res) {
@@ -44,8 +45,8 @@ function App() {
   const dispatch = useDispatch()
 
   const handleOpenIngredientModal = (currentIngredient) => {
+    dispatch({ type: SET_DETAIL_INGREDIENT, ingredient: currentIngredient })
     setIsIngredientModalVisible(true)
-    setIngredient(currentIngredient)
   }
   
   const handleOpenOrderModal = (req) => {
@@ -65,7 +66,7 @@ function App() {
 
   const handleCloseIngredientModal = () => {
     setIsIngredientModalVisible(false)
-    setIngredient({})
+    dispatch({ type: CLEAR_DETAIL_INGREDIENT })
   }
 
   const handleCloseOrderModal = () => {
@@ -73,20 +74,6 @@ function App() {
   }
 
   React.useEffect(() => {
-    /*
-    resetError()
-    fetch(`${BURGER_API}/ingredients`).then((response) => checkResponse(response))
-    .then((data) => {
-      // Записывает ингредиенты в контекст
-      const mainIngredientsArray = filterMainIngredients(data.data)
-      setIngeredientContext({sauces: filterSauces(data.data), bun: filterBun(data.data), mainIngrediets: mainIngredientsArray})
-      // Костылим временно выбранную булку
-      const bunArray = filterBun(data.data)
-      setChoosenBun(bunArray[0])
-    })
-    
-    .catch(err => setError(err))
-    */
     // Вызываем экшн для получения данных от сервера
     dispatch(getComponents())
   }, [dispatch])
@@ -98,13 +85,14 @@ function App() {
      console.log(buns)
      setChoosenBun(bunToChosen)
   }, [receivedComponents])
+
   return (
     <div className={styles.application} id="app">
       {isIngredientModalVisible && <Modal
         closePopup={handleCloseIngredientModal}
         title={MODAL_INGREDIENT_TITLE}
       >
-        <IngredientDetails ingredient={ingredient} />
+        <IngredientDetails />
       </Modal>}
       {isOrderModalVisible &&  <Modal
         closePopup={handleCloseOrderModal}

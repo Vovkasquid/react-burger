@@ -2,8 +2,10 @@ import React from 'react'
 import styles from './OrderDetails.module.css'
 import succesIcon from '../../images/successIcon.svg'
 import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 
 const OrderDetails = ({ orderNumber }) => {
+  
   return (
     <>
       <p className="text text_type_digits-large mb-8">{orderNumber}</p>

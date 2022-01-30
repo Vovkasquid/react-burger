@@ -4,7 +4,12 @@ import {
   SET_FILTERED_BUN,
   SET_FILTERED_SAUCES,
   SET_FILTERED_MAIN_INGREDIENTS
-} from "../actions/receivedComponents"
+} from '../actions/receivedComponents'
+
+import {
+  SET_DETAIL_INGREDIENT,
+  CLEAR_DETAIL_INGREDIENT,
+} from '../actions/detailIngredient'
 
 const initialReceivedComponents = {
   receivedComponents: [],
@@ -15,16 +20,16 @@ const initialReceivedComponents = {
 }
 
 const initialCurrentIngredients = {
-  currentBun: [],
-  currentIngredients: [],
+  currentBun: {},
+  currentIngredients: {},
 }
 
 const initialDetailIngredient = {
-  ingredient: [],
+  ingredient: {},
 }
 
 const initialOrder = {
-  order: [],
+  order: {},
 }
 
 export const receivedComponentsReducer = (state = initialReceivedComponents, action) => {
@@ -74,7 +79,22 @@ export const currentIngredientsReducer = (state = initialCurrentIngredients, act
 }
 
 export const detailIngredientReducer = (state = initialDetailIngredient, action) => {
-  return 0
+  switch (action.type) {
+    case CLEAR_DETAIL_INGREDIENT: {
+      return {
+        ...state,
+        ingredient: {}
+      }
+    }
+    case SET_DETAIL_INGREDIENT: {
+      return {
+        ...state,
+        ingredient: action.ingredient,
+      }
+    }
+    default:
+      return state
+  }
 }
 
 export const orderReducer = (state = initialOrder, action) => {
