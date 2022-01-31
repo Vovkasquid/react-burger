@@ -65,12 +65,15 @@ export const burgerConstructorsItemsReducer = (state = initialBurgerConstructorI
       }
     }
     //  TO DO
-    /* case DELETE_CONSTRUCTOR_ITEM: {
-      return {
-        ...state,
-
+    case DELETE_CONSTRUCTOR_ITEM: {
+      const newState = {...state}
+      const indexIngredient = newState.ingredients.findIndex(item => item._id === action.item._id)
+      if (indexIngredient !== -1) {
+        // Удаляем первый найденный элемент
+        newState.ingredients.splice(indexIngredient,1)
       }
-    } */
+      return newState
+    }
     default: {
       return state
     }

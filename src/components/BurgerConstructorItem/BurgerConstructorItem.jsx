@@ -4,8 +4,11 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import { useDrag } from 'react-dnd'
 import styles from './BurgerConstructorItem.module.css'
 import { ingredientSchema } from '../../utils/schemas'
+import { useDispatch } from 'react-redux'
+import { DELETE_CONSTRUCTOR_ITEM } from "../../services/actions/burgerConstructorIngredients";
 
 export default function BurgerConstructorItem({ item, openModal, isLocked, isTop, isBottom }) {
+  const dispatch = useDispatch()
   let itemName = ''
   if (isTop) {
     itemName = item?.name + ' (верх)'
@@ -14,22 +17,26 @@ export default function BurgerConstructorItem({ item, openModal, isLocked, isTop
   } else {
     itemName = item?.name
   }
-
+  const deleteElement = (item) => {
+    dispatch({ type: DELETE_CONSTRUCTOR_ITEM, item })
+  }
+  /*
   // Передаём в хук тип элемента и сам игредиент
   const [, dragRef] = useDrag({
     type: 'ingredient',
     item: item,
-  })
+  }) */
 
   return (
-    <div className={`${styles.BurgerConstructorItem}`} ref={dragRef} onClick={() => openModal(item)} >
+    <div className={`${styles.BurgerConstructorItem}`} >
       {!isLocked && <DragIcon type="primary" />}
-      <ConstructorElement 
+      <ConstructorElement
         text={itemName}
         price={item?.price}
         thumbnail={item?.image}
         isLocked={isLocked}
         type={isTop ? 'top' : isBottom ? 'bottom' : undefined}
+        handleClose={() => deleteElement(item)}
       />
     </div>
   )
