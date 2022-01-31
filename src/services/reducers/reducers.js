@@ -19,6 +19,11 @@ import {
   CLOSE_ORDER_MODAL,
 } from '../actions/order'
 
+import {
+  ADD_CONSTRUCTOR_ITEM,
+  DELETE_CONSTRUCTOR_ITEM
+} from '../actions/burgerConstructorIngredients'
+
 const initialReceivedComponents = {
   receivedComponents: [],
   getComponentsError: '',
@@ -37,6 +42,30 @@ const initialOrder = {
   isOrderModalVisible: false,
 }
 
+const initialBurgerConstructorIngredients = {
+  ingredients: [],
+}
+
+export const burgerConstructorsItemsReducer = (state = initialBurgerConstructorIngredients, action) => {
+  switch (action.type) {
+    case ADD_CONSTRUCTOR_ITEM: {
+      return {
+        ...state,
+        ingredients: [...state.ingredients, action.ingredient],
+      }
+    }
+    //  TO DO
+    /* case DELETE_CONSTRUCTOR_ITEM: {
+      return {
+        ...state,
+
+      }
+    } */
+    default: {
+      return state
+    }
+  }
+}
 export const receivedComponentsReducer = (state = initialReceivedComponents, action) => {
   switch(action.type) {
     case GET_COMPONENTS_SUCCESS: {

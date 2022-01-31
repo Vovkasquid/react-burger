@@ -4,20 +4,32 @@ import styles from './BurgerConstructor.module.css'
 import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorItem.jsx'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ingredientSchema } from '../../utils/schemas'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
+import { useDrop } from 'react-dnd'
+import { ADD_CONSTRUCTOR_ITEM } from '../../services/actions/burgerConstructorIngredients';
 
 export default function BurgerConstructor({ openIngredientModal, openOrderModal, choosenBun }) {
   // Вытаскиваем из стора полученные компоненты и отфильтровываем нужные
-  const  { mainIngredients } = useSelector(store => store.receivedComponents)
+  const  { ingredients } = useSelector(store => store.constructorItems)
+  console.log(ingredients)
+  const dispatch = useDispatch()
 
+  const [, dropRef] = useDrop({
+    accept: 'ingredient',
+    drop(item) {
+      console.log(item)
+      dispatch({ type: ADD_CONSTRUCTOR_ITEM, ingredient: item })
+    },
+  })
   const orderPrice = React.useMemo(() => {
-    if (choosenBun && mainIngredients) {
-      return mainIngredients?.reduce((prevPrice, item) => prevPrice + item.price, 0) + 2 * choosenBun.price
+    if (choosenBun && ingredients) {
+      console.log('CRASH HERE = ', ingredients)
+      return ingredients?.reduce((prevPrice, item) => prevPrice + item.price, 0) + 2 * choosenBun.price
     } else {
       return 0
     }
   }
-  , [mainIngredients, choosenBun] )
+  , [ingredients, choosenBun] )
 
   const onSubmitBurger = () => {
     // const ingredientArray = mainIngredients?.map(item => item._id)
@@ -26,10 +38,16 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal,
   
   return (
     <section className={`${styles.burgerConstructorContainer} pt-25 pl-4 pr-4`}>
-      <div className={`${styles.burgerConstructorList} mb-10`}>
+      <div ref={dropRef} className={`${styles.burgerConstructorList} mb-10`}>
           <BurgerConstructorItem item={choosenBun} isLocked openModal={openIngredientModal} isTop/>
           <ul className={`${styles.burgerConstructorScrollList} ${styles.scrollZone}`}>
-            
+            {ingredients && ingredients?.map((item, index) => {
+              return (
+                <li key={index}>
+                  <BurgerConstructorItem item={item} openModal={openIngredientModal} />
+                </li>
+              )
+            })}
           </ul>
           <BurgerConstructorItem item={choosenBun} isLocked openModal={openIngredientModal} isBottom />
       </div>

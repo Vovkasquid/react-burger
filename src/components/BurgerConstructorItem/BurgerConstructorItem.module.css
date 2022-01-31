@@ -4,6 +4,7 @@
   gap: 8px;
   width: 100%;
   max-width: 568px;
+  min-width: 568px;
   align-items: center;
   box-sizing: border-box;
   position: relative;

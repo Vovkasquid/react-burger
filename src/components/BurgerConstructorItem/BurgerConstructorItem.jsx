@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { useDrag } from 'react-dnd'
 import styles from './BurgerConstructorItem.module.css'
 import { ingredientSchema } from '../../utils/schemas'
 
@@ -13,8 +14,15 @@ export default function BurgerConstructorItem({ item, openModal, isLocked, isTop
   } else {
     itemName = item?.name
   }
+
+  // Передаём в хук тип элемента и сам игредиент
+  const [, dragRef] = useDrag({
+    type: 'ingredient',
+    item: item,
+  })
+
   return (
-    <div className={`${styles.BurgerConstructorItem}`} onClick={() => openModal(item)} >
+    <div className={`${styles.BurgerConstructorItem}`} ref={dragRef} onClick={() => openModal(item)} >
       {!isLocked && <DragIcon type="primary" />}
       <ConstructorElement 
         text={itemName}
