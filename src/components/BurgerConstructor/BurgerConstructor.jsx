@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import styles from './BurgerConstructor.module.css'
 import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorItem.jsx'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { ingredientSchema } from '../../utils/schemas'
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd'
 import { ADD_CONSTRUCTOR_ITEM, SET_CHOOSEN_BUN } from '../../services/actions/burgerConstructorIngredients';

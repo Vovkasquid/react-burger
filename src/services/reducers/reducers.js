@@ -136,19 +136,21 @@ export const receivedComponentsReducer = (state = initialReceivedComponents, act
         console.log(indexOfIngredient)
         newState.mainIngredients[indexOfIngredient].counter += 1
       }
-      // const indexOfIngredient = state.receivedComponents.findIndex(item => item._id === action.id)
-      console.log(indexOfIngredient)
-      console.log(newState)
+
       return newState
-      /* if (indexOfIngredient !== -1) {
-       // const newStateReceivedComponents = [...state.receivedComponents, state.receivedComponents[indexOfIngredient].counter += 1 ]
-        console.log(state.receivedComponents)
-        return {
-          ...state,
-        }
+    }
+    case DEC_COUNTER_INGREDIENT: {
+      let indexOfIngredient
+      const newState = {...state}
+        // Булки тут вообще не трогаем
+       if (action.item.type === 'sauce') {
+        indexOfIngredient = state.sauces.findIndex(item => item._id === action.item._id)
+        newState.sauces[indexOfIngredient].counter -= 1
+      } else {
+        indexOfIngredient = state.mainIngredients.findIndex(item => item._id === action.item._id)
+        newState.mainIngredients[indexOfIngredient].counter -= 1
       }
-      // Если элемент не нашёлся, то вернём стейт
-      return state */
+      return newState
     }
     default: {
       return state

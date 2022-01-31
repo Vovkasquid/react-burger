@@ -6,6 +6,7 @@ import styles from './BurgerConstructorItem.module.css'
 import { ingredientSchema } from '../../utils/schemas'
 import { useDispatch } from 'react-redux'
 import { DELETE_CONSTRUCTOR_ITEM } from "../../services/actions/burgerConstructorIngredients";
+import { DEC_COUNTER_INGREDIENT } from "../../services/actions/receivedComponents";
 
 export default function BurgerConstructorItem({ item, openModal, isLocked, isTop, isBottom }) {
   const dispatch = useDispatch()
@@ -18,7 +19,10 @@ export default function BurgerConstructorItem({ item, openModal, isLocked, isTop
     itemName = item?.name
   }
   const deleteElement = (item) => {
+    // Сначала удаляем элемент из списка рендера
     dispatch({ type: DELETE_CONSTRUCTOR_ITEM, item })
+    // Потом уменьшаем его количество в списке ингредиентов
+    dispatch({ type: DEC_COUNTER_INGREDIENT, item })
   }
   /*
   // Передаём в хук тип элемента и сам игредиент
