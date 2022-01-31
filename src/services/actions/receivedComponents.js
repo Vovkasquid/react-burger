@@ -6,6 +6,8 @@ export const GET_COMPONENTS_FAILED = 'GET_COMPONENTS_FAILED'
 export const SET_FILTERED_BUN = 'SET_FILTERED_BUN'
 export const SET_FILTERED_SAUCES = 'SET_FILTERED_SAUCES'
 export const SET_FILTERED_MAIN_INGREDIENTS = 'SET_FILTERED_MAIN_INGREDIENTS'
+export const INC_COUNTER_INGREDIENT = 'INC_COUNTER_INGREDIENT'
+export const DEC_COUNTER_INGREDIENT = 'DEC_COUNTER_INGREDIENT'
 
 
 export function getComponents() {
@@ -24,9 +26,9 @@ export function getComponents() {
           components: modifiedData
         })
         // Сразу отфильтровываем элементы из конструктора
-        const filteredMainIngredients = filterMainIngredients(data.data)
-        const filteredBun = filterBun(data.data)
-        const filteredSauces= filterSauces(data.data)
+        const filteredMainIngredients = filterMainIngredients(modifiedData)
+        const filteredBun = filterBun(modifiedData)
+        const filteredSauces= filterSauces(modifiedData)
         dispatch({
           type: SET_FILTERED_MAIN_INGREDIENTS,
           filtered: filteredMainIngredients,

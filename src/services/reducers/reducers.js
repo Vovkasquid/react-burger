@@ -3,7 +3,9 @@ import {
   GET_COMPONENTS_FAILED,
   SET_FILTERED_BUN,
   SET_FILTERED_SAUCES,
-  SET_FILTERED_MAIN_INGREDIENTS
+  SET_FILTERED_MAIN_INGREDIENTS,
+  INC_COUNTER_INGREDIENT,
+  DEC_COUNTER_INGREDIENT,
 } from '../actions/receivedComponents'
 
 import {
@@ -109,6 +111,41 @@ export const receivedComponentsReducer = (state = initialReceivedComponents, act
         ...state,
         mainIngredients: action.filtered,
       }
+    }
+    case INC_COUNTER_INGREDIENT: {
+      let indexOfIngredient
+      const newState = {...state}
+      if (action.item.type === 'bun') {
+        indexOfIngredient = state.bun.findIndex(item => item._id === action.item._id)
+        console.log(indexOfIngredient)
+        // Булок может быть ли 2, либо 0
+        if (newState.bun[indexOfIngredient].counter === 0) {
+          // Cначала занулим все остальные булки, а потом выставим нужную
+          newState.bun.forEach(item => item.counter = 0)
+          newState.bun[indexOfIngredient].counter += 2;
+        }
+      } else if (action.item.type === 'sauce') {
+        indexOfIngredient = state.sauces.findIndex(item => item._id === action.item._id)
+        console.log(indexOfIngredient)
+        newState.sauces[indexOfIngredient].counter += 1
+      } else {
+        indexOfIngredient = state.mainIngredients.findIndex(item => item._id === action.item._id)
+        console.log(indexOfIngredient)
+        newState.mainIngredients[indexOfIngredient].counter += 1
+      }
+      // const indexOfIngredient = state.receivedComponents.findIndex(item => item._id === action.id)
+      console.log(indexOfIngredient)
+      console.log(newState)
+      return newState
+      /* if (indexOfIngredient !== -1) {
+       // const newStateReceivedComponents = [...state.receivedComponents, state.receivedComponents[indexOfIngredient].counter += 1 ]
+        console.log(state.receivedComponents)
+        return {
+          ...state,
+        }
+      }
+      // Если элемент не нашёлся, то вернём стейт
+      return state */
     }
     default: {
       return state

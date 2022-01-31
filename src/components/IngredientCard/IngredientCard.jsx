@@ -16,7 +16,7 @@ export default function IngredientCard({ ingredient, openModal }) {
     <img src={ingredient.image} className={`${styles.ingredientsImg} ml-4 mr-4 `} alt='изображение ингридиета' />
     <p className={`${styles.ingredientsPrice} text text_type_digits-default`}>{ingredient.price}<CurrencyIcon type="primary" /></p>
     <p className={`${styles.ingredientsName} text text_type_main-default`}>{ingredient.name}</p>
-    {ingredient.counter && <Counter size="default" count={ingredient.counter}/>}
+    {!!ingredient.counter && <Counter size="default" count={ingredient.counter}/>}
   </div>
   )
 }

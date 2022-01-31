@@ -7,6 +7,7 @@ import { ingredientSchema } from '../../utils/schemas'
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd'
 import { ADD_CONSTRUCTOR_ITEM, SET_CHOOSEN_BUN } from '../../services/actions/burgerConstructorIngredients';
+import { INC_COUNTER_INGREDIENT } from "../../services/actions/receivedComponents";
 
 export default function BurgerConstructor({ openIngredientModal, openOrderModal }) {
   // Вытаскиваем из стора полученные компоненты и отфильтровываем нужные
@@ -19,8 +20,10 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
       console.log(item)
       if (item.type === 'bun') {
         dispatch({ type: SET_CHOOSEN_BUN, bun: item })
+        dispatch({ type: INC_COUNTER_INGREDIENT, item: item })
       } else {
         dispatch({ type: ADD_CONSTRUCTOR_ITEM, ingredient: item })
+        dispatch({ type: INC_COUNTER_INGREDIENT, item: item })
       }
     },
   })
