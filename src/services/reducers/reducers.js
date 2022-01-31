@@ -45,7 +45,7 @@ const initialOrder = {
 
 const initialBurgerConstructorIngredients = {
   ingredients: [],
-  choosenBun: {},
+  choosenBun: null,
 }
 
 export const burgerConstructorsItemsReducer = (state = initialBurgerConstructorIngredients, action) => {

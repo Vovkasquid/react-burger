@@ -27,8 +27,7 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
   })
   const orderPrice = React.useMemo(() => {
     if (choosenBun && ingredients) {
-      console.log('CRASH HERE = ', ingredients)
-      return ingredients?.reduce((prevPrice, item) => prevPrice + item.price, 0) + 2 * choosenBun.price
+     return ingredients?.reduce((prevPrice, item) => prevPrice + item.price, 0) + 2 * choosenBun.price
     } else {
       return 0
     }
@@ -43,7 +42,7 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
   return (
     <section className={`${styles.burgerConstructorContainer} pt-25 pl-4 pr-4`}>
       <div ref={dropRef} className={`${styles.burgerConstructorList} mb-10`}>
-          <BurgerConstructorItem item={choosenBun} isLocked openModal={openIngredientModal} isTop/>
+        {choosenBun && <BurgerConstructorItem item={choosenBun} isLocked openModal={openIngredientModal} isTop />}
           <ul className={`${styles.burgerConstructorScrollList} ${styles.scrollZone}`}>
             {ingredients && ingredients?.map((item, index) => {
               return (
@@ -53,7 +52,7 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
               )
             })}
           </ul>
-          <BurgerConstructorItem item={choosenBun} isLocked openModal={openIngredientModal} isBottom />
+        {choosenBun && <BurgerConstructorItem item={choosenBun} isLocked openModal={openIngredientModal} isBottom />}
       </div>
       <div className={`${styles.burgerConstructorPriceContainer} mt-10`}>
         <p className={`${styles.burgerConstructorPrice} text text_type_main-large`}>{orderPrice}<CurrencyIcon type="primary" /></p>
