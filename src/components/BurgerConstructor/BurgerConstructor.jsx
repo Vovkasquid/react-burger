@@ -11,7 +11,6 @@ import { ADD_CONSTRUCTOR_ITEM, SET_CHOOSEN_BUN } from '../../services/actions/bu
 export default function BurgerConstructor({ openIngredientModal, openOrderModal }) {
   // Вытаскиваем из стора полученные компоненты и отфильтровываем нужные
   const  { ingredients, choosenBun } = useSelector(store => store.constructorItems)
-  console.log(ingredients)
   const dispatch = useDispatch()
 
   const [, dropRef] = useDrop({

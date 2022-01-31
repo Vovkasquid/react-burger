@@ -57,7 +57,7 @@ export default function BurgerIngredients({ openModal }) {
       <ul id="bun" ref={bunRef} className={`${styles.ingredientsContainer}`}>
         {bun && bun?.map((bread, index) => (
           <li key={index}>
-            <IngredientCard ingredient={bread} index={index} openModal={openModal} />
+            <IngredientCard ingredient={bread} openModal={openModal} />
           </li>
       ))}
       </ul>
@@ -65,7 +65,7 @@ export default function BurgerIngredients({ openModal }) {
       <ul id="sauces" ref={sauceRef} className={`${styles.ingredientsContainer}`}>
         {sauces && sauces?.map((sauce, index) => (
           <li key={index}>
-            <IngredientCard ingredient={sauce} index={index} openModal={openModal}/>
+            <IngredientCard ingredient={sauce} openModal={openModal}/>
           </li>
       ))}
       </ul>
@@ -73,7 +73,7 @@ export default function BurgerIngredients({ openModal }) {
       <ul id="mainIngredients" ref={mainIngredientRef} className={`${styles.ingredientsContainer}`}>
         {mainIngredients && mainIngredients?.map((sauce, index) => (
           <li key={index}>
-            <IngredientCard ingredient={sauce} index={index} openModal={openModal}/>
+            <IngredientCard ingredient={sauce} openModal={openModal}/>
           </li>
       ))}
       </ul>

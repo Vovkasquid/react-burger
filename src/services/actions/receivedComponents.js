@@ -16,9 +16,12 @@ export function getComponents() {
       .then((data) => {
         // В случае успешного получения данных вызываем экшен
         // для записи полученных данных в хранилище
+        // Каждому объекту нужно добавить поле, в котором будет написано
+        // сколько раз его выбрали
+        const modifiedData = data.data.map(item => ({...item, counter: 0 }))
         dispatch({
           type: GET_COMPONENTS_SUCCESS,
-          components: data.data
+          components: modifiedData
         })
         // Сразу отфильтровываем элементы из конструктора
         const filteredMainIngredients = filterMainIngredients(data.data)
