@@ -1,4 +1,6 @@
 import React from 'react'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import styles from './App.module.css'
 import AppHeader from '../AppHeader/AppHeader.jsx'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor.jsx'
@@ -102,15 +104,17 @@ function App() {
         </p>
       }
       <main className={styles.main}>
-        <BurgerIngredients
-          openModal={handleOpenIngredientModal}
-        />
-        { /*Временное решение с choosenBun, пока не сделали выбор булки*/ }
-        <BurgerConstructor
-          openIngredientModal={handleOpenIngredientModal}
-          openOrderModal={handleOpenOrderModal}
-          choosenBun={choosenBun}
-        />
+        <DndProvider backend={HTML5Backend}>
+          <BurgerIngredients
+            openModal={handleOpenIngredientModal}
+          />
+          { /*Временное решение с choosenBun, пока не сделали выбор булки*/ }
+          <BurgerConstructor
+            openIngredientModal={handleOpenIngredientModal}
+            openOrderModal={handleOpenOrderModal}
+            choosenBun={choosenBun}
+          />
+        </DndProvider>
       </main>
     </div>
 

@@ -20,8 +20,8 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal,
   , [mainIngredients, choosenBun] )
 
   const onSubmitBurger = () => {
-    const ingredientArray = mainIngredients?.map(item => item._id)
-    openOrderModal(ingredientArray)
+    // const ingredientArray = mainIngredients?.map(item => item._id)
+    // openOrderModal(ingredientArray)
   }
   
   return (
@@ -29,13 +29,7 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal,
       <div className={`${styles.burgerConstructorList} mb-10`}>
           <BurgerConstructorItem item={choosenBun} isLocked openModal={openIngredientModal} isTop/>
           <ul className={`${styles.burgerConstructorScrollList} ${styles.scrollZone}`}>
-            {mainIngredients && mainIngredients?.map((item, index) => {
-              return (
-                <li key={index}>
-                  <BurgerConstructorItem item={item} openModal={openIngredientModal} />
-                </li>
-              )
-            })}
+            
           </ul>
           <BurgerConstructorItem item={choosenBun} isLocked openModal={openIngredientModal} isBottom />
       </div>
