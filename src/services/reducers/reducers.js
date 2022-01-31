@@ -21,7 +21,8 @@ import {
 
 import {
   ADD_CONSTRUCTOR_ITEM,
-  DELETE_CONSTRUCTOR_ITEM
+  DELETE_CONSTRUCTOR_ITEM,
+  SET_CHOOSEN_BUN,
 } from '../actions/burgerConstructorIngredients'
 
 const initialReceivedComponents = {
@@ -44,6 +45,7 @@ const initialOrder = {
 
 const initialBurgerConstructorIngredients = {
   ingredients: [],
+  choosenBun: {},
 }
 
 export const burgerConstructorsItemsReducer = (state = initialBurgerConstructorIngredients, action) => {
@@ -52,6 +54,12 @@ export const burgerConstructorsItemsReducer = (state = initialBurgerConstructorI
       return {
         ...state,
         ingredients: [...state.ingredients, action.ingredient],
+      }
+    }
+    case SET_CHOOSEN_BUN: {
+      return {
+        ...state,
+        choosenBun: action.bun,
       }
     }
     //  TO DO

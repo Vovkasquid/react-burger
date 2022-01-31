@@ -6,11 +6,11 @@ import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-co
 import { ingredientSchema } from '../../utils/schemas'
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd'
-import { ADD_CONSTRUCTOR_ITEM } from '../../services/actions/burgerConstructorIngredients';
+import { ADD_CONSTRUCTOR_ITEM, SET_CHOOSEN_BUN } from '../../services/actions/burgerConstructorIngredients';
 
-export default function BurgerConstructor({ openIngredientModal, openOrderModal, choosenBun }) {
+export default function BurgerConstructor({ openIngredientModal, openOrderModal }) {
   // Вытаскиваем из стора полученные компоненты и отфильтровываем нужные
-  const  { ingredients } = useSelector(store => store.constructorItems)
+  const  { ingredients, choosenBun } = useSelector(store => store.constructorItems)
   console.log(ingredients)
   const dispatch = useDispatch()
 
@@ -18,7 +18,11 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal,
     accept: 'ingredient',
     drop(item) {
       console.log(item)
-      dispatch({ type: ADD_CONSTRUCTOR_ITEM, ingredient: item })
+      if (item.type === 'bun') {
+        dispatch({ type: SET_CHOOSEN_BUN, bun: item })
+      } else {
+        dispatch({ type: ADD_CONSTRUCTOR_ITEM, ingredient: item })
+      }
     },
   })
   const orderPrice = React.useMemo(() => {
@@ -64,5 +68,4 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal,
 BurgerConstructor.propTypes = {
   openIngredientModal: PropTypes.func.isRequired,
   openOrderModal: PropTypes.func.isRequired,
-  choosenBun: ingredientSchema,
 }
