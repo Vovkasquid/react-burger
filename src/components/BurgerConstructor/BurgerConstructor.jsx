@@ -20,7 +20,9 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
       if (item.type === 'bun') {
         dispatch({ type: SET_CHOOSEN_BUN, bun: item })
         dispatch({ type: INC_COUNTER_INGREDIENT, item: item })
-      } else {
+      } else if (!item.key) {
+        // Если у ингредиента нет поля key, значит он здесь новичок и его надо добавить в массив на рендер
+        // иначе его не надо дважды плодить
         dispatch({ type: ADD_CONSTRUCTOR_ITEM, ingredient: item, key: generateUniqueId() })
         dispatch({ type: INC_COUNTER_INGREDIENT, item: item })
       }
