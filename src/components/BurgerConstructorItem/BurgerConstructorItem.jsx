@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import { DELETE_CONSTRUCTOR_ITEM } from "../../services/actions/burgerConstructorIngredients";
 import { DEC_COUNTER_INGREDIENT } from "../../services/actions/receivedComponents";
 
-export default function BurgerConstructorItem({ item, openModal, isLocked, isTop, isBottom }) {
+export default function BurgerConstructorItem({ item, isLocked, isTop, isBottom }) {
   const dispatch = useDispatch()
   let itemName = ''
   if (isTop) {
@@ -24,15 +24,16 @@ export default function BurgerConstructorItem({ item, openModal, isLocked, isTop
     // Потом уменьшаем его количество в списке ингредиентов
     dispatch({ type: DEC_COUNTER_INGREDIENT, item })
   }
-  /*
+
   // Передаём в хук тип элемента и сам игредиент
   const [, dragRef] = useDrag({
-    type: 'ingredient',
+    // Контейнер не примет bun, поэтому точно огородимся от попыток его двигать
+    type: isLocked ? 'bun' : 'ingredient',
     item: item,
-  }) */
+  })
 
   return (
-    <div className={`${styles.BurgerConstructorItem}`} >
+    <div ref={dragRef} className={`${styles.BurgerConstructorItem}`} >
       {!isLocked && <DragIcon type="primary" />}
       <ConstructorElement
         text={itemName}
@@ -48,7 +49,6 @@ export default function BurgerConstructorItem({ item, openModal, isLocked, isTop
 
 BurgerConstructorItem.propTypes = {
   item: ingredientSchema,
-  openModal: PropTypes.func.isRequired,
   isLocked: PropTypes.bool,
   isTop: PropTypes.bool,
   isBottom: PropTypes.bool,

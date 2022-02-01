@@ -53,9 +53,12 @@ const initialBurgerConstructorIngredients = {
 export const burgerConstructorsItemsReducer = (state = initialBurgerConstructorIngredients, action) => {
   switch (action.type) {
     case ADD_CONSTRUCTOR_ITEM: {
+      // засовываем key в элемент
+      const newItem = {...action.ingredient}
+      newItem.key = action.key
       return {
         ...state,
-        ingredients: [...state.ingredients, action.ingredient],
+        ingredients: [...state.ingredients, newItem],
       }
     }
     case SET_CHOOSEN_BUN: {
@@ -120,20 +123,17 @@ export const receivedComponentsReducer = (state = initialReceivedComponents, act
       const newState = {...state}
       if (action.item.type === 'bun') {
         indexOfIngredient = state.bun.findIndex(item => item._id === action.item._id)
-        console.log(indexOfIngredient)
         // Булок может быть ли 2, либо 0
         if (newState.bun[indexOfIngredient].counter === 0) {
           // Cначала занулим все остальные булки, а потом выставим нужную
           newState.bun.forEach(item => item.counter = 0)
           newState.bun[indexOfIngredient].counter += 2;
-        }
+        } // В зависимости от типа ищем элемент в нужном массиве
       } else if (action.item.type === 'sauce') {
         indexOfIngredient = state.sauces.findIndex(item => item._id === action.item._id)
-        console.log(indexOfIngredient)
         newState.sauces[indexOfIngredient].counter += 1
       } else {
         indexOfIngredient = state.mainIngredients.findIndex(item => item._id === action.item._id)
-        console.log(indexOfIngredient)
         newState.mainIngredients[indexOfIngredient].counter += 1
       }
 

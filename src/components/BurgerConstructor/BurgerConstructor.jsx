@@ -5,6 +5,7 @@ import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorIte
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd'
+import { v4 as generateUniqueId } from 'uuid'
 import { ADD_CONSTRUCTOR_ITEM, SET_CHOOSEN_BUN } from '../../services/actions/burgerConstructorIngredients';
 import { INC_COUNTER_INGREDIENT } from "../../services/actions/receivedComponents";
 
@@ -16,12 +17,11 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
   const [, dropRef] = useDrop({
     accept: 'ingredient',
     drop(item) {
-      console.log(item)
       if (item.type === 'bun') {
         dispatch({ type: SET_CHOOSEN_BUN, bun: item })
         dispatch({ type: INC_COUNTER_INGREDIENT, item: item })
       } else {
-        dispatch({ type: ADD_CONSTRUCTOR_ITEM, ingredient: item })
+        dispatch({ type: ADD_CONSTRUCTOR_ITEM, ingredient: item, key: generateUniqueId() })
         dispatch({ type: INC_COUNTER_INGREDIENT, item: item })
       }
     },
@@ -47,7 +47,7 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
           <ul className={`${styles.burgerConstructorScrollList} ${styles.scrollZone}`}>
             {ingredients && ingredients?.map((item, index) => {
               return (
-                <li key={index}>
+                <li key={item.key}>
                   <BurgerConstructorItem item={item} openModal={openIngredientModal} />
                 </li>
               )
