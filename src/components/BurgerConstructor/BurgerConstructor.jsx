@@ -50,7 +50,7 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
             {ingredients && ingredients?.map((item, index) => {
               return (
                 <li key={item.key}>
-                  <BurgerConstructorItem item={item} openModal={openIngredientModal} />
+                  <BurgerConstructorItem item={item} openModal={openIngredientModal} index={index} />
                 </li>
               )
             })}

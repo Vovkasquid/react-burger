@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from "react";
 import PropTypes from 'prop-types'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDrag } from 'react-dnd'
@@ -8,7 +8,8 @@ import { useDispatch } from 'react-redux'
 import { DELETE_CONSTRUCTOR_ITEM } from "../../services/actions/burgerConstructorIngredients";
 import { DEC_COUNTER_INGREDIENT } from "../../services/actions/receivedComponents";
 
-export default function BurgerConstructorItem({ item, isLocked, isTop, isBottom }) {
+export default function BurgerConstructorItem({ item, isLocked, isTop, isBottom, index }) {
+  const ref = useRef(null)
   const dispatch = useDispatch()
   let itemName = ''
   if (isTop) {
@@ -26,14 +27,21 @@ export default function BurgerConstructorItem({ item, isLocked, isTop, isBottom 
   }
 
   // Передаём в хук тип элемента и сам игредиент
-  const [, dragRef] = useDrag({
+  const [{ isDragging }, dragRef] = useDrag({
     // Контейнер не примет bun, поэтому точно огородимся от попыток его двигать
     type: isLocked ? 'bun' : 'ingredient',
     item: item,
-  })
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging()
+    })
+  },
+)
+
+  const opacity = isDragging ? 0 : 1
+  // dragRef(drop(ref))
 
   return (
-    <div ref={dragRef} className={`${styles.BurgerConstructorItem}`} >
+    <div ref={dragRef} style={{opacity}} className={`${styles.BurgerConstructorItem}`} >
       {!isLocked && <DragIcon type="primary" />}
       <ConstructorElement
         text={itemName}
@@ -52,4 +60,5 @@ BurgerConstructorItem.propTypes = {
   isLocked: PropTypes.bool,
   isTop: PropTypes.bool,
   isBottom: PropTypes.bool,
+  index: PropTypes.number,
 }
