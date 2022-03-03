@@ -29,13 +29,38 @@ export default function BurgerConstructorItem({ item, isLocked, isTop, isBottom,
   const [, drop] = useDrop({
     accept: 'ingredient',
     hover: (item, monitor) => {
+      if (!ref.current) {
+        return;
+      }
       const dragIndex = item.index
       const hoverIndex = index
       // Если карточка на своём месте, то ничего не делаем
       if (dragIndex === hoverIndex) {
         return
       }
+      // Тёмная магия из документация
+      // Determine rectangle on screen
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      // Get vertical middle
+      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      // Determine mouse position
+      const clientOffset = monitor.getClientOffset();
+      // Get pixels to the top
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      // Only perform the move when the mouse has crossed half of the items height
+      // When dragging downwards, only move when the cursor is below 50%
+      // When dragging upwards, only move when the cursor is above 50%
+      // Dragging downwards
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+        return;
+      }
+      // Dragging upwards
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+        return;
+      }
       moveIngredient(dragIndex, hoverIndex)
+      // Дока говорит, что мутировать плохо, но тут можно
+      item.index = hoverIndex;
     }
   })
   // Передаём в хук тип элемента и сам игредиент
