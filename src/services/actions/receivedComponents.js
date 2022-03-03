@@ -8,7 +8,7 @@ export const SET_FILTERED_SAUCES = 'SET_FILTERED_SAUCES'
 export const SET_FILTERED_MAIN_INGREDIENTS = 'SET_FILTERED_MAIN_INGREDIENTS'
 export const INC_COUNTER_INGREDIENT = 'INC_COUNTER_INGREDIENT'
 export const DEC_COUNTER_INGREDIENT = 'DEC_COUNTER_INGREDIENT'
-
+export const SET_SORTED_ARRAY = 'SET_SORTED_ARRAY'
 export function getComponents() {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
   return function(dispatch) {

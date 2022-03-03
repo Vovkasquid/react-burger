@@ -1,14 +1,14 @@
 import React, { useRef } from "react";
 import PropTypes from 'prop-types'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDrag } from 'react-dnd'
+import { useDrag, useDrop } from 'react-dnd'
 import styles from './BurgerConstructorItem.module.css'
 import { ingredientSchema } from '../../utils/schemas'
 import { useDispatch } from 'react-redux'
 import { DELETE_CONSTRUCTOR_ITEM } from "../../services/actions/burgerConstructorIngredients";
 import { DEC_COUNTER_INGREDIENT } from "../../services/actions/receivedComponents";
 
-export default function BurgerConstructorItem({ item, isLocked, isTop, isBottom, index }) {
+export default function BurgerConstructorItem({ item, isLocked, isTop, isBottom, index, moveIngredient }) {
   const ref = useRef(null)
   const dispatch = useDispatch()
   let itemName = ''
@@ -26,11 +26,19 @@ export default function BurgerConstructorItem({ item, isLocked, isTop, isBottom,
     dispatch({ type: DEC_COUNTER_INGREDIENT, item })
   }
 
+  const [, drop] = useDrop({
+    accept: 'ingredient',
+    hover: (item, monitor) => {
+      const dragIndex = item.index
+      const hoverIndex = index
+      moveIngredient(dragIndex, hoverIndex)
+    }
+  })
   // Передаём в хук тип элемента и сам игредиент
   const [{ isDragging }, dragRef] = useDrag({
     // Контейнер не примет bun, поэтому точно огородимся от попыток его двигать
     type: isLocked ? 'bun' : 'ingredient',
-    item: item,
+    item: () => ({item, index}),
     collect: (monitor) => ({
       isDragging: monitor.isDragging()
     })
@@ -38,10 +46,10 @@ export default function BurgerConstructorItem({ item, isLocked, isTop, isBottom,
 )
 
   const opacity = isDragging ? 0 : 1
-  // dragRef(drop(ref))
+  dragRef(drop(ref))
 
   return (
-    <div ref={dragRef} style={{opacity}} className={`${styles.BurgerConstructorItem}`} >
+    <div ref={ref} style={{opacity}} className={`${styles.BurgerConstructorItem}`} >
       {!isLocked && <DragIcon type="primary" />}
       <ConstructorElement
         text={itemName}
@@ -61,4 +69,5 @@ BurgerConstructorItem.propTypes = {
   isTop: PropTypes.bool,
   isBottom: PropTypes.bool,
   index: PropTypes.number,
+  moveIngredient: PropTypes.func,
 }

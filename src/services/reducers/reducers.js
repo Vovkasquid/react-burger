@@ -5,8 +5,8 @@ import {
   SET_FILTERED_SAUCES,
   SET_FILTERED_MAIN_INGREDIENTS,
   INC_COUNTER_INGREDIENT,
-  DEC_COUNTER_INGREDIENT,
-} from '../actions/receivedComponents'
+  DEC_COUNTER_INGREDIENT, SET_SORTED_ARRAY
+} from "../actions/receivedComponents";
 
 import {
   SET_DETAIL_INGREDIENT,
@@ -67,7 +67,6 @@ export const burgerConstructorsItemsReducer = (state = initialBurgerConstructorI
         choosenBun: action.bun,
       }
     }
-    //  TO DO
     case DELETE_CONSTRUCTOR_ITEM: {
       const newState = {...state}
       const indexIngredient = newState.ingredients.findIndex(item => item._id === action.item._id)
@@ -76,6 +75,15 @@ export const burgerConstructorsItemsReducer = (state = initialBurgerConstructorI
         newState.ingredients.splice(indexIngredient,1)
       }
       return newState
+    }
+    case SET_SORTED_ARRAY: {
+      console.log('action = ', action)
+      const newArray = action.sortedArray
+      console.log('newArr', newArray)
+      return {
+        ...state,
+        ingredients: [...action.sortedArray]
+      }
     }
     default: {
       return state
