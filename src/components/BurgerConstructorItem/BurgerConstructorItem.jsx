@@ -31,6 +31,10 @@ export default function BurgerConstructorItem({ item, isLocked, isTop, isBottom,
     hover: (item, monitor) => {
       const dragIndex = item.index
       const hoverIndex = index
+      // Если карточка на своём месте, то ничего не делаем
+      if (dragIndex === hoverIndex) {
+        return
+      }
       moveIngredient(dragIndex, hoverIndex)
     }
   })
@@ -49,7 +53,7 @@ export default function BurgerConstructorItem({ item, isLocked, isTop, isBottom,
   dragRef(drop(ref))
 
   return (
-    <div ref={ref} style={{opacity}} className={`${styles.BurgerConstructorItem}`} >
+    <div ref={isLocked ? null : ref} style={{opacity}} className={`${styles.BurgerConstructorItem}`} >
       {!isLocked && <DragIcon type="primary" />}
       <ConstructorElement
         text={itemName}
