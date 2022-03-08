@@ -56,8 +56,8 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
   , [ingredients, choosenBun] )
 
   const onSubmitBurger = () => {
-    // const ingredientArray = mainIngredients?.map(item => item._id)
-    // openOrderModal(ingredientArray)
+    const ingredientArray = ingredients?.map(item => item._id)
+    openOrderModal(ingredientArray)
   }
 
   const moveIngredient = (dragIndex, hoverIndex) => {
