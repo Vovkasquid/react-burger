@@ -69,12 +69,16 @@ export const burgerConstructorsItemsReducer = (state = initialBurgerConstructorI
     }
     case DELETE_CONSTRUCTOR_ITEM: {
       const newState = {...state}
+      console.log(newState)
       const indexIngredient = newState.ingredients.findIndex(item => item._id === action.item._id)
       if (indexIngredient !== -1) {
         // Удаляем первый найденный элемент
         newState.ingredients.splice(indexIngredient,1)
       }
-      return newState
+      return {
+        ...state,
+        ingredients: [...newState.ingredients]
+      }
     }
     case SET_SORTED_ARRAY: {
       console.log('action = ', action)

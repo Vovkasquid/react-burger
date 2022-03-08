@@ -44,8 +44,9 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
       }
     },
   })
+
   const orderPrice = React.useMemo(() => {
-    console.log(ingredients)
+    console.log('ing in price = ', ingredients)
     if (choosenBun && ingredients) {
      return ingredients?.reduce((prevPrice, item) => prevPrice + item.price, 0) + 2 * choosenBun.price
     } else {
