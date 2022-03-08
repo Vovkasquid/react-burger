@@ -17,7 +17,6 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
   const [, dropRef] = useDrop({
     accept: 'ingredient',
     drop(ingredient) {
-      console.log(ingredient)
       const { item } = ingredient
       // TO DO вынести в функцию
       if (item) {
@@ -28,7 +27,6 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
           // Если у ингредиента нет поля key, значит он здесь новичок и его надо добавить в массив на рендер
           // иначе его не надо дважды плодить
           dispatch({ type: ADD_CONSTRUCTOR_ITEM, ingredient: item, key: generateUniqueId() })
-          console.log(ingredient.index)
           dispatch({ type: INC_COUNTER_INGREDIENT, item: item })
         }
       } else {
@@ -46,7 +44,6 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
   })
 
   const orderPrice = React.useMemo(() => {
-    console.log('ing in price = ', ingredients)
     if (choosenBun && ingredients) {
      return ingredients?.reduce((prevPrice, item) => prevPrice + item.price, 0) + 2 * choosenBun.price
     } else {
@@ -63,7 +60,6 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
   const moveIngredient = (dragIndex, hoverIndex) => {
     // Вытаскиваем из массива карточку, которую будем вставлять
     const dragIngredient = ingredients[dragIndex]
-    console.log(dragIngredient)
     // Защита от булок
     if (dragIngredient) {
       // Делаем новый массив, который будем мутировать
@@ -73,7 +69,6 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
       // Добавляем в массив элемент с новым индексом
       newIngredients.splice(hoverIndex, 0, dragIngredient)
       // Добавляем отсортированный массив на рендер
-      console.log('na dis =', newIngredients)
       dispatch({ type: SET_SORTED_ARRAY, sortedArray: newIngredients })
     }
   }
