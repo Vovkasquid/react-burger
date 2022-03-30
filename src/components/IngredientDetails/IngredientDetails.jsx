@@ -1,8 +1,9 @@
 import React from 'react'
 import styles from './IngredientDetails.module.css'
-import { ingredientSchema } from '../../utils/schemas'
+import { useSelector } from 'react-redux'
 
-const ModalIngredientItem = ({ ingredient }) => {
+const ModalIngredientItem = () => {
+  const { ingredient } = useSelector(state => state.detailIngredient)
   return (
     <>
       <img alt="картинка ингредиента" src={ingredient?.image} className={styles.ingredientImage} /><div className={styles.ingredientDescriptionContainer}>
@@ -31,7 +32,3 @@ const ModalIngredientItem = ({ ingredient }) => {
 }
 
 export default ModalIngredientItem
-
-ModalIngredientItem.propTypes = {
-  ingredient: ingredientSchema.isRequired,
-}

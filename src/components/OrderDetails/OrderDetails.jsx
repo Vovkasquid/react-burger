@@ -1,9 +1,11 @@
 import React from 'react'
 import styles from './OrderDetails.module.css'
 import succesIcon from '../../images/successIcon.svg'
-import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 
-const OrderDetails = ({ orderNumber }) => {
+const OrderDetails = () => {
+  // TO DO пофиксить эту дичь внизу
+  const orderNumber = useSelector(state => state?.order?.order?.order?.number)
   return (
     <>
       <p className="text text_type_digits-large mb-8">{orderNumber}</p>
@@ -16,7 +18,3 @@ const OrderDetails = ({ orderNumber }) => {
 }
 
 export default OrderDetails
-
-OrderDetails.propTypes = {
-  orderNumber: PropTypes.number.isRequired
-}

@@ -17,6 +17,7 @@
   gap: 16px;
   width: 100%;
   max-height: 656px;
+  min-height: 656px;
 }
 
 .burgerConstructorScrollList {
