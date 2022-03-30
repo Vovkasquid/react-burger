@@ -1,4 +1,5 @@
 import React from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import styles from './App.module.css'
@@ -80,43 +81,50 @@ function App() {
   }, [receivedComponents])
 
   return (
-    <div className={styles.application} id="app">
-      {isIngredientModalVisible && <Modal
-        closePopup={handleCloseIngredientModal}
-        title={MODAL_INGREDIENT_TITLE}
-      >
-        <IngredientDetails />
-      </Modal>}
-      {isOrderModalVisible &&  <Modal
-        closePopup={handleCloseOrderModal}
-      >
-        <OrderDetails />
-      </Modal>}
-      <AppHeader />
-      {getComponentsError && 
-        <p className={`${styles.errorText} text text_type_main-default`}>
-          {getComponentsError}
-        </p>
-      }
-      {orderError && 
-        <p className={`${styles.errorText} text text_type_main-default`}>
-          {orderError}
-        </p>
-      }
-      <main className={styles.main}>
-        <DndProvider backend={HTML5Backend}>
-          <BurgerIngredients
-            openModal={handleOpenIngredientModal}
-          />
-          { /*Временное решение с choosenBun, пока не сделали выбор булки*/ }
-          <BurgerConstructor
-            openIngredientModal={handleOpenIngredientModal}
-            openOrderModal={handleOpenOrderModal}
-            choosenBun={choosenBun}
-          />
-        </DndProvider>
-      </main>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <div className={styles.application} id="app">
+            {isIngredientModalVisible && <Modal
+              closePopup={handleCloseIngredientModal}
+              title={MODAL_INGREDIENT_TITLE}
+            >
+              <IngredientDetails />
+            </Modal>}
+            {isOrderModalVisible &&  <Modal
+              closePopup={handleCloseOrderModal}
+            >
+              <OrderDetails />
+            </Modal>}
+            <AppHeader />
+            {getComponentsError &&
+              <p className={`${styles.errorText} text text_type_main-default`}>
+                {getComponentsError}
+              </p>
+            }
+            {orderError &&
+              <p className={`${styles.errorText} text text_type_main-default`}>
+                {orderError}
+              </p>
+            }
+            <main className={styles.main}>
+              <DndProvider backend={HTML5Backend}>
+                <BurgerIngredients
+                  openModal={handleOpenIngredientModal}
+                />
+                { /*Временное решение с choosenBun, пока не сделали выбор булки*/ }
+                <BurgerConstructor
+                  openIngredientModal={handleOpenIngredientModal}
+                  openOrderModal={handleOpenOrderModal}
+                  choosenBun={choosenBun}
+                />
+              </DndProvider>
+            </main>
+          </div>
+        </Route>
+      </Switch>
+    </BrowserRouter>
+
 
   )
 }
