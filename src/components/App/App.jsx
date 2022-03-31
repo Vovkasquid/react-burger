@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { SET_DETAIL_INGREDIENT, CLEAR_DETAIL_INGREDIENT } from '../../services/actions/detailIngredient'
 import { postOrder, CLOSE_ORDER_MODAL } from '../../services/actions/order'
 import MainPage from "../../pages/MainPage/MainPage";
+import LoginPage from "../../pages/LoginPage/LoginPage";
 
  // Метод для проверки ответа
  export function checkResponse(res) {
@@ -31,6 +32,9 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/login">
+          <LoginPage />
+        </Route>
         <Route exact path="/">
           <MainPage />
         </Route>
