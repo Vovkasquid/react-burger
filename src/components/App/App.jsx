@@ -1,7 +1,8 @@
 import React from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import MainPage from '../../pages/MainPage/MainPage'
 import AuthPage from '../../pages/AuthPage/AuthPage'
+import ProfilePage from '../../pages/ProfilePage/ProfilePage'
 
  // Метод для проверки ответа
  export function checkResponse(res) {
@@ -40,13 +41,17 @@ function App() {
         <Route path="/forgot-password">
           <AuthPage />
         </Route>
+        <Route path="/profile">
+          <ProfilePage />
+        </Route>
         <Route exact path="/">
           <MainPage />
         </Route>
+        <Route path="*">
+          <Redirect to='/' />
+        </Route>
       </Switch>
     </BrowserRouter>
-
-
   )
 }
 

@@ -6,7 +6,6 @@ import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burg
 
 const AuthForm = ({ title }) => {
   const history = useHistory()
-  console.log(history.location.pathname)
   const [email, setEmail] = React.useState('')
   const [resetedEmail, setResetedEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
