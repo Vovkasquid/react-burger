@@ -1,0 +1,36 @@
+.profilePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 120px;
+  max-width: 1980px;
+}
+
+.profileContainer {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  padding: 0 380px;
+  align-self: flex-start;
+}
+
+.linkContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+}
+
+.link {
+  text-decoration: none;
+  color: hsla(240, 20%, 60%, 1);
+}
