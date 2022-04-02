@@ -4,7 +4,7 @@ import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burg
 import { Link } from "react-router-dom";
 
 
-const AuthForm = () => {
+const AuthForm = ({ title }) => {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const onPasswordChange = (e) => {
@@ -22,7 +22,7 @@ const AuthForm = () => {
   return (
     <main className={styles.authForm}>
       <form className={styles.fieldsContainer} onSubmit={onSubmit}>
-        <h2 className="text text_type_main-medium">Вход</h2>
+        <h2 className="text text_type_main-medium">{title}</h2>
         <Input
           type="email"
           placeholder="E-mail"
@@ -35,11 +35,24 @@ const AuthForm = () => {
           name="password"
           onChange={onPasswordChange}
         />
-        <Button>Войти</Button>
+        <Button>{title === 'Вход' ? 'Войти' : title === 'Регистрация' ? 'Зарегестрироваться' : 'Спасти мир'}</Button>
       </form>
       <div className={`mt-20 ${styles.linkContainer}`}>
-        <p className="text text_type_main-default text_color_inactive">Вы — новый пользователь? <Link className={styles.authLink} to="/">Зарегистрироваться</Link></p>
-        <p className="mt-4 text text_type_main-default text_color_inactive">Забыль пароль? <Link className={styles.authLink} to="/">Восстановить пароль</Link></p>
+        {
+          title === 'Вход' ? (
+            <>
+              <p className="text text_type_main-default text_color_inactive">Вы — новый пользователь? <Link className={styles.authLink} to="/register">Зарегистрироваться</Link></p>
+              <p className="mt-4 text text_type_main-default text_color_inactive">Забыль пароль? <Link className={styles.authLink} to="/">Восстановить пароль</Link></p>
+            </>
+          ) :
+          title === 'Регистрация' ? (
+              <>
+                <p className="text text_type_main-default text_color_inactive">Уже зарегистрированы? <Link className={styles.authLink} to="/login">Войти</Link></p>
+              </>
+          ) :
+          (<p>Мама помоги мне</p>)
+        }
+
       </div>
     </main>
   )
