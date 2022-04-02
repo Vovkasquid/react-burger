@@ -7,11 +7,18 @@ import { Link } from "react-router-dom";
 const AuthForm = ({ title }) => {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
+  const [name, setName] = React.useState('')
+
   const onPasswordChange = (e) => {
     setPassword(e.target.value)
   }
+
   const onEmailChange = (e) => {
     setEmail(e.target.value)
+  }
+
+  const onNameChange = (e) => {
+    setName(e.target.value)
   }
 
   const onSubmit = (e) => {
@@ -23,6 +30,13 @@ const AuthForm = ({ title }) => {
     <main className={styles.authForm}>
       <form className={styles.fieldsContainer} onSubmit={onSubmit}>
         <h2 className="text text_type_main-medium">{title}</h2>
+        {title === 'Регистрация' && <Input
+          type="text"
+          placeholder="Имя"
+          value={email}
+          name="email"
+          onChange={onEmailChange}
+        />}
         <Input
           type="email"
           placeholder="E-mail"
@@ -52,7 +66,6 @@ const AuthForm = ({ title }) => {
           ) :
           (<p>Мама помоги мне</p>)
         }
-
       </div>
     </main>
   )
