@@ -34,6 +34,12 @@ function App() {
         <Route path="/register">
           <AuthPage isRegister />
         </Route>
+        <Route path="/reset-password">
+          <AuthPage />
+        </Route>
+        <Route path="/forgot-password">
+          <AuthPage />
+        </Route>
         <Route exact path="/">
           <MainPage />
         </Route>
