@@ -4,7 +4,7 @@ import {
   detailIngredientReducer,
   orderReducer,
   burgerConstructorsItemsReducer,
-} from "./reducers";
+} from './reducers'
 
 const rootReducer = combineReducers({
   receivedComponents: receivedComponentsReducer,

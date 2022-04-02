@@ -27,6 +27,11 @@ import {
   SET_CHOOSEN_BUN,
 } from '../actions/burgerConstructorIngredients'
 
+import {
+  POST_FORGOT_PASSWORD_SUCCESS,
+  POST_FORGOT_PASSWORD_FAILED
+} from '../actions/resetAndForgotPasswords'
+
 const initialReceivedComponents = {
   receivedComponents: [],
   getComponentsError: '',
@@ -43,6 +48,12 @@ const initialOrder = {
   order: {},
   orderError: '',
   isOrderModalVisible: false,
+}
+
+const initialForgotAndResetPassword = {
+  orderError: '',
+  isSuccessForgotPasswordRequest: false,
+  forgotPasswordRequestError: '',
 }
 
 const initialBurgerConstructorIngredients = {
@@ -178,6 +189,26 @@ export const detailIngredientReducer = (state = initialDetailIngredient, action)
       return {
         ...state,
         ingredient: action.ingredient,
+      }
+    }
+    default:
+      return state
+  }
+}
+export const resetAndForgotPasswordReducer = (state = initialForgotAndResetPassword, action) => {
+  switch (action.type) {
+    case POST_FORGOT_PASSWORD_SUCCESS: {
+      return {
+        ...state,
+        isSuccessForgotPasswordRequest: true,
+        forgotPasswordRequestError: ''
+      }
+    }
+    case POST_FORGOT_PASSWORD_FAILED: {
+      return {
+        ...state,
+        isSuccessForgotPasswordRequest: false,
+        forgotPasswordRequestError: action.error,
       }
     }
     default:
