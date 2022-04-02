@@ -89,7 +89,7 @@ const AuthForm = ({ title }) => {
               type="text"
               placeholder="Введите код из письма"
               value={code}
-              name="email"
+              name="code"
               onChange={onCodeChange}
             />
           </>
