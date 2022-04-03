@@ -18,6 +18,7 @@ const AuthForm = ({ title }) => {
   const [name, setName] = React.useState('')
   const [newPassword, setNewPassword] = React.useState('')
   const [code, setCode] = React.useState('')
+  const [requestError, setRequestError] = React.useState('')
   // Получаем диспатч
   const dispatch = useDispatch()
   // Вытащим данные для forgotPassword из стора
@@ -70,7 +71,17 @@ const AuthForm = ({ title }) => {
       // Очищаем стейт
       dispatch({type: CLEAR_STATE_RESET_PASSWORD})
     }
+    if (resetAndForgotPasswordState.resetPasswordRequestError) {
+      setRequestError(resetAndForgotPasswordState.resetPasswordRequestError)
+    }
+    if (resetAndForgotPasswordState.forgotPasswordRequestError) {
+      setRequestError(resetAndForgotPasswordState.forgotPasswordRequestError)
+    }
   }, [history, resetAndForgotPasswordState])
+  // Очистка поля ошибки при смене страницы
+  React.useEffect(() => {
+    setRequestError('')
+  }, [history.location.pathname])
 
   return (
     <main className={styles.authForm}>
@@ -153,6 +164,7 @@ const AuthForm = ({ title }) => {
           )
         }
       </div>
+      {requestError && <p className="text text_type_main-default" style={{ color: "hsl(0,100%,50%)" }}>{requestError}</p>}
     </main>
   )
 }
