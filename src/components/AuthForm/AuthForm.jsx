@@ -3,7 +3,11 @@ import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './AuthForm.module.css'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import { CLEAR_STATE_FORGOT_PASSWORD, postForgotPassword } from "../../services/actions/resetAndForgotPasswords";
+import {
+  CLEAR_STATE_FORGOT_PASSWORD, CLEAR_STATE_RESET_PASSWORD,
+  postForgotPassword,
+  postResetPassword
+} from "../../services/actions/resetAndForgotPasswords";
 
 
 const AuthForm = ({ title }) => {
@@ -49,6 +53,9 @@ const AuthForm = ({ title }) => {
     if (history.location.pathname === '/forgot-password') {
       dispatch(postForgotPassword(resetedEmail))
     }
+    if (history.location.pathname === '/reset-password') {
+      dispatch(postResetPassword({password: newPassword, token: code}))
+    }
   }
 
   React.useEffect(() => {
@@ -56,6 +63,12 @@ const AuthForm = ({ title }) => {
       history.replace({pathname: '/reset-password'})
       // Очищаем стейт
       dispatch({type: CLEAR_STATE_FORGOT_PASSWORD})
+    }
+    if (resetAndForgotPasswordState.isSuccessResetPasswordRequest) {
+      // history.replace({pathname: '/reset-password'})
+      console.log('success reset')
+      // Очищаем стейт
+      dispatch({type: CLEAR_STATE_RESET_PASSWORD})
     }
   }, [history, resetAndForgotPasswordState])
 

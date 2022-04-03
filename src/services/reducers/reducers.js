@@ -29,7 +29,11 @@ import {
 
 import {
   POST_FORGOT_PASSWORD_SUCCESS,
-  POST_FORGOT_PASSWORD_FAILED, CLEAR_STATE_FORGOT_PASSWORD
+  POST_FORGOT_PASSWORD_FAILED,
+  CLEAR_STATE_FORGOT_PASSWORD,
+  POST_RESET_PASSWORD_SUCCESS,
+  POST_RESET_PASSWORD_FAILED,
+  CLEAR_STATE_RESET_PASSWORD
 } from "../actions/resetAndForgotPasswords";
 
 const initialReceivedComponents = {
@@ -53,6 +57,8 @@ const initialOrder = {
 const initialForgotAndResetPassword = {
   isSuccessForgotPasswordRequest: false,
   forgotPasswordRequestError: '',
+  isSuccessResetPasswordRequest: false,
+  resetPasswordRequestError: '',
 }
 
 const initialBurgerConstructorIngredients = {
@@ -215,6 +221,27 @@ export const resetAndForgotPasswordReducer = (state = initialForgotAndResetPassw
         ...state,
         isSuccessForgotPasswordRequest: false,
         forgotPasswordRequestError: '',
+      }
+    }
+    case POST_RESET_PASSWORD_SUCCESS: {
+      return {
+        ...state,
+        isSuccessResetPasswordRequest: true,
+        resetPasswordRequestError: ''
+      }
+    }
+    case POST_RESET_PASSWORD_FAILED: {
+      return {
+        ...state,
+        isSuccessResetPasswordRequest: false,
+        resetPasswordRequestError: action.error,
+      }
+    }
+    case CLEAR_STATE_RESET_PASSWORD: {
+      return {
+        ...state,
+        isSuccessResetPasswordRequest: false,
+        resetPasswordRequestError: '',
       }
     }
     default:
