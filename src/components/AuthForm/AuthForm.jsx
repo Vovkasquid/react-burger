@@ -8,6 +8,7 @@ import {
   postForgotPassword,
   postResetPassword
 } from "../../services/actions/resetAndForgotPasswords";
+import { registerUser } from "../../services/actions/user";
 
 
 const AuthForm = ({ title }) => {
@@ -23,6 +24,8 @@ const AuthForm = ({ title }) => {
   const dispatch = useDispatch()
   // Вытащим данные для forgotPassword из стора
   const resetAndForgotPasswordState = useSelector(store => store.resetAndForgotPassword)
+  // Вытащим данные о юзере из стора
+  const userState = useSelector(store => store.user)
 
   const onPasswordChange = (e) => {
     setPassword(e.target.value)
@@ -51,11 +54,17 @@ const AuthForm = ({ title }) => {
   const onSubmit = (e) => {
     e.preventDefault()
     console.log('submit')
+    // Очищаем ошибки перед запросом
+    setRequestError('')
     if (history.location.pathname === '/forgot-password') {
       dispatch(postForgotPassword(resetedEmail))
     }
     if (history.location.pathname === '/reset-password') {
       dispatch(postResetPassword({password: newPassword, token: code}))
+    }
+    if (history.location.pathname === '/register') {
+      console.log('reg')
+      dispatch(registerUser({email, name, password}))
     }
   }
 
@@ -77,7 +86,15 @@ const AuthForm = ({ title }) => {
     if (resetAndForgotPasswordState.forgotPasswordRequestError) {
       setRequestError(resetAndForgotPasswordState.forgotPasswordRequestError)
     }
-  }, [history, resetAndForgotPasswordState])
+  }, [dispatch, history, resetAndForgotPasswordState])
+
+  React.useEffect(() => {
+    console.log(userState)
+    if (userState.registerError) {
+      setRequestError(userState.registerError)
+    }
+  }, [userState])
+
   // Очистка поля ошибки при смене страницы
   React.useEffect(() => {
     setRequestError('')

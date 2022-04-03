@@ -1,5 +1,5 @@
 import { BURGER_API } from '../../utils/constants'
-import { checkResponse } from "../../components/App/App";
+import { checkResponse } from '../../components/App/App'
 
 export const POST_FORGOT_PASSWORD_SUCCESS = 'POST_FORGOT_PASSWORD_SUCCESS'
 export const POST_FORGOT_PASSWORD_FAILED = 'POST_FORGOT_PASSWORD_FAILED'

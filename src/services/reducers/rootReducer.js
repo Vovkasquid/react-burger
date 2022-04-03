@@ -4,8 +4,8 @@ import {
   detailIngredientReducer,
   orderReducer,
   burgerConstructorsItemsReducer,
-  resetAndForgotPasswordReducer,
-} from './reducers'
+  resetAndForgotPasswordReducer, userReducer
+} from "./reducers";
 
 const rootReducer = combineReducers({
   receivedComponents: receivedComponentsReducer,
@@ -13,6 +13,7 @@ const rootReducer = combineReducers({
   order: orderReducer,
   constructorItems: burgerConstructorsItemsReducer,
   resetAndForgotPassword: resetAndForgotPasswordReducer,
+  user: userReducer,
 })
 
 export default rootReducer
