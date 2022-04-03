@@ -3,6 +3,7 @@ import { checkResponse } from "../../components/App/App";
 
 export const POST_FORGOT_PASSWORD_SUCCESS = 'POST_FORGOT_PASSWORD_SUCCESS'
 export const POST_FORGOT_PASSWORD_FAILED = 'POST_FORGOT_PASSWORD_FAILED'
+export const CLEAR_STATE_FORGOT_PASSWORD = 'CLEAR_STATE_FORGOT_PASSWORD'
 
 export function postForgotPassword(req) {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch

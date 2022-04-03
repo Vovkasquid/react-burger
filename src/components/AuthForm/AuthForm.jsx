@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import styles from './AuthForm.module.css'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
+import { CLEAR_STATE_FORGOT_PASSWORD, postForgotPassword } from "../../services/actions/resetAndForgotPasswords";
 
 
 const AuthForm = ({ title }) => {
@@ -12,6 +14,11 @@ const AuthForm = ({ title }) => {
   const [name, setName] = React.useState('')
   const [newPassword, setNewPassword] = React.useState('')
   const [code, setCode] = React.useState('')
+  // Получаем диспатч
+  const dispatch = useDispatch()
+  // Вытащим данные для forgotPassword из стора
+  const resetAndForgotPasswordState = useSelector(store => store.resetAndForgotPassword)
+
   const onPasswordChange = (e) => {
     setPassword(e.target.value)
   }
@@ -39,7 +46,18 @@ const AuthForm = ({ title }) => {
   const onSubmit = (e) => {
     e.preventDefault()
     console.log('submit')
+    if (history.location.pathname === '/forgot-password') {
+      dispatch(postForgotPassword(resetedEmail))
+    }
   }
+
+  React.useEffect(() => {
+    if (resetAndForgotPasswordState.isSuccessForgotPasswordRequest) {
+      history.replace({pathname: '/reset-password'})
+      // Очищаем стейт
+      dispatch({type: CLEAR_STATE_FORGOT_PASSWORD})
+    }
+  }, [history, resetAndForgotPasswordState])
 
   return (
     <main className={styles.authForm}>

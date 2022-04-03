@@ -29,8 +29,8 @@ import {
 
 import {
   POST_FORGOT_PASSWORD_SUCCESS,
-  POST_FORGOT_PASSWORD_FAILED
-} from '../actions/resetAndForgotPasswords'
+  POST_FORGOT_PASSWORD_FAILED, CLEAR_STATE_FORGOT_PASSWORD
+} from "../actions/resetAndForgotPasswords";
 
 const initialReceivedComponents = {
   receivedComponents: [],
@@ -51,7 +51,6 @@ const initialOrder = {
 }
 
 const initialForgotAndResetPassword = {
-  orderError: '',
   isSuccessForgotPasswordRequest: false,
   forgotPasswordRequestError: '',
 }
@@ -209,6 +208,13 @@ export const resetAndForgotPasswordReducer = (state = initialForgotAndResetPassw
         ...state,
         isSuccessForgotPasswordRequest: false,
         forgotPasswordRequestError: action.error,
+      }
+    }
+    case CLEAR_STATE_FORGOT_PASSWORD: {
+      return {
+        ...state,
+        isSuccessForgotPasswordRequest: false,
+        forgotPasswordRequestError: '',
       }
     }
     default:
