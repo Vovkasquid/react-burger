@@ -11,6 +11,8 @@ export const CLEAR_STATE_RESET_PASSWORD = 'CLEAR_STATE_RESET_PASSWORD'
 export function postForgotPassword(req) {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
   return function(dispatch) {
+    // Очищаем ошибки перед запросом
+    dispatch({ type: CLEAR_STATE_FORGOT_PASSWORD })
     // Закидываем заказ на сервер
     fetch(`${BURGER_API}/password-reset`, { method: 'POST', headers: {
         'Content-Type': 'application/json'
@@ -37,6 +39,7 @@ export function postForgotPassword(req) {
 export function postResetPassword(req) {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
   return function(dispatch) {
+    dispatch({ type: CLEAR_STATE_RESET_PASSWORD })
     // Закидываем заказ на сервер
     fetch(`${BURGER_API}/password-reset/reset-reset`, { method: 'POST', headers: {
         'Content-Type': 'application/json'

@@ -11,6 +11,8 @@ export const CLEAR_REGISTER_STATE = 'CLEAR_REGISTER_STATE'
 export function registerUser(req) {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
   return function(dispatch) {
+    // Перед запросом очищаем ошибки
+    dispatch({ type: CLEAR_REGISTER_STATE })
     // Закидываем заказ на сервер
     fetch(`${BURGER_API}/auth/register`, { method: 'POST', headers: {
         'Content-Type': 'application/json'
@@ -27,9 +29,11 @@ export function registerUser(req) {
           type: SET_USER,
           payload: data.user,
         })
+        /*
         // записать в куки оба токена
         setCookie('token',data.accessToken.split('Bearer ')[1])
         setCookie('refresh_token',data.refreshToken)
+         */
       })
       .catch((err) => {
         // Если что-то пошло не так, то вернём ошибку

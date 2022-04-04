@@ -8,7 +8,7 @@ import {
   postForgotPassword,
   postResetPassword
 } from "../../services/actions/resetAndForgotPasswords";
-import { registerUser } from "../../services/actions/user";
+import { CLEAR_REGISTER_STATE, registerUser } from "../../services/actions/user";
 
 
 const AuthForm = ({ title }) => {
@@ -57,15 +57,19 @@ const AuthForm = ({ title }) => {
     // Очищаем ошибки перед запросом
     setRequestError('')
     if (history.location.pathname === '/forgot-password') {
-
       dispatch(postForgotPassword(resetedEmail))
+      setResetedEmail('')
     }
     if (history.location.pathname === '/reset-password') {
       dispatch(postResetPassword({password: newPassword, token: code}))
+      setNewPassword('')
+      setCode('')
     }
     if (history.location.pathname === '/register') {
-      console.log('reg')
       dispatch(registerUser({email, name, password}))
+      setEmail('')
+      setName('')
+      setPassword('')
     }
   }
 
@@ -100,6 +104,15 @@ const AuthForm = ({ title }) => {
   React.useEffect(() => {
     setRequestError('')
   }, [history.location.pathname])
+
+  React.useEffect(() => {
+    // настроим редирект, если юзер успешно зарегался
+    if (userState.isRegisterSuccess) {
+      history.replace({pathname: '/login'})
+      // почистим стейт
+      dispatch({ type: CLEAR_REGISTER_STATE })
+    }
+  }, [dispatch, history, userState])
 
   return (
     <main className={styles.authForm}>
