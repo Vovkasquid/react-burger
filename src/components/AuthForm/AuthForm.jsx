@@ -57,6 +57,7 @@ const AuthForm = ({ title }) => {
     // Очищаем ошибки перед запросом
     setRequestError('')
     if (history.location.pathname === '/forgot-password') {
+
       dispatch(postForgotPassword(resetedEmail))
     }
     if (history.location.pathname === '/reset-password') {

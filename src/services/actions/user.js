@@ -1,5 +1,6 @@
 import { BURGER_API } from '../../utils/constants'
 import { checkResponse } from '../../components/App/App'
+import { setCookie } from "../../utils/coockies";
 
 export const USER_REGISTER_SUCCESS = 'USER_REGISTER_SUCCESS'
 export const REGISTER_FAILED = 'REGISTER_FAILED'
@@ -26,7 +27,9 @@ export function registerUser(req) {
           type: SET_USER,
           payload: data.user,
         })
-        // записать в куки
+        // записать в куки оба токена
+        setCookie('token',data.accessToken.split('Bearer ')[1])
+        setCookie('refresh_token',data.refreshToken)
       })
       .catch((err) => {
         // Если что-то пошло не так, то вернём ошибку
