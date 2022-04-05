@@ -35,7 +35,15 @@ import {
   POST_RESET_PASSWORD_FAILED,
   CLEAR_STATE_RESET_PASSWORD
 } from "../actions/resetAndForgotPasswords";
-import { CLEAR_REGISTER_STATE, CLEAR_USER, REGISTER_FAILED, SET_USER, USER_REGISTER_SUCCESS } from "../actions/user";
+import {
+  CLEAR_LOGIN_STATE,
+  CLEAR_REGISTER_STATE,
+  CLEAR_USER, LOGIN_FAILED,
+  REGISTER_FAILED,
+  SET_USER,
+  USER_LOGIN_SUCCESS,
+  USER_REGISTER_SUCCESS
+} from "../actions/user";
 
 const initialReceivedComponents = {
   receivedComponents: [],
@@ -72,6 +80,8 @@ const initialUser = {
   name: '',
   isRegisterSuccess: false,
   registerError: '',
+  isLoginSuccess: false,
+  loginError: '',
 }
 
 export const burgerConstructorsItemsReducer = (state = initialBurgerConstructorIngredients, action) => {
@@ -211,6 +221,12 @@ export const detailIngredientReducer = (state = initialDetailIngredient, action)
 
 export const userReducer = (state = initialUser, action) => {
   switch (action.type) {
+    case USER_LOGIN_SUCCESS: {
+      return {
+        ...state,
+        isLoginSuccess: true,
+      }
+    }
     case USER_REGISTER_SUCCESS: {
       return {
         ...state,
@@ -231,6 +247,12 @@ export const userReducer = (state = initialUser, action) => {
         registerError: action.error
       }
     }
+    case LOGIN_FAILED: {
+      return {
+        ...state,
+        loginError: action.error
+      }
+    }
     case CLEAR_USER: {
       return {
         ...state,
@@ -243,6 +265,13 @@ export const userReducer = (state = initialUser, action) => {
         ...state,
         registerError: '',
         isRegisterSuccess: false,
+      }
+    }
+    case CLEAR_LOGIN_STATE: {
+      return {
+        ...state,
+        loginError: '',
+        isLoginSuccess: false,
       }
     }
     default:
