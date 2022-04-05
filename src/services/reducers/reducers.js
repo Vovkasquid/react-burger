@@ -36,11 +36,12 @@ import {
   CLEAR_STATE_RESET_PASSWORD
 } from "../actions/resetAndForgotPasswords";
 import {
+  CLEAR_EXIT_STATE,
   CLEAR_LOGIN_STATE,
   CLEAR_REGISTER_STATE,
-  CLEAR_USER, LOGIN_FAILED,
+  CLEAR_USER, DELETE_USER, EXIT_FAILED, LOGIN_FAILED,
   REGISTER_FAILED,
-  SET_USER,
+  SET_USER, USER_EXIT_SUCCESS,
   USER_LOGIN_SUCCESS,
   USER_REGISTER_SUCCESS
 } from "../actions/user";
@@ -82,6 +83,8 @@ const initialUser = {
   registerError: '',
   isLoginSuccess: false,
   loginError: '',
+  isExitSuccess: false,
+  exitError: '',
 }
 
 export const burgerConstructorsItemsReducer = (state = initialBurgerConstructorIngredients, action) => {
@@ -233,24 +236,42 @@ export const userReducer = (state = initialUser, action) => {
         isRegisterSuccess: true,
       }
     }
+    case USER_EXIT_SUCCESS: {
+      return {
+        ...state,
+        isExitSuccess: true,
+      }
+    }
     case SET_USER: {
-      console.log(action.payload)
       return {
         ...state,
         name: action.payload.name,
         email: action.payload.email,
       }
     }
+    case DELETE_USER: {
+      return {
+        ...state,
+        name: '',
+        email: '',
+      }
+    }
     case REGISTER_FAILED: {
       return {
         ...state,
-        registerError: action.error
+        registerError: action.error,
       }
     }
     case LOGIN_FAILED: {
       return {
         ...state,
-        loginError: action.error
+        loginError: action.error,
+      }
+    }
+    case EXIT_FAILED: {
+      return {
+        ...state,
+        exitError: action.error,
       }
     }
     case CLEAR_USER: {
@@ -272,6 +293,13 @@ export const userReducer = (state = initialUser, action) => {
         ...state,
         loginError: '',
         isLoginSuccess: false,
+      }
+    }
+    case CLEAR_EXIT_STATE: {
+      return {
+        ...state,
+        exitError: '',
+        isExitSuccess: false,
       }
     }
     default:

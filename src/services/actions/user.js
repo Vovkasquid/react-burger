@@ -1,6 +1,6 @@
 import { BURGER_API } from '../../utils/constants'
 import { checkResponse } from '../../components/App/App'
-import { setCookie } from "../../utils/coockies";
+import { deleteCookie, getCookie, setCookie } from "../../utils/coockies";
 
 export const USER_REGISTER_SUCCESS = 'USER_REGISTER_SUCCESS'
 export const REGISTER_FAILED = 'REGISTER_FAILED'
@@ -10,6 +10,10 @@ export const CLEAR_REGISTER_STATE = 'CLEAR_REGISTER_STATE'
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS'
 export const CLEAR_LOGIN_STATE = 'CLEAR_LOGIN_STATE'
 export const LOGIN_FAILED = 'LOGIN_FAILED'
+export const CLEAR_EXIT_STATE = 'CLEAR_EXIT_STATE'
+export const USER_EXIT_SUCCESS = 'USER_EXIT_SUCCESS'
+export const DELETE_USER = 'DELETE_USER'
+export const EXIT_FAILED = 'EXIT_FAILED'
 
 export function registerUser(req) {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
@@ -68,6 +72,41 @@ export function loginUser(req) {
         // Если что-то пошло не так, то вернём ошибку
         dispatch({
           type: LOGIN_FAILED,
+          error: `При выполнении запроса произошла ошибка: ${err.statusText}`
+        })
+      })
+  }
+}
+
+export function exitUser() {
+  // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
+  return function(dispatch) {
+    // Перед запросом очищаем ошибки
+    dispatch({ type: CLEAR_EXIT_STATE })
+    // Закидываем заказ на сервер
+    fetch(`${BURGER_API}/auth/logout`, { method: 'POST', headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${getCookie('token')}`,
+      },
+      body: JSON.stringify({ token: getCookie('refresh_token') })})
+      .then((response) => checkResponse(response))
+      .then((data) => {
+        // В случае успешного получения данных вызываем экшен
+        // Где передаём успех и удаляем юзера
+        dispatch({
+          type: USER_EXIT_SUCCESS,
+        })
+        dispatch({
+          type: DELETE_USER,
+        })
+        // удаляем обе куки
+        deleteCookie('token')
+        deleteCookie('refresh_token')
+      })
+      .catch((err) => {
+        // Если что-то пошло не так, то вернём ошибку
+        dispatch({
+          type: EXIT_FAILED,
           error: `При выполнении запроса произошла ошибка: ${err.statusText}`
         })
       })
