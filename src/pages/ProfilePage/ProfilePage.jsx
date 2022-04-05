@@ -4,7 +4,7 @@ import { Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './ProfilePage.module.css'
 import AppHeader from '../../components/AppHeader/AppHeader'
-import { CLEAR_EXIT_STATE, exitUser } from "../../services/actions/user";
+import { CLEAR_EXIT_STATE, exitUser, getUser } from "../../services/actions/user";
 
 const ProfilePage = () => {
   const [name, setName] = React.useState('')
@@ -45,6 +45,25 @@ const ProfilePage = () => {
     }
   }, [userState])
 
+  // Если юзера нет в сторе, но есть кука, то надо юзера получить
+  // Исходим из того, что юзер без куки сюда и не попадёт, так что на неё не проверяем
+  React.useEffect(() => {
+    console.log(userState.name)
+    if (!userState.name) {
+      console.log('dis')
+      dispatch(getUser())
+      console.log('after')
+    }
+  }, [])
+
+  // Если юзер в стейте есть, то ставим его
+  React.useEffect(() => {
+    if (userState.name) {
+      setName(userState.name)
+      setEmail(userState.email)
+    }
+  }, [userState.name])
+
   return (
     <div className={styles.profilePage}>
       <AppHeader />
@@ -63,6 +82,7 @@ const ProfilePage = () => {
             value={name}
             name="name"
             onChange={onNameChange}
+            defaultValue={userState?.name}
           />
           <Input
             type="email"
@@ -78,7 +98,6 @@ const ProfilePage = () => {
             placeholder="Пароль"
             value={password}
             name="password"
-            onChange={onPasswordChange}
           />
         </form>
       </main>

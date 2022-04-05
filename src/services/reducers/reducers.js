@@ -36,12 +36,12 @@ import {
   CLEAR_STATE_RESET_PASSWORD
 } from "../actions/resetAndForgotPasswords";
 import {
-  CLEAR_EXIT_STATE,
+  CLEAR_EXIT_STATE, CLEAR_GET_STATE,
   CLEAR_LOGIN_STATE,
   CLEAR_REGISTER_STATE,
-  CLEAR_USER, DELETE_USER, EXIT_FAILED, LOGIN_FAILED,
+  CLEAR_USER, DELETE_USER, EXIT_FAILED, GET_FAILED, LOGIN_FAILED,
   REGISTER_FAILED,
-  SET_USER, USER_EXIT_SUCCESS,
+  SET_USER, USER_EXIT_SUCCESS, USER_GET_SUCCESS,
   USER_LOGIN_SUCCESS,
   USER_REGISTER_SUCCESS
 } from "../actions/user";
@@ -85,6 +85,8 @@ const initialUser = {
   loginError: '',
   isExitSuccess: false,
   exitError: '',
+  isGetSuccess: false,
+  getError: '',
 }
 
 export const burgerConstructorsItemsReducer = (state = initialBurgerConstructorIngredients, action) => {
@@ -242,6 +244,12 @@ export const userReducer = (state = initialUser, action) => {
         isExitSuccess: true,
       }
     }
+    case USER_GET_SUCCESS: {
+      return {
+        ...state,
+        isGetSuccess: true,
+      }
+    }
     case SET_USER: {
       return {
         ...state,
@@ -274,6 +282,12 @@ export const userReducer = (state = initialUser, action) => {
         exitError: action.error,
       }
     }
+    case GET_FAILED: {
+      return {
+        ...state,
+        getError: action.error,
+      }
+    }
     case CLEAR_USER: {
       return {
         ...state,
@@ -300,6 +314,13 @@ export const userReducer = (state = initialUser, action) => {
         ...state,
         exitError: '',
         isExitSuccess: false,
+      }
+    }
+    case CLEAR_GET_STATE: {
+      return {
+        ...state,
+        getError: '',
+        isGetSuccess: false,
       }
     }
     default:
