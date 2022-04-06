@@ -37,6 +37,11 @@
   color: hsla(240, 20%, 60%, 1);
 }
 
+.linkActive {
+  text-decoration: none;
+  color: white;
+}
+
 .profileForm {
   width: 480px;
   display: flex;

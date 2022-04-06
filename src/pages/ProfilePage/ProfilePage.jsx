@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, NavLink, useHistory } from "react-router-dom";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './ProfilePage.module.css'
@@ -76,8 +76,8 @@ const ProfilePage = () => {
       <AppHeader />
       <main className={styles.profileContainer}>
         <ul className={styles.linkContainer}>
-          <li className={styles.listItem}><p className='text text_type_main-medium'>Профиль</p></li>
-          <li className={styles.listItem}><Link className={`${styles.link} text text_type_main-medium`} to="/profile/orders">История заказов</Link></li>
+          <li className={styles.listItem}><NavLink activeClassName={styles.linkActive} className={`${styles.link} text text_type_main-medium`} exact to="/profile" >Профиль</NavLink></li>
+          <li className={styles.listItem}><NavLink activeClassName={styles.linkActive} className={`${styles.link} text text_type_main-medium`} to="/profile/orders">История заказов</NavLink></li>
           <li className={styles.listItem}><p className={`${styles.link} text text_type_main-medium`} style={{cursor: 'pointer'}} onClick={exitHandler}>Выход</p></li>
           <li className={`${styles.listItem} mt-20`} style={{width: '320px'}}><p className='text_type_main-default text_color_inactive' style={{margin: 0}} >В этом разделе вы можете изменить свои персональные данные</p></li>
         </ul>
