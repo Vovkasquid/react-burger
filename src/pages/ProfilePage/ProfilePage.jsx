@@ -1,15 +1,19 @@
 import React from 'react'
-import { Link, NavLink, useHistory } from "react-router-dom";
-import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link, NavLink, useHistory } from 'react-router-dom'
+import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './ProfilePage.module.css'
 import AppHeader from '../../components/AppHeader/AppHeader'
-import { CLEAR_EXIT_STATE, exitUser, getUser, patchUser } from "../../services/actions/user";
+import { CLEAR_EXIT_STATE, exitUser, getUser, patchUser } from '../../services/actions/user'
 
 const ProfilePage = () => {
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
+  const [isButtonsVisible, setIsButtonsVisible] = React.useState(false)
+  const [isNameChanged, setIsNameChanged] = React.useState(false)
+  const [isPasswordChanged, setIsPasswordChanged] = React.useState(false)
+  const [isEmailChanged, setIsEmailChanged] = React.useState(false)
 
   const dispatch = useDispatch()
   const userState = useSelector(store => store.user)
@@ -19,22 +23,54 @@ const ProfilePage = () => {
   const resetInputs = () => {
     setName(userState.name)
     setEmail(userState.email)
+    setPassword('')
+    setIsEmailChanged(false)
+    setIsPasswordChanged(false)
+    setIsNameChanged(false)
   }
   const onNameChange = (e) => {
     setName(e.target.value)
+    if (e.target.value === userState.name) {
+      setIsNameChanged(false)
+    } else {
+      setIsNameChanged(true)
+    }
   }
 
   const onEmailChange = (e) => {
     setEmail(e.target.value)
+    if (e.target.value === userState.email) {
+      setIsEmailChanged(false)
+    } else {
+      setIsEmailChanged(true)
+    }
   }
 
   const onPasswordChange = (e) => {
     setPassword(e.target.value)
+    if (e.target.value === '') {
+      setIsPasswordChanged(false)
+    } else {
+      setIsPasswordChanged(true)
+    }
   }
+
+  React.useEffect(() => {
+    if (isNameChanged || isPasswordChanged || isEmailChanged) {
+      setIsButtonsVisible(true)
+    } else {
+      setIsButtonsVisible(false)
+    }
+  }, [isNameChanged, isPasswordChanged, isEmailChanged])
 
   const onSubmit = (e) => {
     e.preventDefault()
-    dispatch(patchUser({name, email, password}))
+    // Собираем измененённые данные и отправляем
+    const request = {}
+    if (isNameChanged) request.name = name
+    if (isEmailChanged) request.email = email
+    if (isPasswordChanged) request.password = password
+    dispatch(patchUser(request))
   }
 
   const exitHandler = () => {
@@ -107,10 +143,12 @@ const ProfilePage = () => {
             name="password"
             onChange={onPasswordChange}
           />
-          <div className={styles.buttonContainer}>
-            <Button type="secondary" size="medium" onClick={cancelHandler}>Отмена</Button>
-            <Button type="primary" size="medium">Сохранить</Button>
-          </div>
+          {isButtonsVisible && (
+            <div className={styles.buttonContainer}>
+              <Button type="secondary" size="medium" onClick={cancelHandler}>Отмена</Button>
+              <Button type="primary" size="medium">Сохранить</Button>
+            </div>
+          )}
         </form>
       </main>
     </div>
