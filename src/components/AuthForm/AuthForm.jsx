@@ -76,18 +76,16 @@ const AuthForm = ({ title }) => {
       setEmail('')
       setPassword('')
       // Надо отредиректить туда, куда юзер хотел (если хотел)
-
     }
   }
 
   React.useEffect(() => {
     if (resetAndForgotPasswordState.isSuccessForgotPasswordRequest) {
-      history.replace({pathname: '/reset-password'})
+      history.replace({pathname: '/reset-password', state: { haveCode: true }})
       // Очищаем стейт
       dispatch({type: CLEAR_STATE_FORGOT_PASSWORD})
     }
     if (resetAndForgotPasswordState.isSuccessResetPasswordRequest) {
-      // history.replace({pathname: '/reset-password'})
       console.log('success reset')
       // Очищаем стейт
       dispatch({type: CLEAR_STATE_RESET_PASSWORD})
@@ -110,6 +108,11 @@ const AuthForm = ({ title }) => {
   // Очистка поля ошибки при смене страницы
   React.useEffect(() => {
     setRequestError('')
+    // Защитим маршрут reset-password
+    console.log('state = ', history?.location?.state?.haveCode)
+    if (history?.location?.pathname === '/reset-password' && !history?.location?.state?.haveCode) {
+      history.replace({pathname: '/login'})
+    }
   }, [history.location.pathname])
 
   React.useEffect(() => {
