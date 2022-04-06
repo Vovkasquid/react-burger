@@ -17,6 +17,9 @@ export const EXIT_FAILED = 'EXIT_FAILED'
 export const CLEAR_GET_STATE = 'CLEAR_GET_STATE'
 export const USER_GET_SUCCESS = 'USER_GET_SUCCESS'
 export const GET_FAILED = 'GET_FAILED'
+export const CLEAR_PATCH_STATE = 'CLEAR_PATCH_STATE'
+export const USER_PATCH_SUCCESS = 'USER_PATCH_SUCCESS'
+export const PATCH_FAILED = 'PATCH_FAILED'
 
 export function registerUser(req) {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
@@ -144,6 +147,41 @@ export function getUser() {
         // Если что-то пошло не так, то вернём ошибку
         dispatch({
           type: GET_FAILED,
+          error: `При выполнении запроса произошла ошибка: ${err.statusText}`
+        })
+      })
+  }
+}
+
+export function patchUser(req) {
+  // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
+  return function(dispatch) {
+    // Перед запросом очищаем ошибки
+    dispatch({ type: CLEAR_PATCH_STATE })
+    // Закидываем заказ на сервер
+    fetch(`${BURGER_API}/auth/user`, { method: 'PATCH', headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${getCookie('token')}`,
+      },
+      body: JSON.stringify(req)})
+      .then((response) => checkResponse(response))
+      .then((data) => {
+        // В случае успешного получения данных вызываем экшен
+        // Где передаём успех и сохраняем юзера
+        console.log(data)
+        dispatch({
+          type: USER_PATCH_SUCCESS,
+        })
+        dispatch({
+          type: SET_USER,
+          payload: data.user,
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+        // Если что-то пошло не так, то вернём ошибку
+        dispatch({
+          type: PATCH_FAILED,
           error: `При выполнении запроса произошла ошибка: ${err.statusText}`
         })
       })

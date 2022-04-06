@@ -98,6 +98,7 @@ const ProfilePage = () => {
             placeholder="Пароль"
             value={password}
             name="password"
+            onChange={onPasswordChange}
           />
         </form>
       </main>
