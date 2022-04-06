@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
+import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute'
 import MainPage from '../../pages/MainPage/MainPage'
 import AuthPage from '../../pages/AuthPage/AuthPage'
 import ProfilePage from '../../pages/ProfilePage/ProfilePage'
@@ -41,9 +42,9 @@ function App() {
         <Route path="/forgot-password">
           <AuthPage />
         </Route>
-        <Route path="/profile">
+        <ProtectedRoute path="/profile">
           <ProfilePage />
-        </Route>
+        </ProtectedRoute>
         <Route exact path="/">
           <MainPage />
         </Route>

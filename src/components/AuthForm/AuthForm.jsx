@@ -75,6 +75,8 @@ const AuthForm = ({ title }) => {
       dispatch(loginUser({email, password}))
       setEmail('')
       setPassword('')
+      // Надо отредиректить туда, куда юзер хотел (если хотел)
+
     }
   }
 
@@ -117,9 +119,9 @@ const AuthForm = ({ title }) => {
       // почистим стейт
       dispatch({ type: CLEAR_REGISTER_STATE })
     }
-    // редирект, есть юзер залогинился успешноg
+    // редирект, есть юзер залогинился успешно
     if (userState.isLoginSuccess) {
-      history.replace({pathname: '/'})
+      history.replace({pathname: history?.location?.state?.from?.pathname ? history?.location?.state?.from?.pathname  : '/'})
       dispatch({type: CLEAR_LOGIN_STATE})
     }
   }, [dispatch, history, userState])

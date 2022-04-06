@@ -42,34 +42,3 @@ export const fetchWithRefresh = (url, options = {}) => {
       }
     })
 }
-
-/*
-export const fetchWithRefresh = async (url, options = {}) => {
-  console.log('custom fetch')
-  try {
-    const res = await fetch(url, options);
-    console.log('custom res = ', res)
-    return checkResponse(res);
-  } catch (err) {
-    console.log('err =', err)
-    if (err.message === 'jwt expired') {
-      // Обновляем токен
-      console.log('Обновляем')
-      await fetch(`${BURGER_API}/auth/token`, { method: 'POST', headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${getCookie('token')}`, },
-        body: JSON.stringify({ token: getCookie('refresh_token') })})
-       .then((response) => checkResponse(response))
-       .then(data => {
-         // записать в куки оба токена
-         setCookie('token', data.accessToken.split('Bearer ')[1])
-         setCookie('refresh_token', data.refreshToken)
-       })
-        // Делаем изначальный запрос после успешного обновления токена
-      const res = await fetch(url, options)
-      return await checkResponse(res)
-    } else {
-      throw err
-    }
-  }
-} */
