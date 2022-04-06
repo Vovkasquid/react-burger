@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { Input } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './ProfilePage.module.css'
 import AppHeader from '../../components/AppHeader/AppHeader'
-import { CLEAR_EXIT_STATE, exitUser, getUser } from "../../services/actions/user";
+import { CLEAR_EXIT_STATE, exitUser, getUser, patchUser } from "../../services/actions/user";
 
 const ProfilePage = () => {
   const [name, setName] = React.useState('')
@@ -16,6 +16,10 @@ const ProfilePage = () => {
 
   const history = useHistory()
 
+  const resetInputs = () => {
+    setName(userState.name)
+    setEmail(userState.email)
+  }
   const onNameChange = (e) => {
     setName(e.target.value)
   }
@@ -30,11 +34,15 @@ const ProfilePage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    console.log('submit')
+    dispatch(patchUser({name, email, password}))
   }
 
   const exitHandler = () => {
     dispatch(exitUser())
+  }
+
+  const cancelHandler = () => {
+    resetInputs()
   }
 
   React.useEffect(() => {
@@ -59,8 +67,7 @@ const ProfilePage = () => {
   // Если юзер в стейте есть, то ставим его
   React.useEffect(() => {
     if (userState.name) {
-      setName(userState.name)
-      setEmail(userState.email)
+      resetInputs()
     }
   }, [userState.name])
 
@@ -100,6 +107,10 @@ const ProfilePage = () => {
             name="password"
             onChange={onPasswordChange}
           />
+          <div className={styles.buttonContainer}>
+            <Button type="secondary" size="medium" onClick={cancelHandler}>Отмена</Button>
+            <Button type="primary" size="medium">Сохранить</Button>
+          </div>
         </form>
       </main>
     </div>
