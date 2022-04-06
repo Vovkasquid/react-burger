@@ -1,6 +1,7 @@
 import { BURGER_API } from '../../utils/constants'
 import { checkResponse } from '../../components/App/App'
 import { deleteCookie, getCookie, setCookie } from "../../utils/coockies";
+import { fetchWithRefresh } from "../../utils/utils";
 
 export const USER_REGISTER_SUCCESS = 'USER_REGISTER_SUCCESS'
 export const REGISTER_FAILED = 'REGISTER_FAILED'
@@ -89,7 +90,6 @@ export function exitUser() {
   return function(dispatch) {
     // Перед запросом очищаем ошибки
     dispatch({ type: CLEAR_EXIT_STATE })
-    // Закидываем заказ на сервер
     fetch(`${BURGER_API}/auth/logout`, { method: 'POST', headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${getCookie('token')}`,
@@ -125,11 +125,10 @@ export function getUser() {
     // Перед запросом очищаем ошибки
     dispatch({ type: CLEAR_GET_STATE })
     // Закидываем заказ на сервер
-    fetch(`${BURGER_API}/auth/user`, { method: 'GET', headers: {
+    fetchWithRefresh(`${BURGER_API}/auth/user`, { method: 'GET', headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${getCookie('token')}`,
       }, })
-      .then((response) => checkResponse(response))
       .then((data) => {
         // В случае успешного получения данных вызываем экшен
         // Где передаём успех и сохраняем юзера
@@ -143,7 +142,7 @@ export function getUser() {
         })
       })
       .catch((err) => {
-        console.log(err)
+        console.log('феаско')
         // Если что-то пошло не так, то вернём ошибку
         dispatch({
           type: GET_FAILED,
@@ -159,7 +158,7 @@ export function patchUser(req) {
     // Перед запросом очищаем ошибки
     dispatch({ type: CLEAR_PATCH_STATE })
     // Закидываем заказ на сервер
-    fetch(`${BURGER_API}/auth/user`, { method: 'PATCH', headers: {
+    fetchWithRefresh(`${BURGER_API}/auth/user`, { method: 'PATCH', headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${getCookie('token')}`,
       },
