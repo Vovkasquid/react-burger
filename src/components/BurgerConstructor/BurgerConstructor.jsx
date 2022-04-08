@@ -8,6 +8,7 @@ import { useDrop } from 'react-dnd'
 import { v4 as generateUniqueId } from 'uuid'
 import { ADD_CONSTRUCTOR_ITEM, SET_CHOOSEN_BUN } from '../../services/actions/burgerConstructorIngredients';
 import { INC_COUNTER_INGREDIENT, SET_SORTED_ARRAY } from "../../services/actions/receivedComponents";
+import { getCookie } from '../../utils/coockies'
 
 export default function BurgerConstructor({ openIngredientModal, openOrderModal }) {
   // Вытаскиваем из стора полученные компоненты и отфильтровываем нужные
@@ -90,7 +91,7 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
       </div>
       <div className={`${styles.burgerConstructorPriceContainer} mt-10`}>
         <p className={`${styles.burgerConstructorPrice} text text_type_main-large`}>{orderPrice}<CurrencyIcon type="primary" /></p>
-        <Button type="primary" size="medium" onClick={onSubmitBurger} >
+        <Button disabled={!getCookie('token')} type="primary" size="medium" onClick={onSubmitBurger} >
           Оформить заказ
         </Button>
       </div>
