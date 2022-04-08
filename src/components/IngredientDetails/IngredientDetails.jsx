@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './IngredientDetails.module.css'
 import { useSelector } from 'react-redux'
 
-const ModalIngredientItem = () => {
+const IngredientDetails = () => {
   const { ingredient } = useSelector(state => state.detailIngredient)
   return (
     <>
@@ -31,4 +31,4 @@ const ModalIngredientItem = () => {
   )
 }
 
-export default ModalIngredientItem
+export default IngredientDetails
