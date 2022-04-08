@@ -132,7 +132,6 @@ export function getUser() {
       .then((data) => {
         // В случае успешного получения данных вызываем экшен
         // Где передаём успех и сохраняем юзера
-        console.log(data)
         dispatch({
           type: USER_GET_SUCCESS,
         })
@@ -142,7 +141,6 @@ export function getUser() {
         })
       })
       .catch((err) => {
-        console.log('феаско')
         // Если что-то пошло не так, то вернём ошибку
         dispatch({
           type: GET_FAILED,
@@ -166,7 +164,6 @@ export function patchUser(req) {
       .then((data) => {
         // В случае успешного получения данных вызываем экшен
         // Где передаём успех и сохраняем юзера
-        console.log(data)
         dispatch({
           type: USER_PATCH_SUCCESS,
         })
@@ -176,7 +173,6 @@ export function patchUser(req) {
         })
       })
       .catch((err) => {
-        console.log(err)
         // Если что-то пошло не так, то вернём ошибку
         dispatch({
           type: PATCH_FAILED,

@@ -92,11 +92,8 @@ const ProfilePage = () => {
   // Если юзера нет в сторе, но есть кука, то надо юзера получить
   // Исходим из того, что юзер без куки сюда и не попадёт, так что на неё не проверяем
   React.useEffect(() => {
-    console.log(userState.name)
     if (!userState.name) {
-      console.log('dis')
       dispatch(getUser())
-      console.log('after')
     }
   }, [])
 

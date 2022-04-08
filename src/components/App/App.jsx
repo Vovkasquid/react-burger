@@ -9,13 +9,13 @@ import IngredientDetails from '../IngredientDetails/IngredientDetails'
 import { CLEAR_DETAIL_INGREDIENT } from '../../services/actions/detailIngredient'
 import Modal from '../Modal/Modal'
 import { MODAL_INGREDIENT_TITLE } from '../../utils/constants'
-import AppHeader from "../AppHeader/AppHeader";
+import AppHeader from '../AppHeader/AppHeader'
 
   function ModalSwitch() {
-    const location = useLocation();
-    const history = useHistory();
+    const location = useLocation()
+    const history = useHistory()
     const dispatch = useDispatch()
-    const background = location.state && location.state.background;
+    const background = location.state && location.state.background
 
     const handleCloseIngredientModal = () => {
       dispatch({ type: CLEAR_DETAIL_INGREDIENT })
@@ -68,7 +68,7 @@ import AppHeader from "../AppHeader/AppHeader";
           />
         )}
       </>
-    );
+    )
   }
 
 function App() {

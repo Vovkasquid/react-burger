@@ -1,15 +1,15 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import PropTypes from 'prop-types'
 import styles from './AuthForm.module.css'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import {
   CLEAR_STATE_FORGOT_PASSWORD, CLEAR_STATE_RESET_PASSWORD,
   postForgotPassword,
   postResetPassword
-} from "../../services/actions/resetAndForgotPasswords";
-import { CLEAR_LOGIN_STATE, CLEAR_REGISTER_STATE, loginUser, registerUser } from "../../services/actions/user";
-
+} from '../../services/actions/resetAndForgotPasswords'
+import { CLEAR_LOGIN_STATE, CLEAR_REGISTER_STATE, loginUser, registerUser } from '../../services/actions/user'
 
 const AuthForm = ({ title }) => {
   const history = useHistory()
@@ -212,3 +212,7 @@ const AuthForm = ({ title }) => {
 }
 
 export default AuthForm
+
+AuthForm.propTypes = {
+  title: PropTypes.string,
+}

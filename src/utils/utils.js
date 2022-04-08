@@ -23,15 +23,11 @@ export function checkResponse(res) {
 }
 
 export const fetchWithRefresh = (url, options = {}) => {
-  console.log('custom fetch')
-  console.log(options)
   return fetch(url, options)
     .then(res => checkResponse(res))
     .catch(async err => {
-      console.log('err =', err)
       if (+err.status === 403) {
         // Обновляем токен
-        console.log('Обновляем')
         await fetch(`${BURGER_API}/auth/token`, { method: 'POST',
           headers: {
             'Content-Type': 'application/json',

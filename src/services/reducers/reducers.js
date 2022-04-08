@@ -6,7 +6,7 @@ import {
   SET_FILTERED_MAIN_INGREDIENTS,
   INC_COUNTER_INGREDIENT,
   DEC_COUNTER_INGREDIENT, SET_SORTED_ARRAY
-} from "../actions/receivedComponents";
+} from '../actions/receivedComponents'
 
 import {
   SET_DETAIL_INGREDIENT,
@@ -34,7 +34,7 @@ import {
   POST_RESET_PASSWORD_SUCCESS,
   POST_RESET_PASSWORD_FAILED,
   CLEAR_STATE_RESET_PASSWORD
-} from "../actions/resetAndForgotPasswords";
+} from '../actions/resetAndForgotPasswords'
 import {
   CLEAR_EXIT_STATE, CLEAR_GET_STATE,
   CLEAR_LOGIN_STATE, CLEAR_PATCH_STATE,
@@ -44,7 +44,7 @@ import {
   SET_USER, USER_EXIT_SUCCESS, USER_GET_SUCCESS,
   USER_LOGIN_SUCCESS, USER_PATCH_SUCCESS,
   USER_REGISTER_SUCCESS
-} from "../actions/user";
+} from '../actions/user'
 
 const initialReceivedComponents = {
   receivedComponents: [],

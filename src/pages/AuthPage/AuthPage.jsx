@@ -1,8 +1,9 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import styles from './AuthPage.css'
 import AuthForm from '../../components/AuthForm/AuthForm'
-import { getCookie } from "../../utils/coockies"
+import { getCookie } from '../../utils/coockies'
 
 const AuthPage = ({ isLogin, isRegister }) => {
   if (getCookie('token')) {
@@ -18,3 +19,8 @@ const AuthPage = ({ isLogin, isRegister }) => {
 }
 
 export default AuthPage
+
+AuthPage.propTypes = {
+  isLogin: PropTypes.bool,
+  isRegister: PropTypes.bool,
+}
