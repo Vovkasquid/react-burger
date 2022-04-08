@@ -5,13 +5,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from './MainPage.module.css'
 import Modal from '../../components/Modal/Modal'
 import OrderDetails from '../../components/OrderDetails/OrderDetails'
-import AppHeader from '../../components/AppHeader/AppHeader'
 import BurgerIngredients from '../../components/BurgerIngredients/BurgerIngredients'
 import BurgerConstructor from '../../components/BurgerConstructor/BurgerConstructor'
 import { SET_DETAIL_INGREDIENT } from '../../services/actions/detailIngredient'
 import { CLOSE_ORDER_MODAL, postOrder } from '../../services/actions/order'
 import { getComponents } from '../../services/actions/receivedComponents'
-import { filterBun } from '../../components/App/App'
+import { filterBun } from '../../utils/utils'
 
 const MainPage = () => {
   const [choosenBun, setChoosenBun] = React.useState({})

@@ -1,5 +1,5 @@
 import { BURGER_API } from '../../utils/constants'
-import { checkResponse, filterMainIngredients, filterBun, filterSauces } from '../../components/App/App'
+import { checkResponse, filterMainIngredients, filterBun, filterSauces } from '../../utils/utils'
 
 export const GET_COMPONENTS_SUCCESS = 'GET_COMPONENTS_SUCCESS'
 export const GET_COMPONENTS_FAILED = 'GET_COMPONENTS_FAILED'

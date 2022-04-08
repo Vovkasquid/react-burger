@@ -53,7 +53,6 @@ const AuthForm = ({ title }) => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    console.log('submit')
     // Очищаем ошибки перед запросом
     setRequestError('')
     if (history.location.pathname === '/forgot-password') {
@@ -86,7 +85,6 @@ const AuthForm = ({ title }) => {
       dispatch({type: CLEAR_STATE_FORGOT_PASSWORD})
     }
     if (resetAndForgotPasswordState.isSuccessResetPasswordRequest) {
-      console.log('success reset')
       // Очищаем стейт
       dispatch({type: CLEAR_STATE_RESET_PASSWORD})
     }
@@ -99,7 +97,6 @@ const AuthForm = ({ title }) => {
   }, [dispatch, history, resetAndForgotPasswordState])
 
   React.useEffect(() => {
-    console.log(userState)
     if (userState.registerError) {
       setRequestError(userState.registerError)
     }
@@ -109,7 +106,6 @@ const AuthForm = ({ title }) => {
   React.useEffect(() => {
     setRequestError('')
     // Защитим маршрут reset-password
-    console.log('state = ', history?.location?.state?.haveCode)
     if (history?.location?.pathname === '/reset-password' && !history?.location?.state?.haveCode) {
       history.replace({pathname: '/login'})
     }

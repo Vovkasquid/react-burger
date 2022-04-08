@@ -1,6 +1,18 @@
 // Метод для проверки ответа
-import { getCookie, setCookie } from "./coockies";
-import { BURGER_API } from "./constants";
+import { getCookie, setCookie } from './coockies'
+import { BURGER_API } from './constants'
+
+export const filterBun = (data) => {
+  return data?.filter((item) => item.type === 'bun')
+}
+
+export const filterSauces = (data) => {
+  return data?.filter((item) => item.type === 'sauce')
+}
+
+export const filterMainIngredients = (data) => {
+  return data?.filter((item) => item.type === 'main')
+}
 
 export function checkResponse(res) {
   if (res.ok) {

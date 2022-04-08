@@ -11,27 +11,6 @@ import Modal from '../Modal/Modal'
 import { MODAL_INGREDIENT_TITLE } from '../../utils/constants'
 import AppHeader from "../AppHeader/AppHeader";
 
- // Метод для проверки ответа
- export function checkResponse(res) {
-  if (res.ok) {
-    return res.json();
-  }
-  // Если условие не выполнено, то делаем промис с ошибкой
-  return Promise.reject(res);
-}
-
-export const filterBun = (data) => {
-  return data?.filter((item) => item.type === 'bun')
-}
-
-export const filterSauces = (data) => {
-  return data?.filter((item) => item.type === 'sauce')
-}
-
-export const filterMainIngredients = (data) => {
-  return data?.filter((item) => item.type === 'main')
-}
-
   function ModalSwitch() {
     const location = useLocation();
     const history = useHistory();

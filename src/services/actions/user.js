@@ -1,7 +1,7 @@
 import { BURGER_API } from '../../utils/constants'
-import { checkResponse } from '../../components/App/App'
-import { deleteCookie, getCookie, setCookie } from "../../utils/coockies";
-import { fetchWithRefresh } from "../../utils/utils";
+import { deleteCookie, getCookie, setCookie } from '../../utils/coockies'
+import { fetchWithRefresh } from '../../utils/utils'
+import { checkResponse} from '../../utils/utils'
 
 export const USER_REGISTER_SUCCESS = 'USER_REGISTER_SUCCESS'
 export const REGISTER_FAILED = 'REGISTER_FAILED'

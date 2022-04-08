@@ -1,9 +1,8 @@
 import React from 'react'
-import { Link, NavLink, useHistory } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './ProfilePage.module.css'
-import AppHeader from '../../components/AppHeader/AppHeader'
 import { CLEAR_EXIT_STATE, exitUser, getUser, patchUser } from '../../services/actions/user'
 
 const ProfilePage = () => {
