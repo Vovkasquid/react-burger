@@ -1,12 +1,39 @@
 import React from 'react'
 import styles from './IngredientDetails.module.css'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from 'react-router-dom'
+import { getComponents } from "../../services/actions/receivedComponents";
+import { SET_DETAIL_INGREDIENT } from "../../services/actions/detailIngredient";
 
 const IngredientDetails = () => {
+  const { receivedComponents } = useSelector(state => state.receivedComponents)
   const { ingredient } = useSelector(state => state.detailIngredient)
+  const { ingredientId } = useParams()
+  const [isNotModal, setIsNotModal] = React.useState(false)
+  const dispatch = useDispatch()
+
+  // Надо получить список компонентов и выдернуть оттуда один с нужным айди
+  React.useEffect(() => {
+    if (!ingredient?.name) {
+      setIsNotModal(true)
+      if (!receivedComponents[0]) {
+        // Вызываем экшн для получения данных от сервера
+        dispatch(getComponents())
+      }
+      // Ищем по айди компонент
+      const foundIngredient = receivedComponents.find(item => {
+        return item._id === ingredientId;
+      })
+      // Записываем компонент в стор
+      dispatch({ type: SET_DETAIL_INGREDIENT, ingredient: foundIngredient })
+
+    }
+  }, [ingredient, receivedComponents])
+
   return (
-    <>
-      <img alt="картинка ингредиента" src={ingredient?.image} className={styles.ingredientImage} /><div className={styles.ingredientDescriptionContainer}>
+    <div style={{marginTop: isNotModal ? '120px' : 0}} className={styles.ingredientContainer}>
+    <img alt="картинка ингредиента" src={ingredient?.image} className={styles.ingredientImage} />
+    <div className={styles.ingredientDescriptionContainer}>
       <p className={`text text_type_main-medium mb-8`}>{ingredient?.name}</p>
       <ul className={`${styles.coloriesList}`}>
         <li className={styles.coloriesItem}>
@@ -27,7 +54,7 @@ const IngredientDetails = () => {
         </li>
       </ul>
     </div>
-  </>
+  </div>
   )
 }
 

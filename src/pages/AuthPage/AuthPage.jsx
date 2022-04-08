@@ -14,7 +14,6 @@ const AuthPage = ({ isLogin, isRegister }) => {
   }
   return (
     <div className={styles.loginPage}>
-      <AppHeader />
       <AuthForm title={isLogin ? 'Вход' : isRegister ? 'Регистрация' : 'Восстановление пароля'}/>
     </div>
   )

@@ -6,9 +6,10 @@ import MainPage from '../../pages/MainPage/MainPage'
 import AuthPage from '../../pages/AuthPage/AuthPage'
 import ProfilePage from '../../pages/ProfilePage/ProfilePage'
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
-import { CLEAR_DETAIL_INGREDIENT } from "../../services/actions/detailIngredient";
-import Modal from "../Modal/Modal";
-import { MODAL_INGREDIENT_TITLE } from "../../utils/constants";
+import { CLEAR_DETAIL_INGREDIENT } from '../../services/actions/detailIngredient'
+import Modal from '../Modal/Modal'
+import { MODAL_INGREDIENT_TITLE } from '../../utils/constants'
+import AppHeader from "../AppHeader/AppHeader";
 
  // Метод для проверки ответа
  export function checkResponse(res) {
@@ -45,6 +46,7 @@ export const filterMainIngredients = (data) => {
 
     return (
       <>
+        <AppHeader />
         <Switch location={background || location}>
           <Route path="/login">
             <AuthPage isLogin />

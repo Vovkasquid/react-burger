@@ -109,7 +109,6 @@ const ProfilePage = () => {
 
   return (
     <div className={styles.profilePage}>
-      <AppHeader />
       <main className={styles.profileContainer}>
         <ul className={styles.linkContainer}>
           <li className={styles.listItem}><NavLink activeClassName={styles.linkActive} className={`${styles.link} text text_type_main-medium`} exact to="/profile" >Профиль</NavLink></li>

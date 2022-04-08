@@ -34,8 +34,6 @@ const MainPage = () => {
     dispatch(postOrder(req))
   }
 
-
-
   const handleCloseOrderModal = () => {
     dispatch({ type: CLOSE_ORDER_MODAL })
   }
@@ -60,7 +58,6 @@ const MainPage = () => {
       >
         <OrderDetails />
       </Modal>}
-      <AppHeader />
       {getComponentsError &&
         <p className={`${styles.errorText} text text_type_main-default`}>
           {getComponentsError}

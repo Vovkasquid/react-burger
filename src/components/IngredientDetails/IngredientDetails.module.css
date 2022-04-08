@@ -11,6 +11,13 @@
   align-items: center;
 }
 
+.ingredientContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+}
+
 .coloriesList {
   display: flex;
   align-items: center;
