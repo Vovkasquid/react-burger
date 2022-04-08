@@ -71,6 +71,7 @@ const ProfilePage = () => {
     if (isEmailChanged) request.email = email
     if (isPasswordChanged) request.password = password
     dispatch(patchUser(request))
+    resetInputs()
   }
 
   const exitHandler = () => {

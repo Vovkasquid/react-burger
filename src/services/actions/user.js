@@ -163,7 +163,6 @@ export function patchUser(req) {
         authorization: `Bearer ${getCookie('token')}`,
       },
       body: JSON.stringify(req)})
-      .then((response) => checkResponse(response))
       .then((data) => {
         // В случае успешного получения данных вызываем экшен
         // Где передаём успех и сохраняем юзера
