@@ -6,8 +6,12 @@ import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-co
 import { useDispatch, useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
 import { v4 as generateUniqueId } from 'uuid'
-import { ADD_CONSTRUCTOR_ITEM, SET_CHOOSEN_BUN } from '../../services/actions/burgerConstructorIngredients'
-import { INC_COUNTER_INGREDIENT, SET_SORTED_ARRAY } from "../../services/actions/receivedComponents"
+import {
+  ADD_CONSTRUCTOR_ITEM,
+  SET_CHOOSEN_BUN,
+  SET_SORTED_ARRAY
+} from "../../services/actions/burgerConstructorIngredients";
+import { INC_COUNTER_INGREDIENT } from '../../services/actions/receivedComponents'
 import { getCookie } from '../../utils/coockies'
 
 export default function BurgerConstructor({ openIngredientModal, openOrderModal }) {
