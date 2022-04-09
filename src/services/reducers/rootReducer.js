@@ -1,11 +1,10 @@
 import { combineReducers } from 'redux'
-import {
-  receivedComponentsReducer,
-  detailIngredientReducer,
-  orderReducer,
-  burgerConstructorsItemsReducer,
-  resetAndForgotPasswordReducer, userReducer
-} from "./reducers";
+import { receivedComponentsReducer } from './receivedComponentsReducer'
+import { detailIngredientReducer } from './detailIngredientReducer'
+import { orderReducer } from './orderReducer'
+import { burgerConstructorsItemsReducer } from './burgerConstructorIngredientsReducer'
+import { resetAndForgotPasswordReducer } from './resetAndForgotPassword'
+import { userReducer } from './userReducer'
 
 const rootReducer = combineReducers({
   receivedComponents: receivedComponentsReducer,

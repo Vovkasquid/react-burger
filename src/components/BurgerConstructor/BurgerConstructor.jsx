@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import styles from './BurgerConstructor.module.css'
 import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorItem.jsx'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
 import { v4 as generateUniqueId } from 'uuid'
-import { ADD_CONSTRUCTOR_ITEM, SET_CHOOSEN_BUN } from '../../services/actions/burgerConstructorIngredients';
-import { INC_COUNTER_INGREDIENT, SET_SORTED_ARRAY } from "../../services/actions/receivedComponents";
+import { ADD_CONSTRUCTOR_ITEM, SET_CHOOSEN_BUN } from '../../services/actions/burgerConstructorIngredients'
+import { INC_COUNTER_INGREDIENT, SET_SORTED_ARRAY } from "../../services/actions/receivedComponents"
 import { getCookie } from '../../utils/coockies'
 
 export default function BurgerConstructor({ openIngredientModal, openOrderModal }) {
