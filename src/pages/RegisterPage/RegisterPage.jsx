@@ -1,11 +1,11 @@
 import React from 'react'
+import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Redirect, useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import styles from './RegisterPage.module.css'
-import { useDispatch, useSelector } from "react-redux";
-import { CLEAR_LOGIN_STATE, CLEAR_REGISTER_STATE, registerUser } from "../../services/actions/user";
-import AuthForm from "../../components/AuthForm/AuthForm";
-import { Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Redirect, useHistory } from "react-router-dom";
-import { getCookie } from "../../utils/coockies";
+import { CLEAR_REGISTER_STATE, registerUser } from '../../services/actions/user'
+import AuthForm from '../../components/AuthForm/AuthForm'
+import { getCookie } from '../../utils/coockies'
 
 const RegisterPage = () => {
   const userState = useSelector(store => store.user)

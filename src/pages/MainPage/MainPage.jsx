@@ -9,7 +9,6 @@ import BurgerIngredients from '../../components/BurgerIngredients/BurgerIngredie
 import BurgerConstructor from '../../components/BurgerConstructor/BurgerConstructor'
 import { SET_DETAIL_INGREDIENT } from '../../services/actions/detailIngredient'
 import { CLOSE_ORDER_MODAL, postOrder } from '../../services/actions/order'
-import { getComponents } from '../../services/actions/receivedComponents'
 import { filterBun } from '../../utils/utils'
 
 const MainPage = () => {

@@ -1,12 +1,11 @@
 import React from 'react'
-import { Redirect, useHistory } from "react-router-dom";
-import { postForgotPassword, postResetPassword } from "../../services/actions/resetAndForgotPasswords";
-import { CLEAR_LOGIN_STATE, CLEAR_REGISTER_STATE, loginUser, registerUser } from "../../services/actions/user";
-import { useDispatch, useSelector } from "react-redux";
+import { Redirect, useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
+import { CLEAR_LOGIN_STATE, loginUser} from '../../services/actions/user'
 import styles from './LoginPage.module.css'
-import AuthForm from "../../components/AuthForm/AuthForm";
-import { Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { getCookie } from "../../utils/coockies";
+import AuthForm from '../../components/AuthForm/AuthForm'
+import { getCookie } from '../../utils/coockies'
 
 const LoginPage = () => {
   const history = useHistory()
@@ -24,8 +23,6 @@ const LoginPage = () => {
   }
 
   const onSubmit = () => {
-    // Очищаем ошибки перед запросом
-    // setRequestError('')
     dispatch({type: CLEAR_LOGIN_STATE})
     dispatch(loginUser({email, password}))
     setEmail('')

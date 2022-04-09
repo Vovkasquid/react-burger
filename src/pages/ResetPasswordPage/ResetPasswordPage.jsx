@@ -1,15 +1,14 @@
-import React from "react";
+import React from 'react'
 import styles from './ResetPasswordPage.module.css'
-import { Redirect, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Redirect, useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import {
-  CLEAR_STATE_FORGOT_PASSWORD,
   CLEAR_STATE_RESET_PASSWORD,
   postResetPassword
-} from "../../services/actions/resetAndForgotPasswords";
-import AuthForm from "../../components/AuthForm/AuthForm";
-import { Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { getCookie } from "../../utils/coockies";
+} from '../../services/actions/resetAndForgotPasswords'
+import AuthForm from '../../components/AuthForm/AuthForm'
+import { getCookie } from '../../utils/coockies'
 
 const ResetPasswordPage = () => {
   const history = useHistory()

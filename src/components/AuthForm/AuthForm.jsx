@@ -2,14 +2,8 @@ import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
+import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './AuthForm.module.css'
-import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import {
-  CLEAR_STATE_FORGOT_PASSWORD, CLEAR_STATE_RESET_PASSWORD,
-  postForgotPassword,
-  postResetPassword
-} from '../../services/actions/resetAndForgotPasswords'
-import { CLEAR_LOGIN_STATE, CLEAR_REGISTER_STATE, loginUser, registerUser } from '../../services/actions/user'
 
 const AuthForm = ({ onSubmit, children, title, buttonTitle}) => {
   const history = useHistory()
@@ -89,5 +83,8 @@ const AuthForm = ({ onSubmit, children, title, buttonTitle}) => {
 export default AuthForm
 
 AuthForm.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  buttonTitle: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 }

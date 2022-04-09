@@ -1,14 +1,14 @@
 import React from 'react'
 import styles from './ForgotPasswordPage.module.css'
-import { Redirect, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Redirect, useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import {
   CLEAR_STATE_FORGOT_PASSWORD,
-  CLEAR_STATE_RESET_PASSWORD, postForgotPassword
-} from "../../services/actions/resetAndForgotPasswords";
-import AuthForm from "../../components/AuthForm/AuthForm";
-import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { getCookie } from "../../utils/coockies";
+  postForgotPassword
+} from '../../services/actions/resetAndForgotPasswords'
+import AuthForm from '../../components/AuthForm/AuthForm'
+import { getCookie } from '../../utils/coockies'
 
 const ForgotPasswordPage = () => {
   const [resetedEmail, setResetedEmail] = React.useState('')
