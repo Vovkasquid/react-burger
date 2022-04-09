@@ -11,7 +11,7 @@ import {
   ADD_CONSTRUCTOR_ITEM,
   SET_CHOOSEN_BUN,
   SET_SORTED_ARRAY
-} from "../../services/actions/burgerConstructorIngredients";
+} from '../../services/actions/burgerConstructorIngredients'
 import { INC_COUNTER_INGREDIENT } from '../../services/actions/receivedComponents'
 import { getCookie } from '../../utils/coockies'
 
