@@ -11,14 +11,8 @@ import {
 } from '../../services/actions/resetAndForgotPasswords'
 import { CLEAR_LOGIN_STATE, CLEAR_REGISTER_STATE, loginUser, registerUser } from '../../services/actions/user'
 
-const AuthForm = ({ title }) => {
+const AuthForm = ({ onSubmit, children, title, buttonTitle}) => {
   const history = useHistory()
-  const [email, setEmail] = React.useState('')
-  const [resetedEmail, setResetedEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
-  const [name, setName] = React.useState('')
-  const [newPassword, setNewPassword] = React.useState('')
-  const [code, setCode] = React.useState('')
   const [requestError, setRequestError] = React.useState('')
   // Получаем диспатч
   const dispatch = useDispatch()
@@ -27,67 +21,14 @@ const AuthForm = ({ title }) => {
   // Вытащим данные о юзере из стора
   const userState = useSelector(store => store.user)
 
-  const onPasswordChange = (e) => {
-    setPassword(e.target.value)
-  }
-
-  const onEmailChange = (e) => {
-    setEmail(e.target.value)
-  }
-
-  const onNameChange = (e) => {
-    setName(e.target.value)
-  }
-
-  const onResetedEmailChange = (e) => {
-    setResetedEmail(e.target.value)
-  }
-
-  const onNewPasswordChange = (e) => {
-    setNewPassword(e.target.value)
-  }
-
-  const onCodeChange = (e) => {
-    setCode(e.target.value)
-  }
-
-  const onSubmit = (e) => {
+  const onSubmitHandler = (e) => {
     e.preventDefault()
     // Очищаем ошибки перед запросом
     setRequestError('')
-    if (history.location.pathname === '/forgot-password') {
-      dispatch(postForgotPassword(resetedEmail))
-      setResetedEmail('')
-    }
-    if (history.location.pathname === '/reset-password') {
-      dispatch(postResetPassword({password: newPassword, token: code}))
-      setNewPassword('')
-      setCode('')
-    }
-    if (history.location.pathname === '/register') {
-      dispatch(registerUser({email, name, password}))
-      setEmail('')
-      setName('')
-      setPassword('')
-    }
-    if (history.location.pathname === '/login') {
-      dispatch(loginUser({email, password}))
-      setEmail('')
-      setPassword('')
-      // Надо отредиректить туда, куда юзер хотел (если хотел)
-    }
+    onSubmit()
   }
 
   React.useEffect(() => {
-    if (resetAndForgotPasswordState.isSuccessForgotPasswordRequest) {
-      history.replace({pathname: '/reset-password', state: { haveCode: true }})
-      // Очищаем стейт
-      dispatch({type: CLEAR_STATE_FORGOT_PASSWORD})
-    }
-    if (resetAndForgotPasswordState.isSuccessResetPasswordRequest) {
-      // Очищаем стейт
-      dispatch({type: CLEAR_STATE_RESET_PASSWORD})
-    }
     if (resetAndForgotPasswordState.resetPasswordRequestError) {
       setRequestError(resetAndForgotPasswordState.resetPasswordRequestError)
     }
@@ -100,6 +41,9 @@ const AuthForm = ({ title }) => {
     if (userState.registerError) {
       setRequestError(userState.registerError)
     }
+    if (userState.loginError) {
+      setRequestError(userState.loginError)
+    }
   }, [userState])
 
   // Очистка поля ошибки при смене страницы
@@ -111,83 +55,14 @@ const AuthForm = ({ title }) => {
     }
   }, [history.location.pathname])
 
-  React.useEffect(() => {
-    // настроим редирект, если юзер успешно зарегался
-    if (userState.isRegisterSuccess) {
-      history.replace({pathname: '/login'})
-      // почистим стейт
-      dispatch({ type: CLEAR_REGISTER_STATE })
-    }
-    // редирект, есть юзер залогинился успешно
-    if (userState.isLoginSuccess) {
-      history.replace({pathname: history?.location?.state?.from?.pathname ? history?.location?.state?.from?.pathname  : '/'})
-      dispatch({type: CLEAR_LOGIN_STATE})
-    }
-  }, [dispatch, history, userState])
 
   return (
     <main className={styles.authForm}>
-      <form className={styles.fieldsContainer} onSubmit={onSubmit}>
+      <form className={styles.fieldsContainer} onSubmit={onSubmitHandler}>
         <h2 className="text text_type_main-medium">{title}</h2>
-        {title === 'Регистрация' && <Input
-          type="text"
-          placeholder="Имя"
-          value={name}
-          name="email"
-          onChange={onNameChange}
-        />}
-        {(title === 'Регистрация' || title === 'Вход') && (
-          <>
-          <Input
-            type="email"
-            placeholder="E-mail"
-            value={email}
-            name="email"
-            onChange={onEmailChange}
-          />
-          <PasswordInput
-            value={password}
-            name="password"
-            onChange={onPasswordChange}
-          />
-          </>
-        )}
-        {history.location.pathname === '/forgot-password' && (
-          <Input
-            type="email"
-            placeholder="Укажите e-mail"
-            value={resetedEmail}
-            name="email"
-            onChange={onResetedEmailChange}
-          />
-        )}
-        {history.location.pathname === '/reset-password' && (
-          <>
-            <PasswordInput
-              value={newPassword}
-              name="password"
-              onChange={onNewPasswordChange}
-              placeholder="Введите новый пароль"
-            />
-            <Input
-              type="text"
-              placeholder="Введите код из письма"
-              value={code}
-              name="code"
-              onChange={onCodeChange}
-            />
-          </>
-        )}
+        {children}
         <Button>
-          {
-            title === 'Вход' ?
-            'Войти' :
-            title === 'Регистрация' ?
-              'Зарегестрироваться' :
-              history.location.pathname === '/forgot-password' ?
-                'Восстановить' :
-                'Сохранить'
-          }
+          {buttonTitle}
         </Button>
       </form>
       <div className={`mt-20 ${styles.linkContainer}`}>

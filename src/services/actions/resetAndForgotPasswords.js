@@ -41,7 +41,7 @@ export function postResetPassword(req) {
   return function(dispatch) {
     dispatch({ type: CLEAR_STATE_RESET_PASSWORD })
     // Закидываем заказ на сервер
-    fetch(`${BURGER_API}/password-reset/reset-reset`, { method: 'POST', headers: {
+    fetch(`${BURGER_API}/password-reset/reset`, { method: 'POST', headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(req)})

@@ -3,7 +3,6 @@ import { BrowserRouter, Redirect, Route, Switch, useHistory, useLocation } from 
 import { useDispatch } from 'react-redux'
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute'
 import MainPage from '../../pages/MainPage/MainPage'
-import AuthPage from '../../pages/AuthPage/AuthPage'
 import ProfilePage from '../../pages/ProfilePage/ProfilePage'
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
 import { CLEAR_DETAIL_INGREDIENT } from '../../services/actions/detailIngredient'
@@ -11,6 +10,10 @@ import Modal from '../Modal/Modal'
 import { MODAL_INGREDIENT_TITLE } from '../../utils/constants'
 import AppHeader from '../AppHeader/AppHeader'
 import { getComponents } from '../../services/actions/receivedComponents'
+import LoginPage from "../../pages/LoginPage/LoginPage";
+import RegisterPage from "../../pages/RegisterPage/RegisterPage";
+import ResetPasswordPage from "../../pages/ResetPasswordPage/ResetPasswordPage";
+import ForgotPasswordPage from "../../pages/ForgotPasswordPage/ForgotPasswordPage";
 
   function ModalSwitch() {
     const location = useLocation()
@@ -29,16 +32,16 @@ import { getComponents } from '../../services/actions/receivedComponents'
         <AppHeader />
         <Switch location={background || location}>
           <Route path="/login">
-            <AuthPage isLogin />
+            <LoginPage isLogin />
           </Route>
           <Route path="/register">
-            <AuthPage isRegister />
+            <RegisterPage />
           </Route>
           <Route path="/reset-password">
-            <AuthPage />
+            <ResetPasswordPage />
           </Route>
           <Route path="/forgot-password">
-            <AuthPage />
+            <ForgotPasswordPage />
           </Route>
           <Route path='/ingredients/:ingredientId' exact>
             <IngredientDetails />
