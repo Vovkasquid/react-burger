@@ -38,11 +38,6 @@ const MainPage = () => {
   }
 
   React.useEffect(() => {
-    // Вызываем экшн для получения данных от сервера
-    dispatch(getComponents())
-  }, [dispatch])
-
-  React.useEffect(() => {
     // Временное решение для выбранной булки
     const buns = filterBun(receivedComponents)
     const bunToChosen = buns[0]

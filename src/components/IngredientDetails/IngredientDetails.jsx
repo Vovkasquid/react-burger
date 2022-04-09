@@ -2,8 +2,7 @@ import React from 'react'
 import styles from './IngredientDetails.module.css'
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom'
-import { getComponents } from "../../services/actions/receivedComponents";
-import { SET_DETAIL_INGREDIENT } from "../../services/actions/detailIngredient";
+import { SET_DETAIL_INGREDIENT } from '../../services/actions/detailIngredient'
 
 const IngredientDetails = () => {
   const { receivedComponents } = useSelector(state => state.receivedComponents)
@@ -16,10 +15,6 @@ const IngredientDetails = () => {
   React.useEffect(() => {
     if (!ingredient?.name) {
       setIsNotModal(true)
-      if (!receivedComponents[0]) {
-        // Вызываем экшн для получения данных от сервера
-        dispatch(getComponents())
-      }
       // Ищем по айди компонент
       const foundIngredient = receivedComponents.find(item => {
         return item._id === ingredientId;

@@ -10,6 +10,7 @@ import { CLEAR_DETAIL_INGREDIENT } from '../../services/actions/detailIngredient
 import Modal from '../Modal/Modal'
 import { MODAL_INGREDIENT_TITLE } from '../../utils/constants'
 import AppHeader from '../AppHeader/AppHeader'
+import { getComponents } from '../../services/actions/receivedComponents'
 
   function ModalSwitch() {
     const location = useLocation()
@@ -72,6 +73,12 @@ import AppHeader from '../AppHeader/AppHeader'
   }
 
 function App() {
+  const dispatch = useDispatch()
+  // Получаем ингредиенты при монтировании компонента App
+  React.useEffect(() => {
+    // Вызываем экшн для получения данных от сервера
+    dispatch(getComponents())
+  }, [])
 
   return (
     <BrowserRouter>
