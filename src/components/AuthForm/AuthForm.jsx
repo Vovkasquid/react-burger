@@ -75,7 +75,7 @@ const AuthForm = ({ onSubmit, children, title, buttonTitle}) => {
           )
         }
       </div>
-      {requestError && <p className="text text_type_main-default" style={{ color: "hsl(0,100%,50%)" }}>{requestError}</p>}
+      {requestError && <p className={`${styles.errorText} text text_type_main-default`}>{requestError}</p>}
     </main>
   )
 }

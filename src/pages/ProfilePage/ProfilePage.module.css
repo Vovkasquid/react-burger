@@ -33,14 +33,23 @@
   height: 64px;
 }
 
+.listItemWide {
+  width: 320px;
+}
+
 .link {
   text-decoration: none;
   color: hsla(240, 20%, 60%, 1);
+  cursor: pointer;
 }
 
 .linkActive {
   text-decoration: none;
   color: white;
+}
+
+.listItemText {
+  margin: 0;
 }
 
 .profileForm {

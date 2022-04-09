@@ -25,3 +25,7 @@
     text-decoration: none;
     color: hsla(240, 100%, 65%, 1);
 }
+
+.errorText {
+    color: hsl(0,100%,50%);
+}

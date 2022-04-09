@@ -110,8 +110,8 @@ const ProfilePage = () => {
         <ul className={styles.linkContainer}>
           <li className={styles.listItem}><NavLink activeClassName={styles.linkActive} className={`${styles.link} text text_type_main-medium`} exact to="/profile" >Профиль</NavLink></li>
           <li className={styles.listItem}><NavLink activeClassName={styles.linkActive} className={`${styles.link} text text_type_main-medium`} to="/profile/orders">История заказов</NavLink></li>
-          <li className={styles.listItem}><p className={`${styles.link} text text_type_main-medium`} style={{cursor: 'pointer'}} onClick={exitHandler}>Выход</p></li>
-          <li className={`${styles.listItem} mt-20`} style={{width: '320px'}}><p className='text_type_main-default text_color_inactive' style={{margin: 0}} >В этом разделе вы можете изменить свои персональные данные</p></li>
+          <li className={styles.listItem}><p className={`${styles.link} text text_type_main-medium`} onClick={exitHandler}>Выход</p></li>
+          <li className={`${styles.listItem} ${styles.listItemWide} mt-20`}><p className={`${styles.listItemText} text_type_main-default text_color_inactive`}>В этом разделе вы можете изменить свои персональные данные</p></li>
         </ul>
         <form className={styles.profileForm} onSubmit={onSubmit}>
           <Input
