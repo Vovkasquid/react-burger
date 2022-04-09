@@ -10,10 +10,11 @@ import Modal from '../Modal/Modal'
 import { MODAL_INGREDIENT_TITLE } from '../../utils/constants'
 import AppHeader from '../AppHeader/AppHeader'
 import { getComponents } from '../../services/actions/receivedComponents'
-import LoginPage from "../../pages/LoginPage/LoginPage";
-import RegisterPage from "../../pages/RegisterPage/RegisterPage";
-import ResetPasswordPage from "../../pages/ResetPasswordPage/ResetPasswordPage";
-import ForgotPasswordPage from "../../pages/ForgotPasswordPage/ForgotPasswordPage";
+import LoginPage from '../../pages/LoginPage/LoginPage'
+import RegisterPage from '../../pages/RegisterPage/RegisterPage'
+import ResetPasswordPage from '../../pages/ResetPasswordPage/ResetPasswordPage'
+import ForgotPasswordPage from '../../pages/ForgotPasswordPage/ForgotPasswordPage'
+import styles from './App.module.css'
 
   function ModalSwitch() {
     const location = useLocation()
@@ -85,7 +86,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      <ModalSwitch />
+      <div className={styles.app}>
+        <ModalSwitch />
+      </div>
     </BrowserRouter>
   )
 }
