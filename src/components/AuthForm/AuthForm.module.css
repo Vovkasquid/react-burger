@@ -1,0 +1,31 @@
+.authForm {
+    display: flex;
+    flex-direction: column;
+    margin-top: 180px;
+    align-items: center;
+    justify-content: center;
+}
+
+.fieldsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    justify-content: center;
+    width: 480px;
+}
+
+.linkContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.authLink {
+    text-decoration: none;
+    color: hsla(240, 100%, 65%, 1);
+}
+
+.errorText {
+    color: hsl(0,100%,50%);
+}

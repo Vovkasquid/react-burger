@@ -3,15 +3,22 @@ import PropTypes from 'prop-types'
 import styles from './BurgerConstructor.module.css'
 import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorItem.jsx'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
+import { useHistory } from 'react-router-dom'
 import { v4 as generateUniqueId } from 'uuid'
-import { ADD_CONSTRUCTOR_ITEM, SET_CHOOSEN_BUN } from '../../services/actions/burgerConstructorIngredients';
-import { INC_COUNTER_INGREDIENT, SET_SORTED_ARRAY } from "../../services/actions/receivedComponents";
+import {
+  ADD_CONSTRUCTOR_ITEM,
+  SET_CHOOSEN_BUN,
+  SET_SORTED_ARRAY
+} from '../../services/actions/burgerConstructorIngredients'
+import { INC_COUNTER_INGREDIENT } from '../../services/actions/receivedComponents'
+import { getCookie } from '../../utils/coockies'
 
 export default function BurgerConstructor({ openIngredientModal, openOrderModal }) {
   // Вытаскиваем из стора полученные компоненты и отфильтровываем нужные
   const  { ingredients, choosenBun } = useSelector(store => store.constructorItems)
+  const history = useHistory()
   const dispatch = useDispatch()
 
   const [, dropRef] = useDrop({
@@ -52,7 +59,13 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
   }
   , [ingredients, choosenBun] )
 
-  const onSubmitBurger = () => {
+  const onSubmitBurger = (e) => {
+    e.preventDefault()
+    // Если не авторизован, то перенаправляем на логин
+    if (!getCookie('token')) {
+      console.log('redirect')
+      return history.replace({pathname: '/login', state: history.location})
+    }
     const ingredientArray = ingredients?.map(item => item._id)
     openOrderModal(ingredientArray)
   }

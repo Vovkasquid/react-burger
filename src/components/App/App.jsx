@@ -1,123 +1,95 @@
 import React from 'react'
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import styles from './App.module.css'
-import AppHeader from '../AppHeader/AppHeader.jsx'
-import BurgerConstructor from '../BurgerConstructor/BurgerConstructor.jsx'
-import BurgerIngredients from '../BurgerIngredients/BurgerIngredients.jsx'
-import { MODAL_INGREDIENT_TITLE } from '../../utils/constants.js'
-import Modal from '../Modal/Modal.jsx'
-import OrderDetails from '../OrderDetails/OrderDetails'
+import { BrowserRouter, Redirect, Route, Switch, useHistory, useLocation } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute'
+import MainPage from '../../pages/MainPage/MainPage'
+import ProfilePage from '../../pages/ProfilePage/ProfilePage'
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
+import { CLEAR_DETAIL_INGREDIENT } from '../../services/actions/detailIngredient'
+import Modal from '../Modal/Modal'
+import { MODAL_INGREDIENT_TITLE } from '../../utils/constants'
+import AppHeader from '../AppHeader/AppHeader'
 import { getComponents } from '../../services/actions/receivedComponents'
-import { useDispatch, useSelector } from 'react-redux'
-import { SET_DETAIL_INGREDIENT, CLEAR_DETAIL_INGREDIENT } from '../../services/actions/detailIngredient'
-import { postOrder, CLOSE_ORDER_MODAL } from '../../services/actions/order'
+import LoginPage from '../../pages/LoginPage/LoginPage'
+import RegisterPage from '../../pages/RegisterPage/RegisterPage'
+import ResetPasswordPage from '../../pages/ResetPasswordPage/ResetPasswordPage'
+import ForgotPasswordPage from '../../pages/ForgotPasswordPage/ForgotPasswordPage'
+import styles from './App.module.css'
 
- // Метод для проверки ответа
- export function checkResponse(res) {
-  if (res.ok) {
-    return res.json();
+  function ModalSwitch() {
+    const location = useLocation()
+    const history = useHistory()
+    const dispatch = useDispatch()
+    const background = location.state && location.state.background
+
+    const handleCloseIngredientModal = () => {
+      dispatch({ type: CLEAR_DETAIL_INGREDIENT })
+      // Возвращаемся к предыдущему пути при закрытии модалки
+      history.goBack()
+    }
+
+    return (
+      <>
+        <AppHeader />
+        <Switch location={background || location}>
+          <Route path="/login">
+            <LoginPage isLogin />
+          </Route>
+          <Route path="/register">
+            <RegisterPage />
+          </Route>
+          <Route path="/reset-password">
+            <ResetPasswordPage />
+          </Route>
+          <Route path="/forgot-password">
+            <ForgotPasswordPage />
+          </Route>
+          <Route path='/ingredients/:ingredientId' exact>
+            <IngredientDetails />
+          </Route>
+          <ProtectedRoute path="/profile">
+            <ProfilePage />
+          </ProtectedRoute>
+          <Route exact path="/">
+            <MainPage />
+          </Route>
+          <Route path="*">
+            <Redirect to='/' />
+          </Route>
+        </Switch>
+
+
+        {background && (
+          <Route
+            path='/ingredients/:ingredientId'
+            children={
+              <Modal
+                closePopup={handleCloseIngredientModal}
+                title={MODAL_INGREDIENT_TITLE}
+              >
+                <IngredientDetails />
+              </Modal>
+            }
+          />
+        )}
+      </>
+    )
   }
-  // Если условие не выполнено, то делаем промис с ошибкой
-  return Promise.reject(res);
-}
-
-export const filterBun = (data) => {
-  return data?.filter((item) => item.type === 'bun')
-}
-
-export const filterSauces = (data) => {
-  return data?.filter((item) => item.type === 'sauce')
-}
-
-export const filterMainIngredients = (data) => {
-  return data?.filter((item) => item.type === 'main')
-}
 
 function App() {
-  const [isIngredientModalVisible, setIsIngredientModalVisible] = React.useState(false)
-  const [choosenBun, setChoosenBun] = React.useState({})
-
-  // Вытащим из хранилища данные о элементах с сервера и ошибках
-  const { receivedComponents, getComponentsError } = useSelector(store => store.receivedComponents)
-  // Вытащим из стора ошибки при POST с заказом
-  const orderError = useSelector(store => store.order.error)
-  // Вытащим стейт открытия и закрытия модалки
-  const isOrderModalVisible = useSelector(store => store.order.isOrderModalVisible)
-  // Получаем диспатч
   const dispatch = useDispatch()
-
-  const handleOpenIngredientModal = (currentIngredient) => {
-    dispatch({ type: SET_DETAIL_INGREDIENT, ingredient: currentIngredient })
-    setIsIngredientModalVisible(true)
-  }
-  
-  const handleOpenOrderModal = (req) => {
-    // Делаем пост-запрос через экшен, который откроет модалку, если запрос успешен
-    dispatch(postOrder(req))
-  }
-
-  const handleCloseIngredientModal = () => {
-    setIsIngredientModalVisible(false)
-    dispatch({ type: CLEAR_DETAIL_INGREDIENT })
-  }
-
-  const handleCloseOrderModal = () => {
-    dispatch({ type: CLOSE_ORDER_MODAL })
-  }
-
+  // Получаем ингредиенты при монтировании компонента App
   React.useEffect(() => {
     // Вызываем экшн для получения данных от сервера
     dispatch(getComponents())
-  }, [dispatch])
-
-  React.useEffect(() => {
-     // Временное решение для выбранной булки
-     const buns = filterBun(receivedComponents)
-     const bunToChosen = buns[0]
-     setChoosenBun(bunToChosen)
-  }, [receivedComponents])
+  }, [])
 
   return (
-    <div className={styles.application} id="app">
-      {isIngredientModalVisible && <Modal
-        closePopup={handleCloseIngredientModal}
-        title={MODAL_INGREDIENT_TITLE}
-      >
-        <IngredientDetails />
-      </Modal>}
-      {isOrderModalVisible &&  <Modal
-        closePopup={handleCloseOrderModal}
-      >
-        <OrderDetails />
-      </Modal>}
-      <AppHeader />
-      {getComponentsError && 
-        <p className={`${styles.errorText} text text_type_main-default`}>
-          {getComponentsError}
-        </p>
-      }
-      {orderError && 
-        <p className={`${styles.errorText} text text_type_main-default`}>
-          {orderError}
-        </p>
-      }
-      <main className={styles.main}>
-        <DndProvider backend={HTML5Backend}>
-          <BurgerIngredients
-            openModal={handleOpenIngredientModal}
-          />
-          { /*Временное решение с choosenBun, пока не сделали выбор булки*/ }
-          <BurgerConstructor
-            openIngredientModal={handleOpenIngredientModal}
-            openOrderModal={handleOpenOrderModal}
-            choosenBun={choosenBun}
-          />
-        </DndProvider>
-      </main>
-    </div>
-
+    <BrowserRouter>
+      <div className={styles.app}>
+        <ModalSwitch />
+      </div>
+    </BrowserRouter>
   )
 }
 

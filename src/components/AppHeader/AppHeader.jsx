@@ -1,9 +1,10 @@
 import React from 'react'
 import styles from './AppHeader.module.css'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
 export default function AppHeader() {
+  const history = useHistory()
   return (
     <header className={styles.header}>
       <div className={styles.headerContainer}>
@@ -11,19 +12,21 @@ export default function AppHeader() {
           <ul className={styles.navList}>
             <li>
               <NavLink
-              to="/"
-              className={`${styles.link} ${styles.linkActive} pt-4 pb-4 pr-5 pl-5`}
+              exact to="/"
+              className={`${styles.link} pt-4 pb-4 pr-5 pl-5`}
+              activeClassName={styles.linkActive}
               >
-                <BurgerIcon type="primary" />
+                <BurgerIcon type={history.location.pathname === '/' ? 'primary' : 'secondary'} />
                 <p className="text text_type_main-default">Конструктор</p>
               </NavLink>
             </li>
             <li>
               <NavLink
-              to="/"
+              to="/abc"
               className={`${styles.link} pt-4 pb-4 pr-5 pl-5`}
+              activeClassName={styles.linkActive}
               >
-                <ListIcon type="secondary" />
+                <ListIcon type={history.location.pathname === '/abc' ? 'primary' : 'secondary'} />
                 <p className="text text_type_main-default">Лента заказов</p>
               </NavLink>
             </li>
@@ -32,10 +35,11 @@ export default function AppHeader() {
         <Logo />
         <nav className={styles.nav}>
           <NavLink
-            to="/"
-            className={`${styles.link} pt-4 pb-4 pr-5 pl-5`}
+            to="/profile"
+            className={`${styles.link}  pt-4 pb-4 pr-5 pl-5`}
+            activeClassName={styles.linkActive}
             >
-              <ProfileIcon type="secondary" />
+              <ProfileIcon type={history.location.pathname === '/profile' ? 'primary' : 'secondary'} />
               <p className="text text_type_main-default">Личный кабинет</p>
           </NavLink>
         </nav>

@@ -1,5 +1,5 @@
 import { BURGER_API } from '../../utils/constants'
-import { checkResponse, filterMainIngredients, filterBun, filterSauces } from '../../components/App/App'
+import { checkResponse, filterMainIngredients, filterBun, filterSauces } from '../../utils/utils'
 
 export const GET_COMPONENTS_SUCCESS = 'GET_COMPONENTS_SUCCESS'
 export const GET_COMPONENTS_FAILED = 'GET_COMPONENTS_FAILED'
@@ -8,11 +8,11 @@ export const SET_FILTERED_SAUCES = 'SET_FILTERED_SAUCES'
 export const SET_FILTERED_MAIN_INGREDIENTS = 'SET_FILTERED_MAIN_INGREDIENTS'
 export const INC_COUNTER_INGREDIENT = 'INC_COUNTER_INGREDIENT'
 export const DEC_COUNTER_INGREDIENT = 'DEC_COUNTER_INGREDIENT'
-export const SET_SORTED_ARRAY = 'SET_SORTED_ARRAY'
+
 export function getComponents() {
-  // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
-  return function(dispatch) {
-    // Запрашиваем данные у сервера
+      // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
+    return function(dispatch) {
+      // Запрашиваем данные у сервера
     fetch(`${BURGER_API}/ingredients`).then((response) => checkResponse(response))
       .then((data) => {
         // В случае успешного получения данных вызываем экшен

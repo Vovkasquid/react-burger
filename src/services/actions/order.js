@@ -1,5 +1,5 @@
 import { BURGER_API } from '../../utils/constants'
-import { checkResponse } from '../../components/App/App'
+import { checkResponse} from '../../utils/utils'
 
 export const POST_ORDER_SUCCESS = 'POST_ORDER_SUCCESS'
 export const POST_ORDER_FAILED = 'POST_ORDER_FAILED'
