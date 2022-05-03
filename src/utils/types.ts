@@ -38,7 +38,7 @@ export type TAuthForm = {
 
 export type TIngredient = {
   count?: number,
-  index?: number,
+  index: number,
   key?: string,
   readonly _id: string;
   readonly name: string;
@@ -101,6 +101,6 @@ export type TBurgerConstructorItem = {
   isTop?: boolean;
   isBottom?: boolean;
   index?: number;
-  moveIngredient?: (dragIndex: number, hoverIndex: number) => void;
+  moveIngredient: (dragIndex: number, hoverIndex: number) => void;
 }
 
