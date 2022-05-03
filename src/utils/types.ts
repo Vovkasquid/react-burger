@@ -1,9 +1,7 @@
 import { ReactNode } from 'react'
-import PropTypes from "prop-types";
-import { read } from "fs";
 
 export type TUserState = {
-  mail: string;
+  email: string;
   name: string;
   isRegisterSuccess: boolean;
   registerError: string | undefined;
@@ -66,4 +64,10 @@ export type TReceivedComponents = {
 
 export type TDetailIngredient = {
   ingredient: TIngredient,
+}
+
+export type TRequest = {
+  name?: string;
+  email?: string;
+  password?: string;
 }
