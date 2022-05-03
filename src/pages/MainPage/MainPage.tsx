@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { useDispatch, useSelector } from 'react-redux'
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import styles from './MainPage.module.css'
 import Modal from '../../components/Modal/Modal'
 import OrderDetails from '../../components/OrderDetails/OrderDetails'
@@ -9,25 +9,23 @@ import BurgerIngredients from '../../components/BurgerIngredients/BurgerIngredie
 import BurgerConstructor from '../../components/BurgerConstructor/BurgerConstructor'
 import { SET_DETAIL_INGREDIENT } from '../../services/actions/detailIngredient'
 import { CLOSE_ORDER_MODAL, postOrder } from '../../services/actions/order'
-import { filterBun } from '../../utils/utils'
+import { TIngredient, TOrderState, TReceivedComponents, TRequestOrder } from "../../utils/types";
 
-const MainPage = () => {
-  const [choosenBun, setChoosenBun] = React.useState({})
+const MainPage: FC = () => {
 
   // Вытащим из хранилища данные о элементах с сервера и ошибках
-  const { receivedComponents, getComponentsError } = useSelector(store => store.receivedComponents)
+  const {  getComponentsError } = useSelector((store:RootStateOrAny): TReceivedComponents => store.receivedComponents)
   // Вытащим из стора ошибки при POST с заказом
-  const orderError = useSelector(store => store.order.error)
   // Вытащим стейт открытия и закрытия модалки
-  const isOrderModalVisible = useSelector(store => store.order.isOrderModalVisible)
+  const { orderError, isOrderModalVisible } = useSelector((store:RootStateOrAny): TOrderState => store.order)
   // Получаем диспатч
   const dispatch = useDispatch()
 
-  const handleOpenIngredientModal = (currentIngredient) => {
+  const handleOpenIngredientModal = (currentIngredient: TIngredient) => {
     dispatch({ type: SET_DETAIL_INGREDIENT, ingredient: currentIngredient })
   }
 
-  const handleOpenOrderModal = (req) => {
+  const handleOpenOrderModal = (req: TRequestOrder) => {
     // Делаем пост-запрос через экшен, который откроет модалку, если запрос успешен
     dispatch(postOrder(req))
   }
@@ -35,13 +33,6 @@ const MainPage = () => {
   const handleCloseOrderModal = () => {
     dispatch({ type: CLOSE_ORDER_MODAL })
   }
-
-  React.useEffect(() => {
-    // Временное решение для выбранной булки
-    const buns = filterBun(receivedComponents)
-    const bunToChosen = buns[0]
-    setChoosenBun(bunToChosen)
-  }, [receivedComponents])
 
   return (
     <div className={styles.application} id="app">
@@ -66,11 +57,9 @@ const MainPage = () => {
           <BurgerIngredients
             openModal={handleOpenIngredientModal}
           />
-          { /*Временное решение с choosenBun, пока не сделали выбор булки*/ }
           <BurgerConstructor
             openIngredientModal={handleOpenIngredientModal}
             openOrderModal={handleOpenOrderModal}
-            choosenBun={choosenBun}
           />
         </DndProvider>
       </main>

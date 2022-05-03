@@ -1,9 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { FC } from "react";
 import styles from './BurgerConstructor.module.css'
-import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorItem.jsx'
+import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorItem'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux'
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
 import { useHistory } from 'react-router-dom'
 import { v4 as generateUniqueId } from 'uuid'
@@ -14,16 +13,21 @@ import {
 } from '../../services/actions/burgerConstructorIngredients'
 import { INC_COUNTER_INGREDIENT } from '../../services/actions/receivedComponents'
 import { getCookie } from '../../utils/coockies'
+import {
+  TBurgerConstructor,
+  TDropIngredient, TIngredient,
+  TInitialBurgerConstructorIngredients, TRequestOrder
+} from "../../utils/types";
 
-export default function BurgerConstructor({ openIngredientModal, openOrderModal }) {
+const BurgerConstructor:FC<TBurgerConstructor> = ({ openIngredientModal, openOrderModal }) => {
   // Вытаскиваем из стора полученные компоненты и отфильтровываем нужные
-  const  { ingredients, choosenBun } = useSelector(store => store.constructorItems)
+  const  { ingredients, choosenBun } = useSelector((store:RootStateOrAny):TInitialBurgerConstructorIngredients  => store.constructorItems)
   const history = useHistory()
   const dispatch = useDispatch()
 
   const [, dropRef] = useDrop({
     accept: 'ingredient',
-    drop(ingredient) {
+    drop(ingredient:TDropIngredient) {
       const { item } = ingredient
       // TO DO вынести в функцию
       if (item) {
@@ -59,50 +63,52 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
   }
   , [ingredients, choosenBun] )
 
-  const onSubmitBurger = (e) => {
-    e.preventDefault()
+  const onSubmitBurger = (): void => {
     // Если не авторизован, то перенаправляем на логин
     if (!getCookie('token')) {
       console.log('redirect')
       return history.replace({pathname: '/login', state: history.location})
     }
-    const ingredientArray = ingredients?.map(item => item._id)
+    const ingredientArray: TRequestOrder = ingredients?.map(item => item._id)
     openOrderModal(ingredientArray)
   }
 
-  const moveIngredient = (dragIndex, hoverIndex) => {
+  const moveIngredient = (dragIndex: number, hoverIndex: number): void=> {
     // Вытаскиваем из массива карточку, которую будем вставлять
-    const dragIngredient = ingredients[dragIndex]
-    // Защита от булок
-    if (dragIngredient) {
-      // Делаем новый массив, который будем мутировать
-      const newIngredients = [...ingredients]
-      // Убираем из массива элемент со старым индексом
-      newIngredients.splice(dragIndex, 1)
-      // Добавляем в массив элемент с новым индексом
-      newIngredients.splice(hoverIndex, 0, dragIngredient)
-      // Добавляем отсортированный массив на рендер
-      dispatch({ type: SET_SORTED_ARRAY, sortedArray: newIngredients })
+    if (ingredients) {
+      const dragIngredient: TIngredient = ingredients[dragIndex]
+      // Защита от булок
+      if (dragIngredient) {
+        // Делаем новый массив, который будем мутировать
+        const newIngredients = [...ingredients]
+        // Убираем из массива элемент со старым индексом
+        newIngredients.splice(dragIndex, 1)
+        // Добавляем в массив элемент с новым индексом
+        newIngredients.splice(hoverIndex, 0, dragIngredient)
+        // Добавляем отсортированный массив на рендер
+        dispatch({ type: SET_SORTED_ARRAY, sortedArray: newIngredients })
+      }
     }
   }
-  
+
   return (
     <section className={`${styles.burgerConstructorContainer} pt-25 pl-4 pr-4`}>
       <div ref={dropRef} className={`${styles.burgerConstructorList} mb-10`}>
-        {choosenBun && <BurgerConstructorItem item={choosenBun} isLocked openModal={openIngredientModal}  moveIngredient={moveIngredient} isTop />}
+        {choosenBun && <BurgerConstructorItem item={choosenBun} isLocked  moveIngredient={moveIngredient} isTop />}
           <ul className={`${styles.burgerConstructorScrollList} ${styles.scrollZone}`}>
             {ingredients && ingredients?.map((item, index) => {
               return (
                 <li key={item.key}>
-                  <BurgerConstructorItem item={item} openModal={openIngredientModal} index={index} moveIngredient={moveIngredient} />
+                  <BurgerConstructorItem item={item} index={index} moveIngredient={moveIngredient} />
                 </li>
               )
             })}
           </ul>
-        {choosenBun && <BurgerConstructorItem item={choosenBun} isLocked openModal={openIngredientModal} moveIngredient={moveIngredient} isBottom />}
+        {choosenBun && <BurgerConstructorItem item={choosenBun} isLocked moveIngredient={moveIngredient} isBottom  />}
       </div>
       <div className={`${styles.burgerConstructorPriceContainer} mt-10`}>
         <p className={`${styles.burgerConstructorPrice} text text_type_main-large`}>{orderPrice}<CurrencyIcon type="primary" /></p>
+        {/* @ts-ignore */}
         <Button type="primary" size="medium" onClick={onSubmitBurger} >
           Оформить заказ
         </Button>
@@ -111,7 +117,4 @@ export default function BurgerConstructor({ openIngredientModal, openOrderModal 
   )
 }
 
-BurgerConstructor.propTypes = {
-  openIngredientModal: PropTypes.func.isRequired,
-  openOrderModal: PropTypes.func.isRequired,
-}
+export default BurgerConstructor

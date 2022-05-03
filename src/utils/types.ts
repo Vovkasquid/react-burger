@@ -36,7 +36,7 @@ export type TAuthForm = {
   children?: ReactNode;
 }
 
-type TIngredient = {
+export type TIngredient = {
   count?: number,
   index?: number,
   key?: string,
@@ -52,6 +52,10 @@ type TIngredient = {
   readonly image_mobile: string;
   readonly image_large: string;
   readonly __v: number;
+}
+
+export type TDropIngredient = TIngredient & {
+  item?: TIngredient,
 }
 
 export type TReceivedComponents = {
@@ -71,3 +75,32 @@ export type TRequest = {
   email?: string;
   password?: string;
 }
+
+export type TOrderState = {
+  order: {};
+  orderError: string | undefined;
+  isOrderModalVisible: boolean;
+}
+
+export type TRequestOrder = Array<string> | undefined
+
+
+export type TBurgerConstructor = {
+  openIngredientModal: (currentIngredient: TIngredient) => void;
+  openOrderModal: (req: TRequestOrder) => void;
+}
+
+export type TInitialBurgerConstructorIngredients = {
+  ingredients: Array<TIngredient> | null;
+  choosenBun: TIngredient | null;
+}
+
+export type TBurgerConstructorItem = {
+  item: TIngredient;
+  isLocked?: boolean;
+  isTop?: boolean;
+  isBottom?: boolean;
+  index?: number;
+  moveIngredient?: (dragIndex: number, hoverIndex: number) => void;
+}
+

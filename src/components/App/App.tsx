@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from "react";
 import { BrowserRouter, Redirect, Route, Switch, useHistory, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute'

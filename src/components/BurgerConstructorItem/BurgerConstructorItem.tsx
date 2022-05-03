@@ -1,17 +1,16 @@
-import React, { useRef } from "react";
-import PropTypes from 'prop-types'
+import React, { FC, useRef } from 'react'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDrag, useDrop } from 'react-dnd'
 import styles from './BurgerConstructorItem.module.css'
-import { ingredientSchema } from '../../utils/schemas'
 import { useDispatch } from 'react-redux'
 import { DELETE_CONSTRUCTOR_ITEM } from "../../services/actions/burgerConstructorIngredients";
 import { DEC_COUNTER_INGREDIENT } from "../../services/actions/receivedComponents";
+import { TBurgerConstructorItem, TDropIngredient, TIngredient } from "../../utils/types";
 
-export default function BurgerConstructorItem({ item, isLocked, isTop, isBottom, index, moveIngredient }) {
-  const ref = useRef(null)
+const BurgerConstructorItem: FC<TBurgerConstructorItem> = ({ item, isLocked, isTop, isBottom, index, moveIngredient }) => {
+  const ref = useRef<any>(null)
   const dispatch = useDispatch()
-  let itemName = ''
+  let itemName : string
   if (isTop) {
     itemName = item?.name + ' (верх)'
   } else if (isBottom) {
@@ -19,7 +18,7 @@ export default function BurgerConstructorItem({ item, isLocked, isTop, isBottom,
   } else {
     itemName = item?.name
   }
-  const deleteElement = (item) => {
+  const deleteElement = (item: TIngredient) => {
     // Сначала удаляем элемент из списка рендера
     dispatch({ type: DELETE_CONSTRUCTOR_ITEM, item })
     // Потом уменьшаем его количество в списке ингредиентов
@@ -28,11 +27,11 @@ export default function BurgerConstructorItem({ item, isLocked, isTop, isBottom,
 
   const [, drop] = useDrop({
     accept: 'ingredient',
-    hover: (item, monitor) => {
+    hover: (item:TDropIngredient, monitor) => {
       if (!ref.current) {
         return;
       }
-      const dragIndex = item.index
+      const dragIndex = item?.index
       const hoverIndex = index
       // Если карточка на своём месте, то ничего не делаем
       if (dragIndex === hoverIndex) {
@@ -44,21 +43,26 @@ export default function BurgerConstructorItem({ item, isLocked, isTop, isBottom,
       // Get vertical middle
       const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       // Determine mouse position
-      const clientOffset = monitor.getClientOffset();
+      const clientOffset = monitor?.getClientOffset();
       // Get pixels to the top
+      // @ts-ignore
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
       // Only perform the move when the mouse has crossed half of the items height
       // When dragging downwards, only move when the cursor is below 50%
       // When dragging upwards, only move when the cursor is above 50%
       // Dragging downwards
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return;
+      if (dragIndex && hoverIndex) {
+        if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+          return;
+        }
+        // Dragging upwards
+        if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+          return;
+        }
+        if (moveIngredient) {
+          moveIngredient(dragIndex, hoverIndex);
+        }
       }
-      // Dragging upwards
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-        return;
-      }
-      moveIngredient(dragIndex, hoverIndex)
       // Дока говорит, что мутировать плохо, но тут можно
       item.index = hoverIndex;
     }
@@ -92,11 +96,4 @@ export default function BurgerConstructorItem({ item, isLocked, isTop, isBottom,
   )
 }
 
-BurgerConstructorItem.propTypes = {
-  item: ingredientSchema,
-  isLocked: PropTypes.bool,
-  isTop: PropTypes.bool,
-  isBottom: PropTypes.bool,
-  index: PropTypes.number,
-  moveIngredient: PropTypes.func,
-}
+export default BurgerConstructorItem
