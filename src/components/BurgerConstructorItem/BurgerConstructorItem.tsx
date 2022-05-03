@@ -31,7 +31,7 @@ const BurgerConstructorItem: FC<TBurgerConstructorItem> = ({ item, isLocked, isT
       if (!ref.current) {
         return;
       }
-      if (index) {
+      if (index !== undefined) {
         const dragIndex = item?.index
         const hoverIndex = index
         // Если карточка на своём месте, то ничего не делаем
