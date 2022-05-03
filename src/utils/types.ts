@@ -1,4 +1,6 @@
 import { ReactNode } from 'react'
+import PropTypes from "prop-types";
+import { read } from "fs";
 
 export type TUserState = {
   mail: string;
@@ -34,4 +36,34 @@ export type TAuthForm = {
   title: string;
   buttonTitle: string;
   children?: ReactNode;
+}
+
+type TIngredient = {
+  count?: number,
+  index?: number,
+  key?: string,
+  readonly _id: string;
+  readonly name: string;
+  readonly type: string;
+  readonly proteins: number;
+  readonly fat: number;
+  readonly carbohydrates: number;
+  readonly calories: number;
+  readonly price: number;
+  readonly image: string;
+  readonly image_mobile: string;
+  readonly image_large: string;
+  readonly __v: number;
+}
+
+export type TReceivedComponents = {
+  receivedComponents: Array<TIngredient> | undefined;
+  getComponentsError: string | undefined;
+  bun: Array<TIngredient> | undefined;
+  sauces: Array<TIngredient> | undefined;
+  mainIngredients: Array<TIngredient> | undefined;
+}
+
+export type TDetailIngredient = {
+  ingredient: TIngredient,
 }

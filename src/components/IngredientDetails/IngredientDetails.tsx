@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { FC } from "react";
 import styles from './IngredientDetails.module.css'
-import { useDispatch, useSelector } from "react-redux";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom'
 import { SET_DETAIL_INGREDIENT } from '../../services/actions/detailIngredient'
+import { TDetailIngredient, TReceivedComponents } from "../../utils/types";
 
-const IngredientDetails = () => {
-  const { receivedComponents } = useSelector(state => state.receivedComponents)
-  const { ingredient } = useSelector(state => state.detailIngredient)
+const IngredientDetails: FC = () => {
+  // @ts-ignore
   const { ingredientId } = useParams()
+  const { receivedComponents } = useSelector((state:RootStateOrAny):TReceivedComponents => state.receivedComponents)
+  const { ingredient } = useSelector((state:RootStateOrAny):TDetailIngredient => state.detailIngredient)
   const [isNotModal, setIsNotModal] = React.useState(false)
   const dispatch = useDispatch()
 
@@ -16,7 +18,7 @@ const IngredientDetails = () => {
     if (!ingredient?.name) {
       setIsNotModal(true)
       // Ищем по айди компонент
-      const foundIngredient = receivedComponents.find(item => {
+      const foundIngredient = receivedComponents?.find(item => {
         return item._id === ingredientId;
       })
       // Записываем компонент в стор

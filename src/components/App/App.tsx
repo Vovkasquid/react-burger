@@ -16,16 +16,12 @@ import ResetPasswordPage from '../../pages/ResetPasswordPage/ResetPasswordPage'
 import ForgotPasswordPage from '../../pages/ForgotPasswordPage/ForgotPasswordPage'
 import styles from './App.module.css'
 
-interface LocationState {
-  background: {
-    backgroundState: string;
-  }
-}
 
 function ModalSwitch() {
-  const location = useLocation<LocationState>()
+  const location = useLocation()
   const history = useHistory()
   const dispatch = useDispatch()
+  // @ts-ignore
   const background = location.state && location?.state?.background
 
   const handleCloseIngredientModal = () => {
@@ -37,7 +33,7 @@ function ModalSwitch() {
   return (
     <>
       <AppHeader />
-      <Switch location={location || background}>
+      <Switch location={background || location}>
         <Route path="/login">
           <LoginPage />
         </Route>
