@@ -77,14 +77,15 @@ export type TRequest = {
   password?: string;
 }
 
-export type TOrderState = {
+type TOrder = {
+  success: boolean;
+  name: string;
   order: {
-    success: boolean;
-    name: string;
-    order: {
-      number: number;
-    }
-  };
+    number: number;
+  }
+}
+export type TOrderState = {
+  order: TOrder;
   orderError: string | undefined;
   isOrderModalVisible: boolean;
 }
@@ -138,3 +139,31 @@ export type TProtectedRoute = {
 }
 
 export type TActions = (req?:string | {[key: string]: string} | Array<String>) => (dispatch: any) => void
+
+export type THeaders = {
+  Accept?: string;
+  'Content-Type': string;
+  authorization?: string;
+} & HeadersInit;
+
+type TFetchMethod = 'PATCH' | 'POST';
+
+export interface TApiOptions {
+  readonly method?: TFetchMethod;
+  headers: THeaders;
+  readonly body?:BodyInit | null | undefined;
+}
+
+export type TFetch = (url: string, options:TApiOptions) => Promise<string>
+
+export type TFilterIngredient = (data: Array<TIngredient>) => Array<TIngredient>
+
+
+export interface IApiResponse extends Response {
+  readonly refreshToken?: string;
+  readonly accessToken?: string;
+  readonly order?: TOrder;
+  readonly success?: boolean;
+  readonly message?: string;
+  readonly user?: TUserState;
+}
