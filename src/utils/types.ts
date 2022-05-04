@@ -132,3 +132,7 @@ export type TModalOverley = {
 export type TModal = TModalOverley & {
   title?: string;
 }
+
+export type TProtectedRoute = {
+  path: string;
+}

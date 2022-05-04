@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { RootStateOrAny, useSelector } from "react-redux";
 import { getCookie } from '../../utils/coockies'
+import { TProtectedRoute, TUserState } from "../../utils/types";
 
-export function ProtectedRoute({ children, ...rest }) {
-  const userState = useSelector(store => store.user)
+export const ProtectedRoute: FC<TProtectedRoute> = ({ children, path, ...rest }) => {
+  const userState = useSelector((store:RootStateOrAny):TUserState => store.user)
   return (
     <Route
+      path={path}
       {...rest}
       // Получим текущий маршрут, с которого произойдёт переадресация
       // для неавторизованного пользователя
