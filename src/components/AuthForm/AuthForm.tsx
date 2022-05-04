@@ -1,21 +1,21 @@
-import React from 'react'
+import React, { FC, FormEvent } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import PropTypes from 'prop-types'
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './AuthForm.module.css'
+import { HistoryWithFrom, TAuthForm, TAuthState, TUserState } from '../../utils/types'
 
-const AuthForm = ({ onSubmit, children, title, buttonTitle}) => {
-  const history = useHistory()
+const AuthForm: FC<TAuthForm> = ({ onSubmit, title, buttonTitle, children}) => {
+  const history = useHistory<HistoryWithFrom>()
   const [requestError, setRequestError] = React.useState('')
   // Получаем диспатч
   const dispatch = useDispatch()
   // Вытащим данные для forgotPassword из стора
-  const resetAndForgotPasswordState = useSelector(store => store.resetAndForgotPassword)
+  const resetAndForgotPasswordState: TAuthState  = useSelector((store: RootStateOrAny) => store.resetAndForgotPassword)
   // Вытащим данные о юзере из стора
-  const userState = useSelector(store => store.user)
+  const userState: TUserState = useSelector((store: RootStateOrAny) => store.user)
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     // Очищаем ошибки перед запросом
     setRequestError('')
@@ -50,14 +50,13 @@ const AuthForm = ({ onSubmit, children, title, buttonTitle}) => {
   }, [history.location.pathname])
 
 
+
   return (
     <main className={styles.authForm}>
       <form className={styles.fieldsContainer} onSubmit={onSubmitHandler}>
         <h2 className="text text_type_main-medium">{title}</h2>
         {children}
-        <Button>
-          {buttonTitle}
-        </Button>
+        <Button>{buttonTitle}</Button>
       </form>
       <div className={`mt-20 ${styles.linkContainer}`}>
         {
@@ -71,7 +70,7 @@ const AuthForm = ({ onSubmit, children, title, buttonTitle}) => {
               <p className="text text_type_main-default text_color_inactive">Уже зарегистрированы? <Link className={styles.authLink} to="/login">Войти</Link></p>
           ) :
           (
-            <p className="text text_type_main-default text_color_inactive">Вспоминили пароль? <Link className={styles.authLink} to="/login">Войти</Link></p>
+            <p className="text text_type_main-default text_color_inactive">Вспомнили пароль? <Link className={styles.authLink} to="/login">Войти</Link></p>
           )
         }
       </div>
@@ -81,10 +80,3 @@ const AuthForm = ({ onSubmit, children, title, buttonTitle}) => {
 }
 
 export default AuthForm
-
-AuthForm.propTypes = {
-  title: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  buttonTitle: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-}

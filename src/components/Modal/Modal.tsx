@@ -1,29 +1,31 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, {  FC } from "react";
 import styles from './Modal.module.css'
-import ModalOverley from '../ModalOverley/ModalOverley.jsx'
+import ModalOverley from '../ModalOverley/ModalOverley'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ReactDOM from 'react-dom'
+import { TModal } from '../../utils/types'
 
-const modalRoot = document.getElementById('modal')
+const modalRoot:HTMLDivElement = document.getElementById('modal') as HTMLDivElement
 
-const Modal = ( { closePopup, children, title } ) => {
-  const listenEscHandler = (event) => {
+const Modal: FC<TModal> = ( { closePopup, children, title } ) => {
+  const listenEscHandler = (event: React.KeyboardEvent) => {
     if (event.key === 'Escape') {
       closePopup()
     }
   }
 
   React.useEffect(() => {
+    // @ts-ignore
     document.addEventListener('keydown', listenEscHandler)
+    // @ts-ignore
     return  () => document.removeEventListener('keydown', listenEscHandler)
   }, [closePopup])
-  
+
   return ReactDOM.createPortal(
     <ModalOverley closePopup={closePopup} >
     <div className={!title ? `${styles.modal} pb-30 pt-30` : `${styles.modal} pt-10 pr-10 pb-15 pl-10`}>
-        {!title ? 
-          <button 
+        {!title ?
+          <button
             className={`${styles.closeButton} ${styles.closeButtonFixed}`}
           >
             <CloseIcon type="primary" onClick={closePopup} />
@@ -37,14 +39,9 @@ const Modal = ( { closePopup, children, title } ) => {
         {children}
       </div>
     </ModalOverley>
-    
+
   , modalRoot)
 }
 
 export default Modal
 
-Modal.propTypes = {
-  closePopup: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired,
-  title: PropTypes.string,
-}

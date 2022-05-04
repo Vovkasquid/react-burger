@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { ChangeEvent } from "react";
 import styles from './ResetPasswordPage.module.css'
 import { Redirect, useHistory } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import {
   CLEAR_STATE_RESET_PASSWORD,
@@ -9,23 +9,24 @@ import {
 } from '../../services/actions/resetAndForgotPasswords'
 import AuthForm from '../../components/AuthForm/AuthForm'
 import { getCookie } from '../../utils/coockies'
+import { HistoryWithFrom, TAuthState } from "../../utils/types";
 
 const ResetPasswordPage = () => {
-  const history = useHistory()
-  const resetAndForgotPasswordState = useSelector(store => store.resetAndForgotPassword)
+  const history = useHistory<HistoryWithFrom>()
+  const resetAndForgotPasswordState = useSelector((store: RootStateOrAny):TAuthState => store.resetAndForgotPassword)
   const dispatch = useDispatch()
   const [newPassword, setNewPassword] = React.useState('')
   const [code, setCode] = React.useState('')
 
-  const onNewPasswordChange = (e) => {
+  const onNewPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setNewPassword(e.target.value)
   }
 
-  const onCodeChange = (e) => {
+  const onCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCode(e.target.value)
   }
 
-  const onSubmit = () => {
+  const onSubmit = (): void => {
     dispatch({type: CLEAR_STATE_RESET_PASSWORD})
     dispatch(postResetPassword({password: newPassword, token: code}))
     setNewPassword('')
@@ -61,7 +62,6 @@ const ResetPasswordPage = () => {
           value={newPassword}
           name="password"
           onChange={onNewPasswordChange}
-          placeholder="Введите новый пароль"
         />
         <Input
           type="text"

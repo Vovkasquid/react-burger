@@ -1,19 +1,19 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { FC } from 'react'
 import styles from './BurgerIngredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import IngredientCard from '../IngredientCard/IngredientCard.jsx'
-import { useSelector } from 'react-redux'
+import IngredientCard from '../IngredientCard/IngredientCard'
+import { RootStateOrAny, useSelector } from "react-redux";
 import { useTabType } from '../../hooks/useTabType'
+import { TBurgerIngredients, TReceivedComponents } from '../../utils/types'
 
-export default function BurgerIngredients({ openModal }) {
+const BurgerIngredients: FC<TBurgerIngredients> = ({ openModal }) => {
   // Получаем из стора компоненты и фильтруем их
-  const { mainIngredients, bun, sauces } = useSelector(state => state.receivedComponents)
+  const { mainIngredients, bun, sauces } = useSelector((state:RootStateOrAny):TReceivedComponents => state.receivedComponents)
 
   const [current, setCurrent] = React.useState('Булки')
-  const bunRef = React.useRef()
-  const sauceRef = React.useRef()
-  const mainIngredientRef = React.useRef()
+  const bunRef = React.useRef<HTMLUListElement>(null)
+  const sauceRef = React.useRef<HTMLUListElement>(null)
+  const mainIngredientRef = React.useRef<HTMLUListElement>(null)
   const { listRef, onScroll, tabType } = useTabType([
     bunRef,
     sauceRef,
@@ -82,6 +82,4 @@ export default function BurgerIngredients({ openModal }) {
   )
 }
 
-IngredientCard.propTypes = {
-  openModal: PropTypes.func.isRequired,
-}
+export default BurgerIngredients

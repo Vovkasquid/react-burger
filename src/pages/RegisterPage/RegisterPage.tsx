@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { ChangeEvent } from "react";
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Redirect, useHistory } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import styles from './RegisterPage.module.css'
 import { CLEAR_REGISTER_STATE, registerUser } from '../../services/actions/user'
 import AuthForm from '../../components/AuthForm/AuthForm'
 import { getCookie } from '../../utils/coockies'
+import { TUserState } from '../../utils/types'
 
 const RegisterPage = () => {
-  const userState = useSelector(store => store.user)
+  const userState = useSelector((store: RootStateOrAny): TUserState => store.user)
   const history = useHistory()
   const [password, setPassword] = React.useState('')
   const [name, setName] = React.useState('')
@@ -16,19 +17,19 @@ const RegisterPage = () => {
 
   const dispatch = useDispatch()
 
-  const onPasswordChange = (e) => {
+  const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
   }
 
-  const onEmailChange = (e) => {
+  const onEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
   }
 
-  const onNameChange = (e) => {
+  const onNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value)
   }
 
-  const onSubmit = () => {
+  const onSubmit = (): void => {
     dispatch({ type: CLEAR_REGISTER_STATE })
     dispatch(registerUser({email, name, password}))
     setEmail('')

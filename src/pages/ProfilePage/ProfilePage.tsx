@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { ChangeEvent, FC, FormEvent } from "react";
 import { NavLink, useHistory } from 'react-router-dom'
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux'
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import styles from './ProfilePage.module.css'
 import { CLEAR_EXIT_STATE, exitUser, getUser, patchUser } from '../../services/actions/user'
+import { TRequest, TUserState } from "../../utils/types";
 
-const ProfilePage = () => {
+const ProfilePage: FC = () => {
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
@@ -15,11 +16,11 @@ const ProfilePage = () => {
   const [isEmailChanged, setIsEmailChanged] = React.useState(false)
 
   const dispatch = useDispatch()
-  const userState = useSelector(store => store.user)
+  const userState = useSelector((store:RootStateOrAny):TUserState => store.user)
 
   const history = useHistory()
 
-  const resetInputs = () => {
+  const resetInputs = (): void => {
     setName(userState.name)
     setEmail(userState.email)
     setPassword('')
@@ -27,7 +28,7 @@ const ProfilePage = () => {
     setIsPasswordChanged(false)
     setIsNameChanged(false)
   }
-  const onNameChange = (e) => {
+  const onNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value)
     if (e.target.value === userState.name) {
       setIsNameChanged(false)
@@ -36,7 +37,7 @@ const ProfilePage = () => {
     }
   }
 
-  const onEmailChange = (e) => {
+  const onEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
     if (e.target.value === userState.email) {
       setIsEmailChanged(false)
@@ -45,7 +46,7 @@ const ProfilePage = () => {
     }
   }
 
-  const onPasswordChange = (e) => {
+  const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
     if (e.target.value === '') {
       setIsPasswordChanged(false)
@@ -62,10 +63,10 @@ const ProfilePage = () => {
     }
   }, [isNameChanged, isPasswordChanged, isEmailChanged])
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     // Собираем измененённые данные и отправляем
-    const request = {}
+    const request:TRequest = {}
     if (isNameChanged) request.name = name
     if (isEmailChanged) request.email = email
     if (isPasswordChanged) request.password = password
@@ -121,7 +122,6 @@ const ProfilePage = () => {
             value={name}
             name="name"
             onChange={onNameChange}
-            defaultValue={userState?.name}
           />
           <Input
             type="email"
@@ -141,7 +141,9 @@ const ProfilePage = () => {
           />
           {isButtonsVisible && (
             <div className={styles.buttonContainer}>
+              { /* @ts-ignore */}
               <Button type="secondary" size="medium" onClick={cancelHandler}>Отмена</Button>
+              {/* @ts-ignore */}
               <Button type="primary" size="medium">Сохранить</Button>
             </div>
           )}

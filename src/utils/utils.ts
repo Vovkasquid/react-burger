@@ -1,20 +1,21 @@
 // Метод для проверки ответа
 import { getCookie, setCookie } from './coockies'
 import { BURGER_API } from './constants'
+import { IApiResponse, TFetch, TFilterIngredient } from "./types";
 
-export const filterBun = (data) => {
+export const filterBun: TFilterIngredient = (data) => {
   return data?.filter((item) => item.type === 'bun')
 }
 
-export const filterSauces = (data) => {
+export const filterSauces: TFilterIngredient = (data) => {
   return data?.filter((item) => item.type === 'sauce')
 }
 
-export const filterMainIngredients = (data) => {
+export const filterMainIngredients: TFilterIngredient = (data) => {
   return data?.filter((item) => item.type === 'main')
 }
 
-export function checkResponse(res) {
+export function checkResponse(res: IApiResponse) {
   if (res.ok) {
     return res.json()
   }
@@ -22,7 +23,7 @@ export function checkResponse(res) {
   return Promise.reject(res)
 }
 
-export const fetchWithRefresh = (url, options = {}) => {
+export const fetchWithRefresh:TFetch = (url, options) => {
   return fetch(url, options)
     .then(res => checkResponse(res))
     .catch(async err => {

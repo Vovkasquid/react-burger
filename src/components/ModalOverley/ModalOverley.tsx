@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { FC } from "react";
 import styles from './ModalOverley.module.css'
+import { TModalOverley } from '../../utils/types'
 
-export default function ModalOverley ({ children, closePopup }) {
+const ModalOverley: FC<TModalOverley> = ({ children, closePopup }) => {
   return (
     <>
       <section
@@ -10,7 +10,7 @@ export default function ModalOverley ({ children, closePopup }) {
         onClick={(e) => {
           if (e.target === e.currentTarget) {
             closePopup()
-          }           
+          }
         }}
         >
           {children}
@@ -19,7 +19,4 @@ export default function ModalOverley ({ children, closePopup }) {
   )
 }
 
-ModalOverley.propTypes = {
-  closePopup: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired,
-}
+export default ModalOverley
