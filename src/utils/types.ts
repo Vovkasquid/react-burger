@@ -144,9 +144,9 @@ export type THeaders = {
   Accept?: string;
   'Content-Type': string;
   authorization?: string;
-} & HeadersInit;
+} & HeadersInit
 
-type TFetchMethod = 'PATCH' | 'POST';
+type TFetchMethod = 'PATCH' | 'POST' | 'GET'
 
 export interface TApiOptions {
   readonly method?: TFetchMethod;
@@ -154,7 +154,7 @@ export interface TApiOptions {
   readonly body?:BodyInit | null | undefined;
 }
 
-export type TFetch = (url: string, options:TApiOptions) => Promise<string>
+export type TFetch = (url: string, options:TApiOptions) => Promise<any>
 
 export type TFilterIngredient = (data: Array<TIngredient>) => Array<TIngredient>
 
