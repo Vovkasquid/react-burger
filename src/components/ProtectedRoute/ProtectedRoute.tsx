@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
-import { Route, Redirect } from 'react-router-dom'
-import { RootStateOrAny, useSelector } from "react-redux";
+import { Route, Redirect, RouteProps } from 'react-router-dom'
+import { RootStateOrAny, useSelector } from 'react-redux'
 import { getCookie } from '../../utils/coockies'
-import { TProtectedRoute, TUserState } from "../../utils/types";
+import { TUserState } from '../../utils/types'
 
-export const ProtectedRoute: FC<TProtectedRoute> = ({ children, path, ...rest }) => {
+export const ProtectedRoute: FC<RouteProps> = ({ children, path, ...rest }) => {
   const userState = useSelector((store:RootStateOrAny):TUserState => store.user)
   return (
     <Route
