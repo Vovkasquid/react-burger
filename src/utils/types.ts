@@ -78,7 +78,13 @@ export type TRequest = {
 }
 
 export type TOrderState = {
-  order: {};
+  order: {
+    success: boolean;
+    name: string;
+    order: {
+      number: number;
+    }
+  };
   orderError: string | undefined;
   isOrderModalVisible: boolean;
 }
