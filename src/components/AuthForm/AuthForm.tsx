@@ -56,7 +56,6 @@ const AuthForm: FC<TAuthForm> = ({ onSubmit, title, buttonTitle, children}) => {
       <form className={styles.fieldsContainer} onSubmit={onSubmitHandler}>
         <h2 className="text text_type_main-medium">{title}</h2>
         {children}
-        {/* @ts-ignore */}
         <Button>{buttonTitle}</Button>
       </form>
       <div className={`mt-20 ${styles.linkContainer}`}>

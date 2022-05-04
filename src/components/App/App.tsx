@@ -18,11 +18,10 @@ import styles from './App.module.css'
 
 
 function ModalSwitch() {
-  const location = useLocation()
+  const location = useLocation<{ background: Location}>()
   const history = useHistory()
   const dispatch = useDispatch()
-  // @ts-ignore
-  const background = location.state && location?.state?.background
+  const background= location.state && location?.state?.background
 
   const handleCloseIngredientModal = () => {
     dispatch({ type: CLEAR_DETAIL_INGREDIENT })

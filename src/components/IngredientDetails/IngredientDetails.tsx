@@ -6,8 +6,8 @@ import { SET_DETAIL_INGREDIENT } from '../../services/actions/detailIngredient'
 import { TDetailIngredient, TReceivedComponents } from "../../utils/types";
 
 const IngredientDetails: FC = () => {
-  // @ts-ignore
-  const { ingredientId } = useParams()
+
+  const { ingredientId } = useParams<{ingredientId: string}>()
   const { receivedComponents } = useSelector((state:RootStateOrAny):TReceivedComponents => state.receivedComponents)
   const { ingredient } = useSelector((state:RootStateOrAny):TDetailIngredient => state.detailIngredient)
   const [isNotModal, setIsNotModal] = React.useState(false)

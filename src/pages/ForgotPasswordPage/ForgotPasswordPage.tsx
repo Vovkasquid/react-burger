@@ -29,7 +29,7 @@ const ForgotPasswordPage = () => {
 
   React.useEffect(() => {
     if (resetAndForgotPasswordState.isSuccessForgotPasswordRequest) {
-      // @ts-ignore
+
       history.replace({pathname: '/reset-password', state: {  haveCode: true }})
       // Очищаем стейт
       dispatch({type: CLEAR_STATE_FORGOT_PASSWORD})
