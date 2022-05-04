@@ -2,6 +2,7 @@ import { BURGER_API } from '../../utils/constants'
 import { deleteCookie, getCookie, setCookie } from '../../utils/coockies'
 import { fetchWithRefresh } from '../../utils/utils'
 import { checkResponse} from '../../utils/utils'
+import { TActions} from '../../utils/types'
 
 export const USER_REGISTER_SUCCESS = 'USER_REGISTER_SUCCESS'
 export const REGISTER_FAILED = 'REGISTER_FAILED'
@@ -22,7 +23,7 @@ export const CLEAR_PATCH_STATE = 'CLEAR_PATCH_STATE'
 export const USER_PATCH_SUCCESS = 'USER_PATCH_SUCCESS'
 export const PATCH_FAILED = 'PATCH_FAILED'
 
-export function registerUser(req) {
+export const registerUser: TActions = (req) => {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
   return function(dispatch) {
     // Перед запросом очищаем ошибки
@@ -50,7 +51,7 @@ export function registerUser(req) {
   }
 }
 
-export function loginUser(req) {
+export const loginUser:TActions = (req) => {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
   return function(dispatch) {
     // Перед запросом очищаем ошибки
@@ -85,7 +86,7 @@ export function loginUser(req) {
   }
 }
 
-export function exitUser() {
+export const exitUser:TActions = () => {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
   return function(dispatch) {
     // Перед запросом очищаем ошибки
@@ -119,7 +120,7 @@ export function exitUser() {
   }
 }
 
-export function getUser() {
+export const getUser:TActions = () => {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
   return function(dispatch) {
     // Перед запросом очищаем ошибки
@@ -150,7 +151,7 @@ export function getUser() {
   }
 }
 
-export function patchUser(req) {
+export const patchUser:TActions = (req) => {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
   return function(dispatch) {
     // Перед запросом очищаем ошибки

@@ -19,7 +19,7 @@ import {
   TInitialBurgerConstructorIngredients, TRequestOrder
 } from "../../utils/types";
 
-const BurgerConstructor:FC<TBurgerConstructor> = ({ openIngredientModal, openOrderModal }) => {
+const BurgerConstructor:FC<TBurgerConstructor> = ({ openOrderModal }) => {
   // Вытаскиваем из стора полученные компоненты и отфильтровываем нужные
   const  { ingredients, choosenBun } = useSelector((store:RootStateOrAny):TInitialBurgerConstructorIngredients  => store.constructorItems)
   const history = useHistory()

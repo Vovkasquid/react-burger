@@ -136,3 +136,5 @@ export type TModal = TModalOverley & {
 export type TProtectedRoute = {
   path: string;
 }
+
+export type TActions = (req?:string | {[key: string]: string} | Array<String>) => (dispatch: any) => void
