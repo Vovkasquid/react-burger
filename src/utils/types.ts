@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, RefObject } from "react";
 
 export type TUserState = {
   email: string;
@@ -104,3 +104,12 @@ export type TBurgerConstructorItem = {
   moveIngredient: (dragIndex: number, hoverIndex: number) => void;
 }
 
+export type TBurgerIngredients = {
+  openModal: (ingredient: TIngredient) => void;
+}
+
+export type TUseTabType = {
+  listRef: RefObject<HTMLDivElement>
+  onScroll: () => void
+  tabType: string
+}

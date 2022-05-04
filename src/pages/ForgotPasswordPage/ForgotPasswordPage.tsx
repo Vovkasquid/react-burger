@@ -13,7 +13,7 @@ import { HistoryWithFrom, TAuthState } from "../../utils/types";
 
 const ForgotPasswordPage = () => {
   const [resetedEmail, setResetedEmail] = React.useState('')
-  const history = useHistory<HistoryWithFrom>()
+  const history = useHistory<{haveCode: boolean}>()
   const dispatch = useDispatch()
   const resetAndForgotPasswordState = useSelector((store:RootStateOrAny):TAuthState => store.resetAndForgotPassword)
 

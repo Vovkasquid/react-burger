@@ -32,6 +32,7 @@ function ModalSwitch() {
   return (
     <>
       <AppHeader />
+      {/* @ts-ignore */}
       <Switch location={background || location}>
         <Route path="/login">
           <LoginPage />
