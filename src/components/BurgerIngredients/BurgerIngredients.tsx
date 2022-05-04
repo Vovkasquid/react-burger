@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import styles from './BurgerIngredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import IngredientCard from '../IngredientCard/IngredientCard.jsx'
+import IngredientCard from '../IngredientCard/IngredientCard'
 import { RootStateOrAny, useSelector } from "react-redux";
 import { useTabType } from '../../hooks/useTabType'
 import { TBurgerIngredients, TReceivedComponents } from '../../utils/types'

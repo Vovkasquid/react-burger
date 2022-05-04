@@ -118,3 +118,11 @@ export type TUseTabType = {
   onScroll: () => void
   tabType: string
 }
+
+export type TModalOverley = {
+  closePopup: () => void;
+}
+
+export type TModal = TModalOverley & {
+  title?: string;
+}
