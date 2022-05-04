@@ -8,7 +8,7 @@ import { DEC_COUNTER_INGREDIENT } from "../../services/actions/receivedComponent
 import { TBurgerConstructorItem, TDropIngredient, TIngredient } from "../../utils/types";
 
 const BurgerConstructorItem: FC<TBurgerConstructorItem> = ({ item, isLocked, isTop, isBottom, index, moveIngredient }) => {
-  const ref = useRef<any>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const dispatch = useDispatch()
   let itemName : string
   if (isTop) {
