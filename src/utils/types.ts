@@ -1,4 +1,5 @@
 import { ReactNode, RefObject } from "react";
+import exp from "constants";
 
 export type TUserState = {
   email: string;
@@ -37,7 +38,7 @@ export type TAuthForm = {
 }
 
 export type TIngredient = {
-  count?: number,
+  counter?: number,
   index: number,
   key?: string,
   readonly _id: string;
@@ -106,6 +107,10 @@ export type TBurgerConstructorItem = {
 
 export type TBurgerIngredients = {
   openModal: (ingredient: TIngredient) => void;
+}
+
+export type TIngredientCard = TBurgerIngredients & {
+  ingredient: TIngredient;
 }
 
 export type TUseTabType = {

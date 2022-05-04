@@ -1,12 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { FC } from "react";
 import { useDrag } from 'react-dnd'
 import { useLocation, Link } from 'react-router-dom'
 import styles from './IngredientCard.module.css'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
-import { ingredientSchema } from '../../utils/schemas'
+import { TIngredientCard } from "../../utils/types";
 
-export default function IngredientCard({ ingredient, openModal }) {
+
+const IngredientCard: FC<TIngredientCard> = ({ ingredient, openModal }) => {
   const location = useLocation()
   const ingredientId = ingredient['_id'];
   // Передаём в хук тип элемента и сам игредиент
@@ -36,7 +36,4 @@ export default function IngredientCard({ ingredient, openModal }) {
   )
 }
 
-IngredientCard.propTypes = {
-  ingredient: ingredientSchema.isRequired,
-  openModal: PropTypes.func.isRequired,
-}
+export default IngredientCard

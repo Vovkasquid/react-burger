@@ -1,4 +1,4 @@
-import React, { FC, LegacyRef, RefObject } from "react";
+import React, { FC } from 'react'
 import styles from './BurgerIngredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientCard from '../IngredientCard/IngredientCard.jsx'
