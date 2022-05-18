@@ -4,7 +4,7 @@ import {
   SET_CHOOSEN_BUN,
   SET_SORTED_ARRAY,
 } from '../actions/burgerConstructorIngredients'
-import { TIngredient } from "../../utils/types";
+import { TIngredient } from '../../utils/types'
 
 type TInitialBurgerConstructorIngredients = {
   ingredients: ReadonlyArray<TIngredient> | null;
