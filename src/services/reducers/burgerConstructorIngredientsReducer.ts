@@ -6,6 +6,11 @@ import {
 } from '../actions/burgerConstructorIngredients'
 import { TIngredient } from "../../utils/types";
 
+type TInitialBurgerConstructorIngredients = {
+  ingredients: ReadonlyArray<TIngredient> | null;
+  choosenBun: TIngredient | null;
+}
+
 const initialBurgerConstructorIngredients = {
   ingredients: [],
   choosenBun: null,
@@ -34,11 +39,11 @@ interface ISetSortedArrayAction {
 
 type TBurgerConstructorsItemsReducer = | IAddConstructorItemAction | IDeleteConstructorItemAction | ISetChoosenBunAction | ISetSortedArrayAction
 
-export const burgerConstructorsItemsReducer = (state = initialBurgerConstructorIngredients, action:TBurgerConstructorsItemsReducer) => {
+export const burgerConstructorsItemsReducer = (state = initialBurgerConstructorIngredients, action:TBurgerConstructorsItemsReducer):TInitialBurgerConstructorIngredients => {
   switch (action.type) {
     case ADD_CONSTRUCTOR_ITEM: {
       // засовываем key в элемент
-      const newItem = {...action.ingredient}
+      const newItem:TIngredient = {...action.ingredient}
       newItem.key = action.key
       return {
         ...state,
