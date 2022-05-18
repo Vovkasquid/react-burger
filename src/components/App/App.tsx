@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Redirect, Route, Switch, useHistory, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { Location } from 'history'
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute'
 import MainPage from '../../pages/MainPage/MainPage'
 import ProfilePage from '../../pages/ProfilePage/ProfilePage'
@@ -32,7 +33,6 @@ function ModalSwitch() {
   return (
     <>
       <AppHeader />
-      {/* @ts-ignore */}
       <Switch location={background || location}>
         <Route path="/login">
           <LoginPage />
