@@ -2,7 +2,7 @@ import { CLEAR_DETAIL_INGREDIENT, SET_DETAIL_INGREDIENT } from '../actions/detai
 import { TIngredient } from '../../utils/types'
 
 type TInitialDetailIngredient = {
-  ingredient: TIngredient | {}
+  ingredient: TIngredient | {};
 }
 
 interface IClearDetailIngredient {

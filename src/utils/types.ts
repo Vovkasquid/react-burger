@@ -77,7 +77,7 @@ export type TRequest = {
   password?: string;
 }
 
-type TOrder = {
+export type TOrder = {
   success: boolean;
   name: string;
   order: {
