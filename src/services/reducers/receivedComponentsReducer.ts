@@ -50,7 +50,7 @@ interface IDecCounterIngredient {
   item: TIngredient;
 }
 
-type TReceivedComponentsReducer = IGetComponentSuccess |
+export type TReceivedComponentsReducer = IGetComponentSuccess |
   IGetComponentFailed |
   ISetFilteredBun |
   ISetFilteredSauces |

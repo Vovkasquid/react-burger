@@ -37,7 +37,7 @@ interface ISetSortedArrayAction {
   readonly sortedArray: Array<TIngredient>;
 }
 
-type TBurgerConstructorsItemsReducer = | IAddConstructorItemAction | IDeleteConstructorItemAction | ISetChoosenBunAction | ISetSortedArrayAction
+export type TBurgerConstructorsItemsReducer = | IAddConstructorItemAction | IDeleteConstructorItemAction | ISetChoosenBunAction | ISetSortedArrayAction
 
 export const burgerConstructorsItemsReducer = (state = initialBurgerConstructorIngredients, action:TBurgerConstructorsItemsReducer):TInitialBurgerConstructorIngredients => {
   switch (action.type) {

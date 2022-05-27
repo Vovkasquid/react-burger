@@ -14,7 +14,7 @@ interface  ISetDetailIngredient {
   ingredient: TIngredient;
 }
 
-type TDetailIngredientReducers = IClearDetailIngredient | ISetDetailIngredient
+export type TDetailIngredientReducers = IClearDetailIngredient | ISetDetailIngredient
 
 const initialDetailIngredient: TInitialDetailIngredient = {
   ingredient: {},

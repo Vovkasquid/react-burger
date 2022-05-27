@@ -36,7 +36,7 @@ interface ICloseOrderModal {
   readonly type: typeof CLOSE_ORDER_MODAL;
 }
 
-type TOrderReducer = IPostOrderSuccess | IPostOrderFailed | IClearOrderNumber | IOpenOrderModal | ICloseOrderModal
+export type TOrderReducer = IPostOrderSuccess | IPostOrderFailed | IClearOrderNumber | IOpenOrderModal | ICloseOrderModal
 
 const initialOrder: TInitialOrder = {
   order: {},
