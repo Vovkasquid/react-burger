@@ -1,10 +1,10 @@
 import React, { ChangeEvent, FC, FormEvent } from "react";
 import { NavLink, useHistory } from 'react-router-dom'
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from '../../services/hooks'
 import styles from './ProfilePage.module.css'
 import { CLEAR_EXIT_STATE, exitUser, getUser, patchUser } from '../../services/actions/user'
-import { TRequest, TUserState } from "../../utils/types";
+import { TRequest, TUserState } from '../../utils/types'
 
 const ProfilePage: FC = () => {
   const [name, setName] = React.useState('')
@@ -16,7 +16,7 @@ const ProfilePage: FC = () => {
   const [isEmailChanged, setIsEmailChanged] = React.useState(false)
 
   const dispatch = useDispatch()
-  const userState = useSelector((store:RootStateOrAny):TUserState => store.user)
+  const userState = useSelector((store) => store.user)
 
   const history = useHistory()
 

@@ -1,6 +1,7 @@
 import { BURGER_API } from '../../utils/constants'
 import { checkResponse, filterMainIngredients, filterBun, filterSauces } from '../../utils/utils'
-import { TActions, TIngredient } from "../../utils/types";
+import { TIngredient } from "../../utils/types";
+import { AppThunk } from '../../index'
 
 export const GET_COMPONENTS_SUCCESS = 'GET_COMPONENTS_SUCCESS'
 export const GET_COMPONENTS_FAILED = 'GET_COMPONENTS_FAILED'
@@ -10,7 +11,7 @@ export const SET_FILTERED_MAIN_INGREDIENTS = 'SET_FILTERED_MAIN_INGREDIENTS'
 export const INC_COUNTER_INGREDIENT = 'INC_COUNTER_INGREDIENT'
 export const DEC_COUNTER_INGREDIENT = 'DEC_COUNTER_INGREDIENT'
 
-export const getComponents:TActions = () => {
+export const getComponents: AppThunk = () => {
       // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
     return function(dispatch) {
       // Запрашиваем данные у сервера

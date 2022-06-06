@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import styles from './BurgerConstructor.module.css'
 import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorItem'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../../services/hooks'
 import { useDrop } from 'react-dnd'
 import { useHistory } from 'react-router-dom'
 import { v4 as generateUniqueId } from 'uuid'
@@ -21,7 +21,7 @@ import {
 
 const BurgerConstructor:FC<TBurgerConstructor> = ({ openOrderModal }) => {
   // Вытаскиваем из стора полученные компоненты и отфильтровываем нужные
-  const  { ingredients, choosenBun } = useSelector((store:RootStateOrAny):TInitialBurgerConstructorIngredients  => store.constructorItems)
+  const  { ingredients, choosenBun } = useSelector((store):TInitialBurgerConstructorIngredients  => store.constructorItems)
   const history = useHistory()
   const dispatch = useDispatch()
 

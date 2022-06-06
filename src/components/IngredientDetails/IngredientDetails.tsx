@@ -1,15 +1,15 @@
 import React, { FC } from "react";
 import styles from './IngredientDetails.module.css'
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from '../../services/hooks'
 import { useParams } from 'react-router-dom'
 import { SET_DETAIL_INGREDIENT } from '../../services/actions/detailIngredient'
-import { TDetailIngredient, TReceivedComponents } from "../../utils/types";
+import { TDetailIngredient, TIngredient, TReceivedComponents } from "../../utils/types";
 
 const IngredientDetails: FC = () => {
 
   const { ingredientId } = useParams<{ingredientId: string}>()
-  const { receivedComponents } = useSelector((state:RootStateOrAny):TReceivedComponents => state.receivedComponents)
-  const { ingredient } = useSelector((state:RootStateOrAny):TDetailIngredient => state.detailIngredient)
+  const { receivedComponents } = useSelector((state) => state.receivedComponents)
+  const { ingredient } = useSelector((state) => state.detailIngredient)
   const [isNotModal, setIsNotModal] = React.useState(false)
   const dispatch = useDispatch()
 

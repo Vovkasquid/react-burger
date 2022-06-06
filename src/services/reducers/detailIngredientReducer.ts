@@ -2,7 +2,7 @@ import { CLEAR_DETAIL_INGREDIENT, SET_DETAIL_INGREDIENT } from '../actions/detai
 import { TIngredient } from '../../utils/types'
 
 type TInitialDetailIngredient = {
-  ingredient: TIngredient | {};
+  ingredient: TIngredient;
 }
 
 interface IClearDetailIngredient {
@@ -17,7 +17,7 @@ interface  ISetDetailIngredient {
 export type TDetailIngredientReducers = IClearDetailIngredient | ISetDetailIngredient
 
 const initialDetailIngredient: TInitialDetailIngredient = {
-  ingredient: {},
+  ingredient: {} as TIngredient,
 }
 
 export const detailIngredientReducer = (state = initialDetailIngredient, action: TDetailIngredientReducers): TInitialDetailIngredient => {
@@ -25,7 +25,7 @@ export const detailIngredientReducer = (state = initialDetailIngredient, action:
     case CLEAR_DETAIL_INGREDIENT: {
       return {
         ...state,
-        ingredient: {}
+        ingredient: {} as TIngredient
       }
     }
     case SET_DETAIL_INGREDIENT: {

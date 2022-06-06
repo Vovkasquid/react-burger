@@ -4,10 +4,10 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './components/App/App'
 import reportWebVitals from './reportWebVitals'
-import { compose, createStore, applyMiddleware } from 'redux'
+import { compose, createStore, applyMiddleware, Dispatch, ActionCreator, Action } from "redux";
 import { Provider } from 'react-redux'
 import rootReducer from './services/reducers/rootReducer'
-import thunk from 'redux-thunk'
+import thunk, { ThunkAction } from 'redux-thunk'
 import { TBurgerConstructorsItemsReducer } from './services/reducers/burgerConstructorIngredientsReducer'
 import { TDetailIngredientReducers } from './services/reducers/detailIngredientReducer'
 import { TOrderReducer } from './services/reducers/orderReducer'
@@ -23,6 +23,14 @@ type TApplicationActions = TBurgerConstructorsItemsReducer |
   TUserReducer
 
 export type RootState = ReturnType<typeof store.getState>
+
+// Типизация thunk'ов в нашем приложении
+export type AppThunk<TReturn = void> = ActionCreator<
+  ThunkAction<TReturn, Action, RootState, TApplicationActions>
+  >
+
+// Типизация метода dispatch для проверки на валидность отправляемого экшена
+export type AppDispatch = Dispatch<TApplicationActions>
 
 declare global {
   interface Window {

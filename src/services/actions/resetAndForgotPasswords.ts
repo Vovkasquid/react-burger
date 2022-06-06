@@ -1,6 +1,6 @@
 import { BURGER_API } from '../../utils/constants'
 import { checkResponse } from '../../utils/utils'
-import { TActions } from "../../utils/types";
+import { AppThunk } from '../../index'
 
 export const POST_FORGOT_PASSWORD_SUCCESS = 'POST_FORGOT_PASSWORD_SUCCESS'
 export const POST_FORGOT_PASSWORD_FAILED = 'POST_FORGOT_PASSWORD_FAILED'
@@ -9,7 +9,7 @@ export const POST_RESET_PASSWORD_SUCCESS = 'POST_RESET_PASSWORD_SUCCESS'
 export const POST_RESET_PASSWORD_FAILED = 'POST_RESET_PASSWORD_FAILED'
 export const CLEAR_STATE_RESET_PASSWORD = 'CLEAR_STATE_RESET_PASSWORD'
 
-export const postForgotPassword: TActions = (req) => {
+export const postForgotPassword: AppThunk = (req) => {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
   return function(dispatch) {
     // Очищаем ошибки перед запросом
@@ -37,7 +37,7 @@ export const postForgotPassword: TActions = (req) => {
   }
 }
 
-export const postResetPassword:TActions = (req) => {
+export const postResetPassword:AppThunk = (req) => {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
   return function(dispatch) {
     dispatch({ type: CLEAR_STATE_RESET_PASSWORD })

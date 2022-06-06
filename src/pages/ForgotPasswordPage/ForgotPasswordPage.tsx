@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react'
 import styles from './ForgotPasswordPage.module.css'
 import { Redirect, useHistory } from 'react-router-dom'
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../../services/hooks'
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import {
   CLEAR_STATE_FORGOT_PASSWORD,
@@ -15,7 +15,7 @@ const ForgotPasswordPage = () => {
   const [resetedEmail, setResetedEmail] = React.useState('')
   const history = useHistory<{haveCode: boolean}>()
   const dispatch = useDispatch()
-  const resetAndForgotPasswordState = useSelector((store:RootStateOrAny):TAuthState => store.resetAndForgotPassword)
+  const resetAndForgotPasswordState = useSelector((store):TAuthState => store.resetAndForgotPassword)
 
   const onResetedEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setResetedEmail(e.target.value)

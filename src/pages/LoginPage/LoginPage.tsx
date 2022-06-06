@@ -1,6 +1,6 @@
 import React, { ChangeEvent} from "react";
 import { Redirect, useHistory } from 'react-router-dom'
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from '../../services/hooks'
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { CLEAR_LOGIN_STATE, loginUser} from '../../services/actions/user'
 import styles from './LoginPage.module.css'
@@ -10,7 +10,7 @@ import { TUserState, HistoryWithFrom } from "../../utils/types";
 
 const LoginPage = () => {
   const history = useHistory<HistoryWithFrom>()
-  const userState: TUserState = useSelector((store: RootStateOrAny):TUserState => store.user)
+  const userState: TUserState = useSelector((store):TUserState => store.user)
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const dispatch = useDispatch()

@@ -1,6 +1,7 @@
 import React, { FC, FormEvent } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
+import { RootStateOrAny, useSelector } from 'react-redux'
+import { useDispatch } from '../../services/hooks'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './AuthForm.module.css'
 import { HistoryWithFrom, TAuthForm, TAuthState, TUserState } from '../../utils/types'

@@ -2,7 +2,7 @@ import { BURGER_API } from '../../utils/constants'
 import { deleteCookie, getCookie, setCookie } from '../../utils/coockies'
 import { fetchWithRefresh } from '../../utils/utils'
 import { checkResponse} from '../../utils/utils'
-import { TActions} from '../../utils/types'
+import { AppThunk } from '../../index'
 
 export const USER_REGISTER_SUCCESS = 'USER_REGISTER_SUCCESS'
 export const REGISTER_FAILED = 'REGISTER_FAILED'
@@ -23,7 +23,7 @@ export const CLEAR_PATCH_STATE = 'CLEAR_PATCH_STATE'
 export const USER_PATCH_SUCCESS = 'USER_PATCH_SUCCESS'
 export const PATCH_FAILED = 'PATCH_FAILED'
 
-export const registerUser: TActions = (req) => {
+export const registerUser: AppThunk = (req) => {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
   return function(dispatch) {
     // Перед запросом очищаем ошибки
@@ -51,7 +51,7 @@ export const registerUser: TActions = (req) => {
   }
 }
 
-export const loginUser:TActions = (req) => {
+export const loginUser:AppThunk = (req) => {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
   return function(dispatch) {
     // Перед запросом очищаем ошибки
@@ -86,7 +86,7 @@ export const loginUser:TActions = (req) => {
   }
 }
 
-export const exitUser:TActions = () => {
+export const exitUser:AppThunk = () => {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
   return function(dispatch) {
     // Перед запросом очищаем ошибки
@@ -120,7 +120,7 @@ export const exitUser:TActions = () => {
   }
 }
 
-export const getUser:TActions = () => {
+export const getUser:AppThunk = () => {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
   return function(dispatch) {
     // Перед запросом очищаем ошибки
@@ -151,7 +151,7 @@ export const getUser:TActions = () => {
   }
 }
 
-export const patchUser:TActions = (req) => {
+export const patchUser:AppThunk = (req) => {
   // Воспользуемся первым аргументом из усилителя redux-thunk - dispatch
   return function(dispatch) {
     // Перед запросом очищаем ошибки

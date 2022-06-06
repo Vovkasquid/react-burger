@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Redirect, Route, Switch, useHistory, useLocation } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch } from '../../services/hooks'
 import { Location } from 'history'
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute'
 import MainPage from '../../pages/MainPage/MainPage'
