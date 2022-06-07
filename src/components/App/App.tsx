@@ -52,6 +52,22 @@ function ModalSwitch() {
         <ProtectedRoute path="/profile">
           <ProfilePage />
         </ProtectedRoute>
+        <ProtectedRoute exact path="/profile">
+          <ProfilePage />
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/profile/orders">
+          Привет профиль-ордерс
+        </ProtectedRoute>
+        <ProtectedRoute path="/profile/:id">
+          Привет профиль-ордерс-айди
+        </ProtectedRoute>
+        <ProtectedRoute path="/profile">
+          <ProfilePage />
+        </ProtectedRoute>
+        <Route exact path="/feed">
+          Привет фид
+        </Route>
+        <Route path="/feed/:id">Привед Фид айди</Route>
         <Route exact path="/">
           <MainPage />
         </Route>
